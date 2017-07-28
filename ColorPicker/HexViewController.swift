@@ -168,15 +168,17 @@ translateToHex(myArray: &myArray)
             for var i in (0..<myArray.count)
             {
             print(myArray[i])
-                
+                if(myArray[i] == 0){
+                    red1 = String(myArray[0])
+                    red2 = String(myArray[1])
+                }
                 if(myArray[i] == 1){
-                    red1 = "1"
-                    red2 = "1"
+                    red1 = String(myArray[0])
+                    red2 = String(myArray[1])
                 }
                 if(myArray[i] == 2){
-                    red1 = "2"
-                    red2 = "2"
-                }
+                    red1 = String(myArray[0])
+                    red2 = String(myArray[1])                }
                 if(myArray[i] == 3){
                     red1 = String(myArray[0])
                     red2 = String(myArray[1])
@@ -205,31 +207,42 @@ translateToHex(myArray: &myArray)
                     red1 = String(myArray[0])
                     red2 = String(myArray[1])
                 }
-                if(myArray[i] == 10){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
-                }
-                if(myArray[i] == 11){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
-                }
-                if(myArray[i] == 12){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
-                }
-                if(myArray[i] == 13){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
-                }
-                if(myArray[i] == 14){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
-                }
-                if(myArray[i] == 15){
-                    red1 = "f"
-                    red2 = "f"
-                }
-                
+            }
+            if(myArray[0] == 10){
+                red1 = "a"
+            }
+            if(myArray[1] == 10){
+                red2 = "a"
+            }
+            if(myArray[0] == 11){
+                red1 = "b"
+            }
+            if(myArray[1] == 11){
+                red2 = "b"
+            }
+            if(myArray[0] == 12){
+                red1 = "c"
+            }
+            if(myArray[1] == 12){
+                red2 = "c"
+            }
+            if(myArray[0] == 13){
+                red1 = "d"
+            }
+            if(myArray[1] == 13){
+                red2 = "d"
+            }
+            if(myArray[0] == 14){
+                red1 = "e"
+            }
+            if(myArray[1] == 14){
+                red2 = "e"
+            }
+            if(myArray[0] == 15){
+                red1 = "f"
+            }
+            if(myArray[1] == 15){
+                red2 = "f"
             }
             
          
