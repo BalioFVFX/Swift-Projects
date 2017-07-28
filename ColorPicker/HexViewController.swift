@@ -21,6 +21,8 @@ class HexViewController: UIViewController {
     var myArray = [Int]()
     
     var myRGB = [Float]()
+    var myGreenValues = [Float] ()
+    var myHexGreenValues = [Int] ()
     
     var testarr = [Float] ()
     var testarr2 = [Float] ()
@@ -29,6 +31,8 @@ class HexViewController: UIViewController {
     
     var red1:String = ""
     var red2:String = ""
+    var green1:String = ""
+    var green2:String = ""
     
     //Text Fields
     @IBOutlet weak var redValueTextField: UITextField!
@@ -68,8 +72,8 @@ class HexViewController: UIViewController {
     
     @IBAction func redSliderDidChange(_ sender: UISlider) {
         redSliderValue = sender.value
-        redValueTextField.text! = String(sender.value)
-        myRGB.append(redSliderValue)
+         redValueTextField.text! = String(sender.value)
+         myRGB.append(redSliderValue)
     
         for item in myRGB {
             if(item != 0){
@@ -114,10 +118,155 @@ translateToHex(myArray: &myArray)
     }
     
     @IBAction func greenSliderDidChange(_ sender: UISlider) {
-      //  translateToHex(myArray)
+        greenSliderValue = sender.value
+        greenValueTextField.text! = String(sender.value)
+        myGreenValues.append(greenSliderValue)
+        
+        for item in myGreenValues {
+            if(item != 0){
+                
+                
+                result = item / divideNumber
+                convertedResult = Int(item) / Int(divideNumber)
+                
+                
+                
+                result = result.truncatingRemainder(dividingBy: 1.0)
+                
+                result = result * 16
+                
+                myHexGreenValues.append (Int(result))
+                
+                result = 0
+                
+                result = Float(convertedResult) / divideNumber
+                
+                result = result * 16
+                
+                
+                myHexGreenValues.insert(Int(result), at: myHexGreenValues.count - 1)
+                
+                result = 0
+                
+            }
+                
+            else{
+                //    myArray.append(0)
+                //  myArray.append(0)
+            }
+            
+            
+        }
+        
+         if(myHexGreenValues.isEmpty == false){
+        
+        for var i in (0...1)
+        {
+            
+           
+            
+            if(myHexGreenValues[i] == 0){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 1){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 2){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            
+            if(myHexGreenValues[i] == 3){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 4){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[0] == 5){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 6){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 7){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 8){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            if(myHexGreenValues[i] == 9){
+                green1 = String(myHexGreenValues[0])
+                green2 = String(myHexGreenValues[1])
+            }
+            
+        }
+        if(myHexGreenValues[0] == 10){
+            green1 = "a"
+        }
+        if(myHexGreenValues[1] == 10){
+            green2 = "a"
+        }
+        if(myHexGreenValues[0] == 11){
+            green1 = "b"
+        }
+        if(myHexGreenValues[1] == 11){
+            green2 = "b"
+        }
+        if(myHexGreenValues[0] == 12){
+            green1 = "c"
+        }
+        if(myHexGreenValues[1] == 12){
+            green2 = "c"
+        }
+        if(myHexGreenValues[0] == 13){
+            green1 = "d"
+        }
+        if(myHexGreenValues[1] == 13){
+            green2 = "d"
+        }
+        if(myHexGreenValues[0] == 14){
+            green1 = "e"
+        }
+        if(myHexGreenValues[1] == 14){
+            green2 = "e"
+        }
+        if(myHexGreenValues[0] == 15){
+            green1 = "f"
+        }
+        if(myHexGreenValues[1] == 15){
+            green2 = "f"
+        }
+        
+        
+            
+        blueValueTextField!.text = green1 + green2
+        green1 = ""
+        green2 = ""
+        myHexGreenValues.removeAll()
+        myGreenValues.removeAll()
+    
+        }
+        
+        
+        
     }
     
     @IBAction func blueSliderDidChange(_ sender: UISlider) {
+    }
+    
+    
+    func translateGreenToHex(greenArray: inout[Int]){
+        
+        
+        
     }
     
     func translateToHex(myArray: inout[Int]){
@@ -165,7 +314,7 @@ translateToHex(myArray: &myArray)
             }
      
          
-            for var i in (0..<myArray.count)
+            for var i in (0...1)
             {
             print(myArray[i])
                 if(myArray[i] == 0){
