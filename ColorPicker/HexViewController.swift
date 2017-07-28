@@ -9,33 +9,35 @@
 import UIKit
 
 class HexViewController: UIViewController {
-    //Values
+    //Values from sliders
     var redSliderValue:Float = 0.0
     var greenSliderValue:Float = 0.0
     var blueSliderValue:Float = 0.0
+    
+    //Calculation
     var resultValue:Float = 0.0
     let divideNumber:Float = 16
     var result:Float = 0
     var convertedResult:Int = 0
-    var hexString: String = "#"
-    var myArray = [Int]()
-    
-    var myRGB = [Float]()
-    var myGreenValues = [Float] ()
-    var myHexGreenValues = [Int] ()
+  
+    //RGB And HEX Arrays
+    var redValues = [Float]()
+    var redHexValues = [Int]()
+    var greenValues = [Float] ()
+    var greenHexValues = [Int] ()
+    var blueValues = [Float] ()
+    var blueHexValues = [Int] ()
     var shouldTranslateRed:Bool = false
     var shouldTranslateGreen:Bool = false
     var shouldTranslateBlue:Bool = false
     
-    var testarr = [Float] ()
-    var testarr2 = [Float] ()
-    
-    var redToHex = [Float] ()
-    
+    //Hex values stored as String
     var red1:String = ""
     var red2:String = ""
     var green1:String = ""
     var green2:String = ""
+    var blue1:String = ""
+    var blue2:String = ""
     
     //Text Fields
     @IBOutlet weak var redValueTextField: UITextField!
@@ -76,9 +78,9 @@ class HexViewController: UIViewController {
     @IBAction func redSliderDidChange(_ sender: UISlider) {
         redSliderValue = sender.value
          redValueTextField.text! = String(sender.value)
-         myRGB.append(redSliderValue)
+         redValues.append(redSliderValue)
     
-        for item in myRGB {
+        for item in redValues {
             if(item != 0){
                 
                 
@@ -91,7 +93,7 @@ class HexViewController: UIViewController {
                 
                 result = result * 16
                 
-                myArray.append (Int(result))
+                redHexValues.append (Int(result))
                 
                 result = 0
                 
@@ -100,7 +102,7 @@ class HexViewController: UIViewController {
                 result = result * 16
                 
                 
-                myArray.insert(Int(result), at: myArray.count - 1)
+                redHexValues.insert(Int(result), at: redHexValues.count - 1)
                 
                 result = 0
                 
@@ -115,7 +117,7 @@ class HexViewController: UIViewController {
 
         
             shouldTranslateRed = true
-            translateToHex(myArray: &myArray)
+            translateToHex(myArray: &redHexValues)
  
   
 
@@ -124,9 +126,9 @@ class HexViewController: UIViewController {
     
     @IBAction func greenSliderDidChange(_ sender: UISlider) {
         greenSliderValue = sender.value
-        myGreenValues.append(greenSliderValue)
+        greenValues.append(greenSliderValue)
         
-        for item in myGreenValues {
+        for item in greenValues {
             if(item != 0){
                 
                 
@@ -139,7 +141,7 @@ class HexViewController: UIViewController {
                 
                 result = result * 16
                 
-                myHexGreenValues.append (Int(result))
+                greenHexValues.append (Int(result))
                 
                 result = 0
                 
@@ -148,7 +150,7 @@ class HexViewController: UIViewController {
                 result = result * 16
                 
                 
-                myHexGreenValues.insert(Int(result), at: myHexGreenValues.count - 1)
+                greenHexValues.insert(Int(result), at: greenHexValues.count - 1)
                 
                 result = 0
                 
@@ -162,7 +164,7 @@ class HexViewController: UIViewController {
             
         }
         shouldTranslateGreen = true
-        translateToHex(myArray: &myHexGreenValues)
+        translateToHex(myArray: &greenHexValues)
 
         
         
@@ -170,10 +172,47 @@ class HexViewController: UIViewController {
     }
     
     @IBAction func blueSliderDidChange(_ sender: UISlider) {
-    }
-    
-    
-    func translateGreenToHex(greenArray: inout[Int]){
+        blueSliderValue = sender.value
+        blueValues.append(blueSliderValue)
+        
+        for item in blueValues {
+            if(item != 0){
+                
+                
+                result = item / divideNumber
+                convertedResult = Int(item) / Int(divideNumber)
+                
+                
+                
+                result = result.truncatingRemainder(dividingBy: 1.0)
+                
+                result = result * 16
+                
+                blueHexValues.append (Int(result))
+                
+                result = 0
+                
+                result = Float(convertedResult) / divideNumber
+                
+                result = result * 16
+                
+                
+                blueHexValues.insert(Int(result), at: blueHexValues.count - 1)
+                
+                result = 0
+                
+            }
+                
+            else{
+                //    myArray.append(0)
+                //  myArray.append(0)
+            }
+            
+            
+        }
+        shouldTranslateBlue = true
+        translateToHex(myArray: &blueHexValues)
+        
         
         
         
@@ -181,7 +220,7 @@ class HexViewController: UIViewController {
     
     func translateToHex(myArray: inout[Int]){
         if(shouldTranslateRed == true){
-        if(myArray.isEmpty == false){
+        if(redHexValues.isEmpty == false){
 //            for item in myArray {
 //                switch true {
 //                case item < 1.0:
@@ -220,88 +259,86 @@ class HexViewController: UIViewController {
 //                    break
 //                }
 //            }
-            if(hexString.characters.count > 3){
-                hexString = hexString + ""
-            }
+        
      
          
             for var i in (0...1)
             {
-            print(myArray[i])
-                if(myArray[i] == 0){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+           
+                if(redHexValues[i] == 0){
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 1){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 2){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])                }
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])                }
                 if(myArray[i] == 3){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 4){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[0] == 5){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 6){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 7){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 8){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
                 if(myArray[i] == 9){
-                    red1 = String(myArray[0])
-                    red2 = String(myArray[1])
+                    red1 = String(redHexValues[0])
+                    red2 = String(redHexValues[1])
                 }
             }
-            if(myArray[0] == 10){
+            if(redHexValues[0] == 10){
                 red1 = "a"
             }
-            if(myArray[1] == 10){
+            if(redHexValues[1] == 10){
                 red2 = "a"
             }
-            if(myArray[0] == 11){
+            if(redHexValues[0] == 11){
                 red1 = "b"
             }
-            if(myArray[1] == 11){
+            if(redHexValues[1] == 11){
                 red2 = "b"
             }
-            if(myArray[0] == 12){
+            if(redHexValues[0] == 12){
                 red1 = "c"
             }
-            if(myArray[1] == 12){
+            if(redHexValues[1] == 12){
                 red2 = "c"
             }
-            if(myArray[0] == 13){
+            if(redHexValues[0] == 13){
                 red1 = "d"
             }
-            if(myArray[1] == 13){
+            if(redHexValues[1] == 13){
                 red2 = "d"
             }
-            if(myArray[0] == 14){
+            if(redHexValues[0] == 14){
                 red1 = "e"
             }
-            if(myArray[1] == 14){
+            if(redHexValues[1] == 14){
                 red2 = "e"
             }
-            if(myArray[0] == 15){
+            if(redHexValues[0] == 15){
                 red1 = "f"
             }
-            if(myArray[1] == 15){
+            if(redHexValues[1] == 15){
                 red2 = "f"
             }
             
@@ -311,8 +348,8 @@ class HexViewController: UIViewController {
             redValueTextField.text! = red1 + red2
            red1 = ""
            red2 = ""
-           myArray.removeAll()
-           myRGB.removeAll()
+           redHexValues.removeAll()
+           redValues.removeAll()
             
         }
             shouldTranslateRed = false
@@ -320,90 +357,88 @@ class HexViewController: UIViewController {
         
         if(shouldTranslateGreen == true){
             
-            if(myHexGreenValues.isEmpty == false){
+            if(greenHexValues.isEmpty == false){
                 
                 for var i in (0...1)
                 {
                     
-                    
-                    
-                    if(myHexGreenValues[i] == 0){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 0){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 1){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 1){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 2){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 2){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
                     
-                    if(myHexGreenValues[i] == 3){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 3){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 4){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 4){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[0] == 5){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[0] == 5){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 6){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 6){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 7){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 7){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 8){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 8){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
-                    if(myHexGreenValues[i] == 9){
-                        green1 = String(myHexGreenValues[0])
-                        green2 = String(myHexGreenValues[1])
+                    if(greenHexValues[i] == 9){
+                        green1 = String(greenHexValues[0])
+                        green2 = String(greenHexValues[1])
                     }
                     
                 }
-                if(myHexGreenValues[0] == 10){
+                if(greenHexValues[0] == 10){
                     green1 = "a"
                 }
-                if(myHexGreenValues[1] == 10){
+                if(greenHexValues[1] == 10){
                     green2 = "a"
                 }
-                if(myHexGreenValues[0] == 11){
+                if(greenHexValues[0] == 11){
                     green1 = "b"
                 }
-                if(myHexGreenValues[1] == 11){
+                if(greenHexValues[1] == 11){
                     green2 = "b"
                 }
-                if(myHexGreenValues[0] == 12){
+                if(greenHexValues[0] == 12){
                     green1 = "c"
                 }
-                if(myHexGreenValues[1] == 12){
+                if(greenHexValues[1] == 12){
                     green2 = "c"
                 }
-                if(myHexGreenValues[0] == 13){
+                if(greenHexValues[0] == 13){
                     green1 = "d"
                 }
-                if(myHexGreenValues[1] == 13){
+                if(greenHexValues[1] == 13){
                     green2 = "d"
                 }
-                if(myHexGreenValues[0] == 14){
+                if(greenHexValues[0] == 14){
                     green1 = "e"
                 }
-                if(myHexGreenValues[1] == 14){
+                if(greenHexValues[1] == 14){
                     green2 = "e"
                 }
-                if(myHexGreenValues[0] == 15){
+                if(greenHexValues[0] == 15){
                     green1 = "f"
                 }
-                if(myHexGreenValues[1] == 15){
+                if(greenHexValues[1] == 15){
                     green2 = "f"
                 }
                 
@@ -412,22 +447,124 @@ class HexViewController: UIViewController {
                 greenValueTextField!.text = green1 + green2
                 green1 = ""
                 green2 = ""
-                myHexGreenValues.removeAll()
-                myGreenValues.removeAll()
+                greenHexValues.removeAll()
+                greenValues.removeAll()
                 
                 
             }
             shouldTranslateGreen = false
             
         }
-        resultValueTextField.text! = "#" + redValueTextField.text! + greenValueTextField.text!
+        
+        if(shouldTranslateBlue == true){
+            
+            if(blueHexValues.isEmpty == false){
+                
+                for var i in (0...1)
+                {
+                    
+                    if(blueHexValues[i] == 0){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 1){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 2){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    
+                    if(blueHexValues[i] == 3){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 4){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[0] == 5){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 6){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 7){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 8){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    if(blueHexValues[i] == 9){
+                        blue1 = String(blueHexValues[0])
+                        blue2 = String(blueHexValues[1])
+                    }
+                    
+                }
+                if(blueHexValues[0] == 10){
+                    blue1 = "a"
+                }
+                if(blueHexValues[1] == 10){
+                    blue2 = "a"
+                }
+                if(blueHexValues[0] == 11){
+                    blue1 = "b"
+                }
+                if(blueHexValues[1] == 11){
+                    blue2 = "b"
+                }
+                if(blueHexValues[0] == 12){
+                    blue1 = "c"
+                }
+                if(blueHexValues[1] == 12){
+                    blue2 = "c"
+                }
+                if(blueHexValues[0] == 13){
+                    blue1 = "d"
+                }
+                if(blueHexValues[1] == 13){
+                    blue2 = "d"
+                }
+                if(blueHexValues[0] == 14){
+                    blue1 = "e"
+                }
+                if(blueHexValues[1] == 14){
+                    blue2 = "e"
+                }
+                if(blueHexValues[0] == 15){
+                    blue1 = "f"
+                }
+                if(blueHexValues[1] == 15){
+                    blue2 = "f"
+                }
+                
+                
+                // resultValueTextField.text! = "#" + red1
+                blueValueTextField!.text = blue1 + blue2
+                blue1 = ""
+                blue2 = ""
+                blueHexValues.removeAll()
+                blueValues.removeAll()
+                
+                
+            }
+            shouldTranslateBlue = false
+            
+        }
+        
+        
+        resultValueTextField.text! = "#" + redValueTextField.text! + greenValueTextField.text! + blueValueTextField.text!
      
     }
 
     @IBAction func myButtonTapped(_ sender: UIButton) {
       
-      hexString.removeAll()
-        greenValueTextField.text! = ""
+        
         
     }
 

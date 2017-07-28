@@ -48,8 +48,6 @@ class ViewController: UIViewController {
         redSliderValue = CGFloat(sender.value)
         redValueTextField.text! = String(sender.value * 255)
         view.backgroundColor = UIColor(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue, alpha: alphaSliderValue)
-        
-        print(sender.value * 255)
     }
 
     
