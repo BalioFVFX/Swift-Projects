@@ -23,6 +23,9 @@ class HexViewController: UIViewController {
     var myRGB = [Float]()
     var myGreenValues = [Float] ()
     var myHexGreenValues = [Int] ()
+    var shouldTranslateRed:Bool = false
+    var shouldTranslateGreen:Bool = false
+    var shouldTranslateBlue:Bool = false
     
     var testarr = [Float] ()
     var testarr2 = [Float] ()
@@ -102,15 +105,17 @@ class HexViewController: UIViewController {
                 result = 0
                 
             }
-                
             else{
             //    myArray.append(0)
               //  myArray.append(0)
-            }
+                }
             
                     
                         }
-translateToHex(myArray: &myArray)
+
+        
+            shouldTranslateRed = true
+            translateToHex(myArray: &myArray)
  
   
 
@@ -119,7 +124,6 @@ translateToHex(myArray: &myArray)
     
     @IBAction func greenSliderDidChange(_ sender: UISlider) {
         greenSliderValue = sender.value
-        greenValueTextField.text! = String(sender.value)
         myGreenValues.append(greenSliderValue)
         
         for item in myGreenValues {
@@ -157,103 +161,9 @@ translateToHex(myArray: &myArray)
             
             
         }
-        
-         if(myHexGreenValues.isEmpty == false){
-        
-        for var i in (0...1)
-        {
-            
-           
-            
-            if(myHexGreenValues[i] == 0){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 1){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 2){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            
-            if(myHexGreenValues[i] == 3){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 4){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[0] == 5){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 6){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 7){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 8){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            if(myHexGreenValues[i] == 9){
-                green1 = String(myHexGreenValues[0])
-                green2 = String(myHexGreenValues[1])
-            }
-            
-        }
-        if(myHexGreenValues[0] == 10){
-            green1 = "a"
-        }
-        if(myHexGreenValues[1] == 10){
-            green2 = "a"
-        }
-        if(myHexGreenValues[0] == 11){
-            green1 = "b"
-        }
-        if(myHexGreenValues[1] == 11){
-            green2 = "b"
-        }
-        if(myHexGreenValues[0] == 12){
-            green1 = "c"
-        }
-        if(myHexGreenValues[1] == 12){
-            green2 = "c"
-        }
-        if(myHexGreenValues[0] == 13){
-            green1 = "d"
-        }
-        if(myHexGreenValues[1] == 13){
-            green2 = "d"
-        }
-        if(myHexGreenValues[0] == 14){
-            green1 = "e"
-        }
-        if(myHexGreenValues[1] == 14){
-            green2 = "e"
-        }
-        if(myHexGreenValues[0] == 15){
-            green1 = "f"
-        }
-        if(myHexGreenValues[1] == 15){
-            green2 = "f"
-        }
-        
-        
-            
-        blueValueTextField!.text = green1 + green2
-        green1 = ""
-        green2 = ""
-        myHexGreenValues.removeAll()
-        myGreenValues.removeAll()
-    
-        }
+        shouldTranslateGreen = true
+        translateToHex(myArray: &myHexGreenValues)
+
         
         
         
@@ -270,6 +180,7 @@ translateToHex(myArray: &myArray)
     }
     
     func translateToHex(myArray: inout[Int]){
+        if(shouldTranslateRed == true){
         if(myArray.isEmpty == false){
 //            for item in myArray {
 //                switch true {
@@ -396,14 +307,120 @@ translateToHex(myArray: &myArray)
             
          
         
-           resultValueTextField!.text = red1 + red2
+         //  resultValueTextField!.text! = "#" + red1 + red2 + green1 + green2
+            redValueTextField.text! = red1 + red2
            red1 = ""
            red2 = ""
            myArray.removeAll()
            myRGB.removeAll()
             
         }
-       
+            shouldTranslateRed = false
+        }
+        
+        if(shouldTranslateGreen == true){
+            
+            if(myHexGreenValues.isEmpty == false){
+                
+                for var i in (0...1)
+                {
+                    
+                    
+                    
+                    if(myHexGreenValues[i] == 0){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 1){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 2){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    
+                    if(myHexGreenValues[i] == 3){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 4){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[0] == 5){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 6){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 7){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 8){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    if(myHexGreenValues[i] == 9){
+                        green1 = String(myHexGreenValues[0])
+                        green2 = String(myHexGreenValues[1])
+                    }
+                    
+                }
+                if(myHexGreenValues[0] == 10){
+                    green1 = "a"
+                }
+                if(myHexGreenValues[1] == 10){
+                    green2 = "a"
+                }
+                if(myHexGreenValues[0] == 11){
+                    green1 = "b"
+                }
+                if(myHexGreenValues[1] == 11){
+                    green2 = "b"
+                }
+                if(myHexGreenValues[0] == 12){
+                    green1 = "c"
+                }
+                if(myHexGreenValues[1] == 12){
+                    green2 = "c"
+                }
+                if(myHexGreenValues[0] == 13){
+                    green1 = "d"
+                }
+                if(myHexGreenValues[1] == 13){
+                    green2 = "d"
+                }
+                if(myHexGreenValues[0] == 14){
+                    green1 = "e"
+                }
+                if(myHexGreenValues[1] == 14){
+                    green2 = "e"
+                }
+                if(myHexGreenValues[0] == 15){
+                    green1 = "f"
+                }
+                if(myHexGreenValues[1] == 15){
+                    green2 = "f"
+                }
+                
+                
+               // resultValueTextField.text! = "#" + red1
+                greenValueTextField!.text = green1 + green2
+                green1 = ""
+                green2 = ""
+                myHexGreenValues.removeAll()
+                myGreenValues.removeAll()
+                
+                
+            }
+            shouldTranslateGreen = false
+            
+        }
+        resultValueTextField.text! = "#" + redValueTextField.text! + greenValueTextField.text!
      
     }
 
