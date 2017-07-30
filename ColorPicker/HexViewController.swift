@@ -39,6 +39,12 @@ class HexViewController: UIViewController {
     var blue1:String = ""
     var blue2:String = ""
     
+    //Background values
+    var redBackgroundValue:CGFloat = 0
+    var greenBackgroundValue:CGFloat = 0
+    var blueBackgroundValue:CGFloat = 0
+    
+    
     //Text Fields
     @IBOutlet weak var redValueTextField: UITextField!
     @IBOutlet weak var greenValueTextField: UITextField!
@@ -77,6 +83,8 @@ class HexViewController: UIViewController {
     
     @IBAction func redSliderDidChange(_ sender: UISlider) {
         redSliderValue = sender.value
+        redBackgroundValue = CGFloat(redSliderValue / 255)
+        view.backgroundColor = UIColor(red: redBackgroundValue, green: greenBackgroundValue, blue: blueBackgroundValue, alpha: 1.0)
          redValueTextField.text! = String(sender.value)
          redValues.append(redSliderValue)
     
@@ -126,8 +134,10 @@ class HexViewController: UIViewController {
     
     @IBAction func greenSliderDidChange(_ sender: UISlider) {
         greenSliderValue = sender.value
+        greenBackgroundValue = CGFloat(greenSliderValue / 255)
+        view.backgroundColor = UIColor(red: redBackgroundValue, green: greenBackgroundValue, blue: blueBackgroundValue, alpha: 1.0)
         greenValues.append(greenSliderValue)
-        
+       
         for item in greenValues {
             if(item != 0){
                 
@@ -173,7 +183,10 @@ class HexViewController: UIViewController {
     
     @IBAction func blueSliderDidChange(_ sender: UISlider) {
         blueSliderValue = sender.value
+        blueBackgroundValue = CGFloat(blueSliderValue / 255)
+        view.backgroundColor = UIColor(red: redBackgroundValue, green: greenBackgroundValue, blue: blueBackgroundValue, alpha: 1.0)
         blueValues.append(blueSliderValue)
+        print(sender.value)
         
         for item in blueValues {
             if(item != 0){
@@ -563,9 +576,11 @@ class HexViewController: UIViewController {
     }
 
     @IBAction func myButtonTapped(_ sender: UIButton) {
-      
-        
-        
+        DataProvider.Red = self.redBackgroundValue
+        DataProvider.Green = self.greenBackgroundValue
+        DataProvider.Blue = self.blueBackgroundValue
+        DataProvider.ShouldUpdateBackground = true
+        self.tabBarController?.selectedIndex = 0
     }
 
 
