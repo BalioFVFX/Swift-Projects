@@ -576,9 +576,9 @@ class HexViewController: UIViewController {
     }
 
     @IBAction func myButtonTapped(_ sender: UIButton) {
-        DataProvider.Red = self.redBackgroundValue
-        DataProvider.Green = self.greenBackgroundValue
-        DataProvider.Blue = self.blueBackgroundValue
+        DataProvider.Red = self.redBackgroundValue * 255
+        DataProvider.Green = self.greenBackgroundValue * 255
+        DataProvider.Blue = self.blueBackgroundValue * 255
         DataProvider.ShouldUpdateBackground = true
         self.tabBarController?.selectedIndex = 0
     }

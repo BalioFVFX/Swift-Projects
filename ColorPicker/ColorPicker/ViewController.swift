@@ -41,18 +41,18 @@ class ViewController: UIViewController {
             redSlider.value = Float(DataProvider.Red)
             greenSlider.value = Float(DataProvider.Green)
             blueSlider.value = Float(DataProvider.Blue)
-            alphaSlider.value = 1.0
+            alphaSlider.value = 255
             
-            redSliderValue = DataProvider.Red
-            greenSliderValue = DataProvider.Green
-            blueSliderValue = DataProvider.Blue
+            redSliderValue = DataProvider.Red / 255
+            greenSliderValue = DataProvider.Green / 255
+            blueSliderValue = DataProvider.Blue / 255
             alphaSliderValue = 1.0
             
             view.backgroundColor = UIColor(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue, alpha: alphaSliderValue)
               redValueTextField.text! = DataProvider.Red.description
               greenValueTextField.text! = DataProvider.Green.description
               blueValueTextField.text! = DataProvider.Blue.description
-              alphaValueTextField.text! = "1"
+              alphaValueTextField.text! = "255"
             
             DataProvider.ShouldUpdateBackground = false
             
