@@ -14,6 +14,13 @@ class HexViewController: UIViewController {
     var greenSliderValue:Float = 0.0
     var blueSliderValue:Float = 0.0
     
+    //Sliders outlets
+    @IBOutlet weak var redSliderOutlet: UISlider!
+    @IBOutlet weak var greenSliderOutlet: UISlider!
+    @IBOutlet weak var blueSliderOutlet: UISlider!
+    
+    
+    
     //Calculation
     var resultValue:Float = 0.0
     let divideNumber:Float = 16
@@ -583,6 +590,37 @@ class HexViewController: UIViewController {
         self.tabBarController?.selectedIndex = 0
     }
 
+    @IBAction func resetButtonTapped(_ sender: UIButton) {
+        redValues.removeAll()
+        greenValues.removeAll()
+        blueValues.removeAll()
+        redHexValues.removeAll()
+        greenHexValues.removeAll()
+        blueHexValues.removeAll()
+        
+        red1 = ""
+        red2 = ""
+        green1 = ""
+        green2 = ""
+        blue1 = ""
+        blue2 = ""
+        
+        redSliderValue = 0
+        greenSliderValue = 0
+        blueSliderValue = 0
+        
+        redValueTextField.text = "00"
+        greenValueTextField.text = "00"
+        blueValueTextField.text = "00"
+        resultValueTextField.text = "#000000"
+        
+        redSliderOutlet.value = 0
+        greenSliderOutlet.value = 0
+        blueSliderOutlet.value = 0
+        
+        view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        
+    }
 
 
 }

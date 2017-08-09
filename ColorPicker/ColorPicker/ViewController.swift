@@ -93,5 +93,27 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue, alpha: alphaSliderValue)
     }
     
+  
+    @IBAction func resetButtonTapped(_ sender: UIButton) {
+        redSliderValue = 0
+        greenSliderValue = 0
+        blueSliderValue = 0
+        alphaSliderValue = 0
+        
+        redSlider.value = 0
+        greenSlider.value = 0
+        blueSlider.value = 0
+        alphaSlider.value = 0
+        
+        redValueTextField.text = "00"
+        greenValueTextField.text = "00"
+        blueValueTextField.text = "00"
+        alphaValueTextField.text = "00"
+        
+        view.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        
+    }
+    
+    
 }
 

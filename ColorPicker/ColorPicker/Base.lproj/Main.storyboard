@@ -123,6 +123,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WuA-UU-tTQ">
+                                <rect key="frame" x="313" y="242" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="53h-wQ-1br"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -239,13 +247,24 @@
                                     <action selector="myButtonTapped:" destination="S1H-br-Ybd" eventType="touchUpInside" id="cX5-9i-klu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6k-mz-Krx">
+                                <rect key="frame" x="313" y="242" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButtonTapped:" destination="S1H-br-Ybd" eventType="touchUpInside" id="Kce-I1-phL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hex" id="Qn4-DV-9Ge"/>
                     <connections>
+                        <outlet property="blueSliderOutlet" destination="5J9-zT-EJD" id="Rcl-Yu-ifJ"/>
                         <outlet property="blueValueTextField" destination="tsV-dQ-bGG" id="XTG-EZ-9ME"/>
+                        <outlet property="greenSliderOutlet" destination="cpc-Fh-59a" id="E4h-KF-Q0S"/>
                         <outlet property="greenValueTextField" destination="Jun-aC-4iX" id="U2A-qj-xsp"/>
+                        <outlet property="redSliderOutlet" destination="PqX-uV-tzm" id="Bav-pP-YLb"/>
                         <outlet property="redValueTextField" destination="WX8-Sf-Q2w" id="efP-GJ-Olq"/>
                         <outlet property="resultValueTextField" destination="W5E-Wn-3SL" id="EtL-rz-fTQ"/>
                     </connections>
