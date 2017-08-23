@@ -68,7 +68,7 @@ class RequestManager{
          Request (3) (POST https://foodsapp-4a21c.firebaseio.com/recipe/.json)
          */
         
-        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user.name)/.json") else {return}
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "POST"
         
@@ -97,5 +97,58 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
+
+    
+    
+    class func getRecipesRequest() {
+               let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         Request (3) (GET https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "GET"
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+                    
+                    print(json.allKeys)
+                    
+                    for item in json.allKeys{
+                        if let myKey = json[item] as? NSDictionary{
+                            print(myKey["RecipeName"])
+                            print(myKey["RecipeDetails"])
+                            print(myKey["RecipeTimeToCook"])
+                        }
+                        
+                    }
+                    
+          
+                }
+                    
+                catch{
+                    
+                }
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+
 
 }

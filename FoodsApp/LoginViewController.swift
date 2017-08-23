@@ -17,6 +17,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DispatchQueue.main.async {
+            RequestManager.getRecipesRequest()
+        }
+        
+        
 
     }
 
