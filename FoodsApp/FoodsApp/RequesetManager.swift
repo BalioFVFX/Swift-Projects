@@ -127,9 +127,13 @@ class RequestManager{
                     
                     for item in json.allKeys{
                         if let myKey = json[item] as? NSDictionary{
-                            print(myKey["RecipeName"])
-                            print(myKey["RecipeDetails"])
-                            print(myKey["RecipeTimeToCook"])
+//                            print(myKey["RecipeName"])
+//                            print(myKey["RecipeDetails"])
+//                            print(myKey["RecipeTimeToCook"])
+//                            print(myKey.value(forKey: "RecipeName"))
+
+                           LocalDataManager.addItems(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeName") as! String, recipe: myKey.value(forKey: "RecipeName") as! String)
+                           
                         }
                         
                     }

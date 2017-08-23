@@ -11,3 +11,9 @@ import Foundation
 class User{
     var name:String = ""
 }
+
+class Foods{
+    var recipeName:String = ""
+    var recipeDetails:String = ""
+    var recipeTimeToCook:String = ""
+}
