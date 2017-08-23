@@ -28,6 +28,8 @@ class LoginViewController: UIViewController {
     
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {
+        SVProgressHUD.show()
+       
         //Error handle
         guard let name = nameTextField.text ,nameTextField.text?.characters.count ?? 0 > 0 else{
             nameTextField.backgroundColor = UIColor.red

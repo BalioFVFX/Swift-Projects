@@ -30,7 +30,7 @@ class AddRecipeViewController: UIViewController {
     
 
     @IBAction func recipeAddButtonTapped(_ sender: UIButton) {
-        print(LocalDataManager.user.name)
+        SVProgressHUD.show()
        
         //Error handle
         guard let recipeName = recipeNameTextField.text, recipeNameTextField.text?.characters.count ?? 0 > 0 else{

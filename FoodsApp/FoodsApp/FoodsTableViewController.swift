@@ -46,6 +46,9 @@ class FoodsTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     @IBAction func addFoodBarButtonTapped(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "addFoodSegue", sender: nil)
