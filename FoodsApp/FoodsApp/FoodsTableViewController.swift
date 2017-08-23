@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class FoodsTableViewController: UITableViewController {
 
@@ -24,6 +25,19 @@ class FoodsTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        LocalDataManager.myFoods.removeAll()
+
+        RequestManager.getRecipesRequest { (sucess, statusMessage) in
+            DispatchQueue.main.async {
+                
+                guard sucess == true && statusMessage == nil else{
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    return
+                }
+                self.tableView.reloadData()
+                SVProgressHUD.showSuccess(withStatus: "Sucessfuly Loaded Data")
+            }
+        }
      
     }
     

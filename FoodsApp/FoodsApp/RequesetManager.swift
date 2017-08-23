@@ -100,7 +100,7 @@ class RequestManager{
 
     
     
-    class func getRecipesRequest() {
+    class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {
                let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -133,21 +133,22 @@ class RequestManager{
 //                            print(myKey.value(forKey: "RecipeName"))
 
                            LocalDataManager.addItems(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeName") as! String, recipe: myKey.value(forKey: "RecipeName") as! String)
-                           
+                    
                         }
                         
                     }
                     
-          
+                    completion(true,nil)
                 }
                     
                 catch{
-                    
+                    completion(false, "ERROR")
                 }
             }
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false, error?.localizedDescription)
             }
         })
         task.resume()
