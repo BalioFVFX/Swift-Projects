@@ -9,14 +9,11 @@
 import Foundation
 
 class RequestManager{
+    
+    // MARK: - REGISTER
+    
     class func registerUserRequest(username:String , password:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?) -> ()) {
-        /* Configure session, choose between:
-         * defaultSessionConfiguration
-         * ephemeralSessionConfiguration
-         * backgroundSessionConfigurationWithIdentifier:
-         And set session-wide properties, such as: HTTPAdditionalHeaders,
-         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
-         */
+
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -98,7 +95,7 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
 
-    
+    // MARK: - GET RECIPES
     
     class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {
                let sessionConfig = URLSessionConfiguration.default
@@ -123,15 +120,14 @@ class RequestManager{
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
-                    print(json.allKeys)
-                    
-                    for item in json.allKeys{
-                        if let myKey = json[item] as? NSDictionary{
-//                            print(myKey["RecipeName"])
-//                            print(myKey["RecipeDetails"])
-//                            print(myKey["RecipeTimeToCook"])
-//                            print(myKey.value(forKey: "RecipeName"))
 
+                    // Iterate through all the data by their keys
+                    for item in json.allKeys{
+                        
+                        // Get the current data
+                        if let myKey = json[item] as? NSDictionary{
+                            
+                            // Add the items
                            LocalDataManager.addItems(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeName") as! String, recipe: myKey.value(forKey: "RecipeName") as! String)
                     
                         }

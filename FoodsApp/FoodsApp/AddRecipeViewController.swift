@@ -38,6 +38,7 @@ class AddRecipeViewController: UIViewController {
             SVProgressHUD.showError(withStatus: "Please fill in the recipe name field")
             return
         }
+        
         recipeNameTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         guard let recipeDetails = recipeDetailsTextView.text, recipeDetailsTextView.text.characters.count ?? 0 > 0 else{
@@ -45,6 +46,7 @@ class AddRecipeViewController: UIViewController {
             SVProgressHUD.showError(withStatus: "Please fill in the recipe detials field")
             return
         }
+        
         recipeDetailsTextView.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         guard let recipeTimeToCook = recipeTimeToCookTextField.text, recipeTimeToCookTextField.text?.characters.count ?? 0 > 0 else{
@@ -52,6 +54,7 @@ class AddRecipeViewController: UIViewController {
             SVProgressHUD.showError(withStatus: "Please fill in the time to cook field")
             return
         }
+       
         recipeTimeToCookTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         //Add the data
@@ -64,22 +67,16 @@ class AddRecipeViewController: UIViewController {
                 SVProgressHUD.showError(withStatus: statusMessage)
                 return
             }
+           
+                // Clear the textfields & views when recipe is added sucessfuly
+            self.recipeNameTextField.text = ""
+            self.recipeDetailsTextView.text = ""
+            self.recipeTimeToCookTextField.text = ""
+            
             SVProgressHUD.showSuccess(withStatus: "Recipe added sucessfuly")
             }
         }
         
     }
     
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

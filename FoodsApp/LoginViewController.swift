@@ -17,13 +17,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        DispatchQueue.main.async {
-            
-        }
-        
-        
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,7 +47,7 @@ class LoginViewController: UIViewController {
         
         passwordTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
-        //Prepare for sending data
+        //Prepare for sending the data
         LocalDataManager.user.name = name
         
         RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
@@ -65,23 +58,15 @@ class LoginViewController: UIViewController {
                 SVProgressHUD.showError(withStatus: statusMessage)
                 return
             }
+                
             SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
+                
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                
             }
         }
        
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
