@@ -68,4 +68,33 @@ class FoodsTableViewController: UITableViewController {
         self.performSegue(withIdentifier: "addFoodSegue", sender: nil)
     }
   
+    // MARK: - SEGUE
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueIdentifier = segue.identifier else{
+            return
+        }
+        
+        switch segueIdentifier{
+            case "foodDetailsSegue":
+            
+                guard let cell = sender as? UITableViewCell else{
+                    assert(false)
+                    return
+            }
+            
+                guard let indexPath = self.tableView.indexPath(for: cell) else{
+                    return
+            }
+            
+            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[indexPath.row]
+            
+        default:
+            break
+            
+        }
+        
+    }
+    
+    
 }

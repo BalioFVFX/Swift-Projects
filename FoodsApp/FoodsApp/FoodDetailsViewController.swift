@@ -10,9 +10,22 @@ import UIKit
 
 class FoodDetailsViewController: UIViewController {
 
+    var currentCellItem = Foods()
+    
+    @IBOutlet weak var foodImageView: UIImageView!
+    @IBOutlet weak var foodNameTextLabel: UILabel!
+    @IBOutlet weak var foodTimeToCookTextLabel: UILabel!
+    @IBOutlet weak var foodDetailsTextView: UITextView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.foodImageView.image = UIImage(named: currentCellItem.recipeImageName)
+        self.foodNameTextLabel.text = currentCellItem.recipeName
+        self.foodTimeToCookTextLabel.text = currentCellItem.recipeTimeToCook
+        self.foodDetailsTextView.text = currentCellItem.recipeDetails
+        
         // Do any additional setup after loading the view.
     }
 
