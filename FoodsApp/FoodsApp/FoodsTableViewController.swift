@@ -17,6 +17,23 @@ class FoodsTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+       
+        //Get my recipes
+        
+        RequestManager.getMyRecipesRequest(user: LocalDataManager.user) { (sucess, statusMessage) in
+            DispatchQueue.main.async {
+                guard sucess == true && statusMessage == nil else{
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay:0.7)
+                    return
+                }
+                self.tableView.reloadData()
+            }
+            
+        }
+        
+        
+        // Get all recipes
         RequestManager.getRecipesRequest { (sucess, statusMessage) in
             DispatchQueue.main.async {
                 
@@ -25,11 +42,11 @@ class FoodsTableViewController: UITableViewController {
                     SVProgressHUD.dismiss(withDelay:0.7)
                     return
                 }
-                self.tableView.reloadData()
+                     self.tableView.reloadData()
             }
         }
 
-
+   
      
     }
     
@@ -48,9 +65,9 @@ class FoodsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 2
-        default:
             return LocalDataManager.myFoods.count
+        default:
+            return LocalDataManager.allFoods.count
         }
         
     }
@@ -70,13 +87,15 @@ class FoodsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodsTableViewCell", for: indexPath) as! FoodsTableViewCell
         
         if(indexPath.section == 0){
-            cell.foodItemRecipeNameLabel.text = "First Section"
+           cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
+           cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
+            cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
         }
         
         if(indexPath.section == 1){
-        cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
-        cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
-        cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
+        cell.foodItemRecipeNameLabel.text = LocalDataManager.allFoods[indexPath.row].recipeName
+        cell.foodItemRecipeDurationLabel.text = LocalDataManager.allFoods[indexPath.row].recipeTimeToCook
+        cell.foodItemImageView.image = UIImage(named: LocalDataManager.allFoods[indexPath.row].recipeImageName)
         }
         return cell
         
@@ -109,7 +128,7 @@ class FoodsTableViewController: UITableViewController {
                 guard let indexPath = self.tableView.indexPath(for: cell) else{
                     return
             }
-            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[indexPath.row]
+            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.allFoods[indexPath.row]
             
         default:
             break

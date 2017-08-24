@@ -11,6 +11,7 @@ import Foundation
 class LocalDataManager{
     
     static var user = User()
+    static var allFoods = [Foods]()
     static var myFoods = [Foods]()
     
     class func addItems(name:String, duration:String, recipe:String){
@@ -23,8 +24,19 @@ class LocalDataManager{
         food.recipeImageName = "food.png"
         
         // Add the data to the myFoods static array of foods
-        self.myFoods.append(food)
+        self.allFoods.append(food)
         
+    }
+    
+    class func addRecipesInMyFoods(name:String, duration:String, recipe:String){
+        let food = Foods()
+        
+        food.recipeName = name
+        food.recipeDetails = recipe
+        food.recipeTimeToCook = duration
+        food.recipeImageName = "food.png"
+        
+        self.myFoods.append(food)
     }
     
 }
