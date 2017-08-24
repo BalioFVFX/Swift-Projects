@@ -84,7 +84,7 @@ class FoodsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
-        print(LocalDataManager.myFoods[7].recipeName)
+       // print(LocalDataManager.myFoods[7].recipeName)
     }
     
     @IBAction func addFoodBarButtonTapped(_ sender: UIBarButtonItem) {

@@ -13,7 +13,7 @@ class RequestManager{
     // MARK: - REGISTER
     
     class func registerUserRequest(username:String , password:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?) -> ()) {
-
+        
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -32,7 +32,7 @@ class RequestManager{
             "password": password
         ]
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
-
+        
         
         /* Start a new Task */
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
@@ -55,7 +55,7 @@ class RequestManager{
     // MARK: - ADD RECIPE REQUEST
     
     class func addRecipeRequest(user: User, recipeName:String, recipeDetails:String, recipeTimeToCook:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?) -> ()) {
-  
+        
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -65,7 +65,7 @@ class RequestManager{
          Request (3) (POST https://foodsapp-4a21c.firebaseio.com/recipe/.json)
          */
         
-        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/.json") else {return}
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user.name)/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "POST"
         
@@ -94,11 +94,11 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
-
+    
     // MARK: - GET RECIPES
     
     class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {
-               let sessionConfig = URLSessionConfiguration.default
+        let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
@@ -122,14 +122,24 @@ class RequestManager{
                     
                     LocalDataManager.myFoods.removeAll()
                     // Iterate through all the data by their keys
+                    
+                    
                     for item in json.allKeys{
                         
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
-                            // Add the items
-                           LocalDataManager.addItems(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeName") as! String, recipe: myKey.value(forKey: "RecipeName") as! String)
-                    
+                            for value in myKey.allKeys{
+                                
+                                if let myValue = myKey[value] as? NSDictionary{
+                                    // Add the items
+                                    LocalDataManager.addItems(name: myValue.value(forKey: "RecipeName") as! String, duration: myValue.value(forKey: "RecipeTimeToCook") as! String, recipe: myValue.value(forKey: "RecipeDetails") as! String)
+                                }
+                                
+                            }
+                            
+                            
+                            
                         }
                         
                     }
@@ -150,6 +160,6 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
-
-
+    
+    
 }
