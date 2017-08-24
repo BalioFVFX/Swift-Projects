@@ -16,6 +16,7 @@
 		B901401F1F4CB7F500378567 /* FoodsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901401E1F4CB7F500378567 /* FoodsTableViewController.swift */; };
 		B90140211F4CB80400378567 /* FoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B90140201F4CB80400378567 /* FoodsTableViewCell.swift */; };
 		B9284FA91F4ED0BE003B79B8 /* food.png in Resources */ = {isa = PBXBuildFile; fileRef = B9284FA81F4ED0BE003B79B8 /* food.png */; };
+		B9284FAB1F4ED1B7003B79B8 /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9284FAA1F4ED1B7003B79B8 /* FoodDetailsViewController.swift */; };
 		B9B17ED61F4D850D0088691C /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED51F4D850D0088691C /* AddRecipeViewController.swift */; };
 		B9B17ED81F4D89550088691C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED71F4D89550088691C /* DataModel.swift */; };
 		B9B17EDA1F4D89680088691C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED91F4D89680088691C /* LocalDataManager.swift */; };
@@ -37,6 +38,7 @@
 		B901401E1F4CB7F500378567 /* FoodsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsTableViewController.swift; sourceTree = "<group>"; };
 		B90140201F4CB80400378567 /* FoodsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsTableViewCell.swift; sourceTree = "<group>"; };
 		B9284FA81F4ED0BE003B79B8 /* food.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = food.png; sourceTree = "<group>"; };
+		B9284FAA1F4ED1B7003B79B8 /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
 		B9B17ED51F4D850D0088691C /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		B9B17ED71F4D89550088691C /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B9B17ED91F4D89680088691C /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				B9B17ED71F4D89550088691C /* DataModel.swift */,
 				B9B17ED91F4D89680088691C /* LocalDataManager.swift */,
 				B901401E1F4CB7F500378567 /* FoodsTableViewController.swift */,
+				B9284FAA1F4ED1B7003B79B8 /* FoodDetailsViewController.swift */,
 				B90140201F4CB80400378567 /* FoodsTableViewCell.swift */,
 				B9284FA81F4ED0BE003B79B8 /* food.png */,
 				B901400C1F4CB25E00378567 /* Main.storyboard */,
@@ -244,6 +247,7 @@
 				B9B17ED61F4D850D0088691C /* AddRecipeViewController.swift in Sources */,
 				B901401B1F4CB3D100378567 /* LoginViewController.swift in Sources */,
 				B90140091F4CB25E00378567 /* AppDelegate.swift in Sources */,
+				B9284FAB1F4ED1B7003B79B8 /* FoodDetailsViewController.swift in Sources */,
 				B901401D1F4CB54100378567 /* RequesetManager.swift in Sources */,
 				B901401F1F4CB7F500378567 /* FoodsTableViewController.swift in Sources */,
 				B90140211F4CB80400378567 /* FoodsTableViewCell.swift in Sources */,
