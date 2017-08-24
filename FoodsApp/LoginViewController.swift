@@ -17,6 +17,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,12 +29,15 @@ class LoginViewController: UIViewController {
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
+        print(SVProgressHUD.displayDuration(for: "Sucessfuly Logged-In"))
+        
         
        
         //Error handle
         guard let name = nameTextField.text ,nameTextField.text?.characters.count ?? 0 > 0 else{
             nameTextField.backgroundColor = UIColor.red
             SVProgressHUD.showError(withStatus: "Please fill in the name field")
+            SVProgressHUD.dismiss(withDelay:0.7)
             return
         }
         
@@ -42,6 +46,7 @@ class LoginViewController: UIViewController {
         guard let password = passwordTextField.text, passwordTextField.text?.characters.count ?? 0 > 0 else{
             passwordTextField.backgroundColor = UIColor.red
             SVProgressHUD.showError(withStatus: "Please fill in the password field")
+            SVProgressHUD.dismiss(withDelay:0.7)
             return
         }
         
@@ -60,6 +65,7 @@ class LoginViewController: UIViewController {
             }
                 
             SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
+            SVProgressHUD.dismiss(withDelay:0.5)
                 
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 

@@ -23,10 +23,10 @@ class FoodsTableViewController: UITableViewController {
                 
                 guard sucess == true && statusMessage == nil else{
                     SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay:0.7)
                     return
                 }
                 self.tableView.reloadData()
-                SVProgressHUD.showSuccess(withStatus: "Sucessfuly Loaded Data")
             }
         }
      
@@ -96,5 +96,9 @@ class FoodsTableViewController: UITableViewController {
         
     }
     
+    
+}
+
+extension SVProgressHUD{
     
 }

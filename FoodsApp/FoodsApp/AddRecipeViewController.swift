@@ -44,6 +44,7 @@ class AddRecipeViewController: UIViewController {
         guard let recipeDetails = recipeDetailsTextView.text, recipeDetailsTextView.text.characters.count ?? 0 > 0 else{
             recipeDetailsTextView.backgroundColor = UIColor.red
             SVProgressHUD.showError(withStatus: "Please fill in the recipe detials field")
+            SVProgressHUD.dismiss(withDelay:0.7)
             return
         }
         
@@ -65,6 +66,7 @@ class AddRecipeViewController: UIViewController {
             
             guard sucess == true && statusMessage == nil else{
                 SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay:0.7)
                 return
             }
            
@@ -74,6 +76,7 @@ class AddRecipeViewController: UIViewController {
             self.recipeTimeToCookTextField.text = ""
             
             SVProgressHUD.showSuccess(withStatus: "Recipe added sucessfuly")
+                SVProgressHUD.dismiss(withDelay:0.5)
             }
         }
         
