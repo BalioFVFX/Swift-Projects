@@ -88,7 +88,7 @@ class FoodsTableViewController: UITableViewController {
                 guard let indexPath = self.tableView.indexPath(for: cell) else{
                     return
             }
-            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[0]
+            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[indexPath.row]
             
         default:
             break
