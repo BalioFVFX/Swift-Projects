@@ -13,11 +13,10 @@ class FoodsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        LocalDataManager.myFoods.removeAll()
-
         RequestManager.getRecipesRequest { (sucess, statusMessage) in
             DispatchQueue.main.async {
                 
@@ -29,6 +28,8 @@ class FoodsTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+
+
      
     }
     
@@ -62,6 +63,7 @@ class FoodsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.deselectRow(at: indexPath, animated: true)
+        print(LocalDataManager.myFoods[7].recipeName)
     }
     
     @IBAction func addFoodBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -86,8 +88,7 @@ class FoodsTableViewController: UITableViewController {
                 guard let indexPath = self.tableView.indexPath(for: cell) else{
                     return
             }
-            
-            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[indexPath.row]
+            (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[0]
             
         default:
             break

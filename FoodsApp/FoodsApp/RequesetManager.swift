@@ -120,7 +120,7 @@ class RequestManager{
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
-
+                    LocalDataManager.myFoods.removeAll()
                     // Iterate through all the data by their keys
                     for item in json.allKeys{
                         

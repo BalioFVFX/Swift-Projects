@@ -10,8 +10,8 @@ import UIKit
 
 class FoodDetailsViewController: UIViewController {
 
-    var currentCellItem = Foods()
     
+    var currentCellItem = Foods()
     @IBOutlet weak var foodImageView: UIImageView!
     @IBOutlet weak var foodNameTextLabel: UILabel!
     @IBOutlet weak var foodTimeToCookTextLabel: UILabel!
@@ -21,13 +21,27 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.foodImageView.image = UIImage(named: currentCellItem.recipeImageName)
         self.foodNameTextLabel.text = currentCellItem.recipeName
         self.foodTimeToCookTextLabel.text = currentCellItem.recipeTimeToCook
         self.foodDetailsTextView.text = currentCellItem.recipeDetails
-        
-        // Do any additional setup after loading the view.
+
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
