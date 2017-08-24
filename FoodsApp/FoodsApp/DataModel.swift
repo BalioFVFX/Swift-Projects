@@ -16,4 +16,5 @@ class Foods{
     var recipeName:String = ""
     var recipeDetails:String = ""
     var recipeTimeToCook:String = ""
+    var recipeImageName:String = ""
 }

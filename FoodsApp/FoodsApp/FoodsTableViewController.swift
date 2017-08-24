@@ -54,6 +54,7 @@ class FoodsTableViewController: UITableViewController {
     
         cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
         cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
+        cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
 
         return cell
         
