@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class AddRecipeViewController: UIViewController {
+class AddRecipeViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var recipeNameTextField: UITextField!
     @IBOutlet weak var recipeDetailsTextView: UITextView!
@@ -19,6 +19,8 @@ class AddRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.recipeDetailsTextView.delegate = self
+        self.recipeDetailsTextView.text = "Recipe Details: "
 
         // Do any additional setup after loading the view.
     }
@@ -28,7 +30,12 @@ class AddRecipeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
+ 
 
+    
     @IBAction func recipeAddButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
        
