@@ -45,12 +45,8 @@ class RequestManager{
                 catch{
                     completion(true, nil)
                 }
-
-                
                 
             }
-                
-                
                 
             else {
                 // Failure
@@ -175,11 +171,11 @@ class RequestManager{
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
                 
                 do{
+                    
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
                     
                     if(json["username"] as! Int == Int(username.hash) && json["password"] as! Int == Int(password.hash)){
-                        print("Sucess")
                         completion(true,nil)
                     }
                     else{
@@ -231,13 +227,13 @@ class RequestManager{
                 LocalDataManager.allFoods.removeAll()
 
                 do{
+                    
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
                     
                     // Iterate through all the data by their keys
                
-                 
-                    
+                
                     for item in json.allKeys{
           
                         // Get the current data
@@ -252,8 +248,6 @@ class RequestManager{
                                 }
                                
                             }
-                            
-                            
                             
                         }
                         
