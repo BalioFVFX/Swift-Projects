@@ -96,6 +96,58 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
+    // MARK: - LOGIN
+    
+    class func loginUserRequest(username:String, password:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         Login User (GET https://foodsapp-4a21c.firebaseio.com/user/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "GET"
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+                    
+                    
+                    if(json["username"] as! String == username && json["password"] as! String == password){
+                        print("Sucess")
+                        completion(true,nil)
+                    }
+                    
+                }
+                    
+                catch{
+                 completion(false, "Wrong details")
+                }
+                
+                
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+
+    
+    
     // MARK: - GET RECIPES
     
     class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {

@@ -68,22 +68,32 @@ class LoginViewController: UIViewController {
         //Prepare for sending the data
         LocalDataManager.user.name = name
         
-        RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
-            DispatchQueue.main.async {
-                
-            
-            guard sucess == true && statusMessage == nil else{
+        RequestManager.loginUserRequest(username: name, password: password, completion: { (sucess, statusMessage) in
+            guard sucess == true, statusMessage == nil else{
                 SVProgressHUD.showError(withStatus: statusMessage)
                 return
             }
-                
-            SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
-            SVProgressHUD.dismiss(withDelay:0.5)
-                
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                
-            }
-        }
+            print("IT'S OK!")
+                        })
+        
+        
+//        
+//        RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
+//            DispatchQueue.main.async {
+//                
+//            
+//            guard sucess == true && statusMessage == nil else{
+//                SVProgressHUD.showError(withStatus: statusMessage)
+//                return
+//            }
+//                
+//            SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
+//            SVProgressHUD.dismiss(withDelay:0.5)
+//
+//            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+//                
+//            }
+//        }
        
         
     }
