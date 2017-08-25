@@ -6,13 +6,6 @@
 //  Copyright © 2017 None. All rights reserved.
 //
 
-
-
-
-
-
-
-
 import Foundation
 
 class RequestManager{
@@ -20,13 +13,7 @@ class RequestManager{
     // MARK: - REGISTER
     
     class func registerUserRequest(username:String , password:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?) -> ()) {
-        /* Configure session, choose between:
-         * defaultSessionConfiguration
-         * ephemeralSessionConfiguration
-         * backgroundSessionConfigurationWithIdentifier:
-         And set session-wide properties, such as: HTTPAdditionalHeaders,
-         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
-         */
+
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -38,7 +25,7 @@ class RequestManager{
         
         guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/.json") else {return}
         var request = URLRequest(url: URL)
-        request.httpMethod = "POST"
+        request.httpMethod = "PUT"
         
         let bodyObject: [String : Any] = [
             "username": username,
@@ -46,6 +33,8 @@ class RequestManager{
         ]
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+
+        
         /* Start a new Task */
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if (error == nil) {
@@ -63,7 +52,6 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
-
     
     // MARK: - ADD RECIPE REQUEST
     
