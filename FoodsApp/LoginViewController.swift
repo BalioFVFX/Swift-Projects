@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
             // SUCESS
             
             SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
-            SVProgressHUD.dismiss(withDelay:0.7)
+            SVProgressHUD.dismiss(withDelay:0.5)
             
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
             }
@@ -105,27 +105,40 @@ class LoginViewController: UIViewController {
         // MARK: - REGISTER
         
         if(isRegisterSelected == true){
-            
-            RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
-                DispatchQueue.main.async {
-                    
-                    // ERROR HANDLE
-                    
+            RequestManager.canRegisterRequest(username: name, completion: { (sucess, statusMessage) in
+
                     guard sucess == true && statusMessage == nil else{
-                        SVProgressHUD.showError(withStatus: statusMessage)
-                        SVProgressHUD.dismiss(withDelay:0.7)
-                        return
-                    }
-                    
-                    // SUCESS
-                    
-                    SVProgressHUD.showSuccess(withStatus: "Sucessfuly Registered")
-                    SVProgressHUD.dismiss(withDelay:0.5)
-                    
-                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
-                    
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay:1.5)
+                    return
                 }
-            }
+                
+                RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
+                    DispatchQueue.main.async {
+                        
+                        // ERROR HANDLE
+                        
+                        guard sucess == true && statusMessage == nil else{
+                            SVProgressHUD.showError(withStatus: statusMessage)
+                            SVProgressHUD.dismiss(withDelay:0.7)
+                            return
+                        }
+                        
+                        // SUCESS
+                        
+                        SVProgressHUD.showSuccess(withStatus: "Sucessfuly Registered")
+                        SVProgressHUD.dismiss(withDelay:0.5)
+                        
+                        self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                        
+                    }
+                }
+                
+                
+            })
+            
+            
+        
 
         }
         
