@@ -15,10 +15,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginRegisterSegmentedControl: UISegmentedControl!
+    var isLoginSelected:Bool = false
+    var isRegisterSelected:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        isLoginSelected = true
+        isRegisterSelected = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,8 +34,12 @@ class LoginViewController: UIViewController {
         switch loginRegisterSegmentedControl.selectedSegmentIndex {
         case 0:
             loginButton.setTitle("Login", for: .normal)
+            isLoginSelected = true
+            isRegisterSelected = false
         case 1:
             loginButton.setTitle("Register", for: .normal)
+            isLoginSelected = false
+            isRegisterSelected = true
         default:
             break
         }
@@ -42,10 +49,8 @@ class LoginViewController: UIViewController {
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
-        print(SVProgressHUD.displayDuration(for: "Sucessfuly Logged-In"))
+     
         
-        
-       
         //Error handle
         guard let name = nameTextField.text ,nameTextField.text?.characters.count ?? 0 > 0 else{
             nameTextField.backgroundColor = UIColor.red
@@ -67,33 +72,63 @@ class LoginViewController: UIViewController {
         
         //Prepare for sending the data
         LocalDataManager.user.name = name
+       
+       
         
+        // MARK: - LOGIN
+        
+        if(isLoginSelected == true){
         RequestManager.loginUserRequest(username: name, password: password, completion: { (sucess, statusMessage) in
+            
+            //ERROR HANDLE
+            
+            DispatchQueue.main.async{
+            
             guard sucess == true, statusMessage == nil else{
                 SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay:0.7)
                 return
             }
-            print("IT'S OK!")
-                        })
+            
+            // SUCESS
+            
+            SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
+            SVProgressHUD.dismiss(withDelay:0.7)
+            
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+            }
+            })
+        }
         
+       
         
-//        
-//        RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
-//            DispatchQueue.main.async {
-//                
-//            
-//            guard sucess == true && statusMessage == nil else{
-//                SVProgressHUD.showError(withStatus: statusMessage)
-//                return
-//            }
-//                
-//            SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
-//            SVProgressHUD.dismiss(withDelay:0.5)
-//
-//            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-//                
-//            }
-//        }
+        // MARK: - REGISTER
+        
+        if(isRegisterSelected == true){
+            
+            RequestManager.registerUserRequest(username: name, password: password) { (sucess, statusMessage) in
+                DispatchQueue.main.async {
+                    
+                    // ERROR HANDLE
+                    
+                    guard sucess == true && statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay:0.7)
+                        return
+                    }
+                    
+                    // SUCESS
+                    
+                    SVProgressHUD.showSuccess(withStatus: "Sucessfuly Registered")
+                    SVProgressHUD.dismiss(withDelay:0.5)
+                    
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                    
+                }
+            }
+
+        }
+        
        
         
     }
