@@ -108,7 +108,7 @@ class LoginViewController: UIViewController {
             
             // SUCESS
             
-            SVProgressHUD.showSuccess(withStatus: "Sucessfuly Logged-In")
+            SVProgressHUD.showSuccess(withStatus: "Successfully Logged-In")
             SVProgressHUD.dismiss(withDelay:0.5)
             
             self.performSegue(withIdentifier: "loginSegue", sender: nil)
@@ -142,7 +142,7 @@ class LoginViewController: UIViewController {
                         
                         // SUCESS
                         
-                        SVProgressHUD.showSuccess(withStatus: "Sucessfuly Registered")
+                        SVProgressHUD.showSuccess(withStatus: "Successfully Registered")
                         SVProgressHUD.dismiss(withDelay:0.5)
                         
                         self.performSegue(withIdentifier: "loginSegue", sender: nil)

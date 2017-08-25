@@ -21,7 +21,7 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+      
         
         
         // Do any additional setup after loading the view.
@@ -39,6 +39,7 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
     }
     
 

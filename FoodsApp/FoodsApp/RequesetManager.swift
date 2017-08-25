@@ -208,6 +208,7 @@ class RequestManager{
     // MARK: - GET RECIPES
     
     class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {
+        
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -227,15 +228,18 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
+                LocalDataManager.allFoods.removeAll()
+
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
-                    LocalDataManager.allFoods.removeAll()
-                    // Iterate through all the data by their keys
                     
+                    // Iterate through all the data by their keys
+               
+                 
                     
                     for item in json.allKeys{
-                        
+          
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
@@ -244,8 +248,9 @@ class RequestManager{
                                 if let myValue = myKey[value] as? NSDictionary{
                                     // Add the items
                                     LocalDataManager.addItems(name: myValue.value(forKey: "RecipeName") as! String, duration: myValue.value(forKey: "RecipeTimeToCook") as! String, recipe: myValue.value(forKey: "RecipeDetails") as! String)
+                                    
                                 }
-                                
+                               
                             }
                             
                             
@@ -253,7 +258,6 @@ class RequestManager{
                         }
                         
                     }
-                    
                     completion(true,nil)
                 }
                     
@@ -272,7 +276,6 @@ class RequestManager{
     }
     
     class func getMyRecipesRequest(user: User, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
-
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -285,29 +288,32 @@ class RequestManager{
         guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user.name)/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "GET"
-        
         /* Start a new Task */
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             if (error == nil) {
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
-                completion(true, nil)
+                LocalDataManager.myFoods.removeAll()
+                
                 
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
-                    LocalDataManager.myFoods.removeAll()
+                    
                     // Iterate through all the data by their keys
+                    
+                 
                     
                     
                     for item in json.allKeys{
+
                         
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
                             LocalDataManager.addRecipesInMyFoods(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeTimeToCook") as! String, recipe: myKey.value(forKey: "RecipeDetails") as! String)
-                            
+                           
                             
                             
                         }

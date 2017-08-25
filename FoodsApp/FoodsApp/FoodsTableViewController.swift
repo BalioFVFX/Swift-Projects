@@ -11,43 +11,50 @@ import SVProgressHUD
 
 class FoodsTableViewController: UITableViewController {
 
+    var openScreenForFirstTime:Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        openScreenForFirstTime = true
     }
+    
+    var canReloadFavoriteFoods:Bool = false
+    var canReloadAllFoods:Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-       
-        //Get my recipes
         
+    
+        
+        //Get my recipes
         RequestManager.getMyRecipesRequest(user: LocalDataManager.user) { (sucess, statusMessage) in
-            DispatchQueue.main.async {
+        
+                    guard sucess == true && statusMessage == nil else{
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay:0.7)
+                    return
+                }
+            
+            // Get all recipes
+            RequestManager.getRecipesRequest { (sucess, statusMessage) in
+                
+                DispatchQueue.main.sync{
                 guard sucess == true && statusMessage == nil else{
                     SVProgressHUD.showError(withStatus: statusMessage)
                     SVProgressHUD.dismiss(withDelay:0.7)
                     return
                 }
+                    if(self.openScreenForFirstTime == true){
+                    SVProgressHUD.showSuccess(withStatus: "Data downloaded successfully")
+                    SVProgressHUD.dismiss(withDelay:0.7)
+                    self.openScreenForFirstTime = false
+                    }
                 self.tableView.reloadData()
+                }
             }
             
-        }
         
-        
-        // Get all recipes
-        RequestManager.getRecipesRequest { (sucess, statusMessage) in
-            DispatchQueue.main.async {
-                
-                guard sucess == true && statusMessage == nil else{
-                    SVProgressHUD.showError(withStatus: statusMessage)
-                    SVProgressHUD.dismiss(withDelay:0.7)
-                    return
-                }
-                     self.tableView.reloadData()
             }
-        }
-
-   
-     
     }
     
 
@@ -96,6 +103,7 @@ class FoodsTableViewController: UITableViewController {
         cell.foodItemRecipeNameLabel.text = LocalDataManager.allFoods[indexPath.row].recipeName
         cell.foodItemRecipeDurationLabel.text = LocalDataManager.allFoods[indexPath.row].recipeTimeToCook
         cell.foodItemImageView.image = UIImage(named: LocalDataManager.allFoods[indexPath.row].recipeImageName)
+        
         }
         return cell
         
@@ -128,7 +136,14 @@ class FoodsTableViewController: UITableViewController {
                 guard let indexPath = self.tableView.indexPath(for: cell) else{
                     return
             }
+                if(indexPath.section == 0){
+                    (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.myFoods[indexPath.row]
+                }
+            if(indexPath.section == 1){
             (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.allFoods[indexPath.row]
+            }
+            
+            print(indexPath.row)
             
         default:
             break
