@@ -65,7 +65,7 @@ class AddRecipeViewController: UIViewController, UITextViewDelegate {
         
         recipeNameTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
-        guard let recipeDetails = recipeDetailsTextView.text, recipeDetailsTextView.text.characters.count ?? 0 > 0 else{
+        guard let recipeDetails = recipeDetailsTextView.text, recipeDetailsTextView.text.characters.count > 0 && recipeDetailsTextView.text != "Recipe Details: " else{
             recipeDetailsTextView.backgroundColor = UIColor.red
             SVProgressHUD.showError(withStatus: "Please fill in the recipe detials field")
             SVProgressHUD.dismiss(withDelay:0.7)
