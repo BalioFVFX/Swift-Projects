@@ -45,6 +45,22 @@ class LoginViewController: UIViewController {
         }
     }
     
+    private func returnKeyTapped(textField: UITextField){
+        switch textField {
+        case self.nameTextField:
+            self.passwordTextField.becomeFirstResponder()
+        case self.passwordTextField:
+            self.passwordTextField.resignFirstResponder()
+        default:
+            break
+        }
+    }
+    
+    @IBAction func textFieldsPrimariesActionsTriggered(_ sender: UITextField) {
+        self.returnKeyTapped(textField: sender)
+    }
+    
+    
     
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {

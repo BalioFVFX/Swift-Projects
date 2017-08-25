@@ -37,6 +37,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldsPrimariesActionsTriggered:" destination="rZj-66-1bl" eventType="primaryActionTriggered" id="DVO-39-DaQ"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -78,6 +81,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <connections>
+                                            <action selector="textFieldsPrimariesActionsTriggered:" destination="rZj-66-1bl" eventType="primaryActionTriggered" id="PgO-lF-dr6"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -272,6 +278,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldsPrimariesActionsTriggered:" destination="uN4-BM-T1M" eventType="primaryActionTriggered" id="vSy-vI-lAa"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Time to cook" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nq8-bY-9jq">
                                 <rect key="frame" x="63" y="365" width="249" height="30"/>
@@ -279,6 +288,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldsPrimariesActionsTriggered:" destination="uN4-BM-T1M" eventType="primaryActionTriggered" id="RFH-NL-5O9"/>
+                                </connections>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aDG-8R-aVT">
                                 <rect key="frame" x="63" y="154" width="249" height="194"/>

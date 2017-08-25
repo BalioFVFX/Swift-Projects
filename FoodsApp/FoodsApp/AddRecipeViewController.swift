@@ -21,7 +21,6 @@ class AddRecipeViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         self.recipeDetailsTextView.delegate = self
         self.recipeDetailsTextView.text = "Recipe Details: "
-
         // Do any additional setup after loading the view.
     }
 
@@ -33,8 +32,26 @@ class AddRecipeViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
     }
- 
-
+    
+    
+    private func textFieldsReturnKeyTapped(textField: UITextField){
+        switch textField {
+        case self.recipeNameTextField:
+            self.recipeDetailsTextView.becomeFirstResponder()
+        case self.recipeTimeToCookTextField:
+            self.recipeTimeToCookTextField.resignFirstResponder()
+        default:
+            break
+        }
+    }
+    
+    @IBAction func textFieldsPrimariesActionsTriggered(_ sender: UITextField) {
+        self.textFieldsReturnKeyTapped(textField: sender)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.recipeTimeToCookTextField.becomeFirstResponder()
+    }
     
     @IBAction func recipeAddButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
