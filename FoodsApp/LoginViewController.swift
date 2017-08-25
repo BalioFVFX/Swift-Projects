@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginRegisterSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,18 @@ class LoginViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func loginRegisterSegmentedControlTapped(_ sender: UISegmentedControl) {
+        switch loginRegisterSegmentedControl.selectedSegmentIndex {
+        case 0:
+            loginButton.setTitle("Login", for: .normal)
+        case 1:
+            loginButton.setTitle("Register", for: .normal)
+        default:
+            break
+        }
     }
     
     
