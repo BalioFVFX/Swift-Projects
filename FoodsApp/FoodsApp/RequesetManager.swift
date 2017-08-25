@@ -82,8 +82,8 @@ class RequestManager{
         request.httpMethod = "PUT"
         
         let bodyObject: [String : Any] = [
-            "username": username,
-            "password": password
+            "username": username.hash,
+            "password": password.hash
         ]
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
@@ -178,9 +178,12 @@ class RequestManager{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
                     
-                    if(json["username"] as! String == username && json["password"] as! String == password){
+                    if(json["username"] as! Int == Int(username.hash) && json["password"] as! Int == Int(password.hash)){
                         print("Sucess")
                         completion(true,nil)
+                    }
+                    else{
+                        completion(false, "Wrong Name / Password")
                     }
                     
                 }
