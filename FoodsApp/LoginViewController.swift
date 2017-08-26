@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -30,30 +30,41 @@ class LoginViewController: UIViewController {
         
         let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
         let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
+        let hasLoggedout = UserDefaults.standard.bool(forKey: "hasLoggedoutBool")
+        LocalDataManager.user.name = nameForTextField!
         
-
+        print("first")
+        
         if(isMyRememberSwitchOn == true){
-        self.nameTextField.text = nameForTextField
-        self.rememberMeSwitch.isOn = isMyRememberSwitchOn
+            self.nameTextField.text = nameForTextField
+            self.rememberMeSwitch.isOn = isMyRememberSwitchOn
+            print(hasLoggedout)
+            if(hasLoggedout == false){
+                
+                UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")
+                self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                
+            }
+        }
+            
+        else{
+            self.nameTextField.text = ""
         }
         
-        else{
-        self.nameTextField.text = ""
-        }
-    
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
-        let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
+        //        let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
+        //        let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
+        //
+        //
+        //        if(isMyRememberSwitchOn == true && LocalDataManager.hasLoggedOut == false){
+        //            LocalDataManager.user.name = nameForTextField!
+        //            LocalDataManager.hasLoggedOut = false
+        //            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        //        }
         
-        
-        if(isMyRememberSwitchOn == true){
-            LocalDataManager.user.name = nameForTextField!
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        }
-
     }
     
     
@@ -79,7 +90,7 @@ class LoginViewController: UIViewController {
     }
     
     
-
+    
     
     private func returnKeyTapped(textField: UITextField){
         switch textField {
@@ -99,7 +110,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func rememberMeSwitchTapped(_ sender: UISwitch) {
- 
+        
     }
     
     
@@ -108,7 +119,7 @@ class LoginViewController: UIViewController {
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
-     
+        
         
         //Error handle
         guard let name = nameTextField.text ,nameTextField.text?.characters.count ?? 0 > 0 else{
@@ -119,8 +130,8 @@ class LoginViewController: UIViewController {
         }
         
         
-            UserDefaults.standard.set(self.nameTextField.text, forKey: "savedNameTextField")
-            UserDefaults.standard.set(rememberMeSwitch.isOn, forKey: "rememberMeSwitchIsOn")
+        UserDefaults.standard.set(self.nameTextField.text, forKey: "savedNameTextField")
+        UserDefaults.standard.set(rememberMeSwitch.isOn, forKey: "rememberMeSwitchIsOn")
         
         
         nameTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -136,42 +147,43 @@ class LoginViewController: UIViewController {
         
         //Prepare for sending the data
         LocalDataManager.user.name = name
-       
-       
+        
+        
         
         // MARK: - LOGIN
         
         if(isLoginSelected == true){
-        RequestManager.loginUserRequest(username: name, password: password, completion: { (sucess, statusMessage) in
-            
-            //ERROR HANDLE
-            
-            DispatchQueue.main.async{
-            
-            guard sucess == true, statusMessage == nil else{
-                SVProgressHUD.showError(withStatus: statusMessage)
-                SVProgressHUD.dismiss(withDelay:0.7)
-                return
-            }
-            
-            // SUCESS
-            
-            SVProgressHUD.showSuccess(withStatus: "Successfully Logged-In")
-            SVProgressHUD.dismiss(withDelay:0.5)
-            
-            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            }
+            RequestManager.loginUserRequest(username: name, password: password, completion: { (sucess, statusMessage) in
+                
+                //ERROR HANDLE
+                
+                DispatchQueue.main.async{
+                    
+                    guard sucess == true, statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay:0.7)
+                        return
+                    }
+                    
+                    // SUCESS
+                    
+                    SVProgressHUD.showSuccess(withStatus: "Successfully Logged-In")
+                    SVProgressHUD.dismiss(withDelay:0.5)
+                    
+                    self.performSegue(withIdentifier: "loginSegue", sender: nil)
+                }
+                UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")
             })
         }
         
-       
+        
         
         // MARK: - REGISTER
         
         if(isRegisterSelected == true){
             RequestManager.canRegisterRequest(username: name, completion: { (sucess, statusMessage) in
-
-                    guard sucess == true && statusMessage == nil else{
+                
+                guard sucess == true && statusMessage == nil else{
                     SVProgressHUD.showError(withStatus: statusMessage)
                     SVProgressHUD.dismiss(withDelay:1.5)
                     return
@@ -193,23 +205,23 @@ class LoginViewController: UIViewController {
                         SVProgressHUD.showSuccess(withStatus: "Successfully Registered")
                         SVProgressHUD.dismiss(withDelay:0.5)
                         
-                
                         
                         self.performSegue(withIdentifier: "loginSegue", sender: nil)
                         
                     }
+                    UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")
                 }
                 
                 
             })
             
             
-        
-
+            
+            
         }
         
-       
+        
         
     }
-
+    
 }

@@ -110,9 +110,19 @@ class FoodsTableViewController: UITableViewController {
         // print(LocalDataManager.myFoods[7].recipeName)
     }
     
+    
+    @IBAction func LogoutBarButtonTapped(_ sender: UIBarButtonItem) {
+        UserDefaults.standard.set(true, forKey: "hasLoggedoutBool")
+        LocalDataManager.user = User()
+        self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+    }
+    
+    
     @IBAction func addFoodBarButtonTapped(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "addFoodSegue", sender: nil)
     }
+    
+    
     
     // MARK: - SEGUE
     
