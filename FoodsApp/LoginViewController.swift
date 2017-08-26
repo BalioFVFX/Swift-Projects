@@ -15,11 +15,18 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loginRegisterSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var rememberMeSwitch: UISwitch!
+    
     var isLoginSelected:Bool = false
     var isRegisterSelected:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
+        
+        self.nameTextField.text = nameForTextField
+        
         isLoginSelected = true
         isRegisterSelected = false
     }
@@ -45,6 +52,9 @@ class LoginViewController: UIViewController {
         }
     }
     
+    
+
+    
     private func returnKeyTapped(textField: UITextField){
         switch textField {
         case self.nameTextField:
@@ -62,6 +72,13 @@ class LoginViewController: UIViewController {
     
     
     
+    @IBAction func rememberMeSwitchTapped(_ sender: UISwitch) {
+        rememberMeSwitch.isOn = true
+    }
+    
+    
+    
+    
     // MARK: - LOGIN
     @IBAction func loginButtonTapped(_ sender: UIButton) {
         SVProgressHUD.show()
@@ -73,6 +90,10 @@ class LoginViewController: UIViewController {
             SVProgressHUD.showError(withStatus: "Please fill in the name field")
             SVProgressHUD.dismiss(withDelay:0.7)
             return
+        }
+        
+        if(self.rememberMeSwitch.isOn == true){
+            UserDefaults.standard.set(self.nameTextField.text, forKey: "savedNameTextField")
         }
         
         nameTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -144,6 +165,8 @@ class LoginViewController: UIViewController {
                         
                         SVProgressHUD.showSuccess(withStatus: "Successfully Registered")
                         SVProgressHUD.dismiss(withDelay:0.5)
+                        
+                
                         
                         self.performSegue(withIdentifier: "loginSegue", sender: nil)
                         

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A352a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rZj-66-1bl">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -20,20 +20,20 @@
                         <viewControllerLayoutGuide type="bottom" id="5mH-gc-dMR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JGi-ap-OMa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="NmT-Dk-Dok">
-                                <rect key="frame" x="16" y="131" width="343" height="30"/>
+                                <rect key="frame" x="20" y="131" width="374" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGg-at-pRP">
-                                        <rect key="frame" x="0.0" y="0.0" width="35.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="35.333333333333336" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AXV-kp-eq6">
-                                        <rect key="frame" x="58.5" y="0.0" width="284.5" height="30"/>
+                                        <rect key="frame" x="58.333333333333343" y="0.0" width="315.66666666666663" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -44,7 +44,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEv-01-tIv">
-                                <rect key="frame" x="137.5" y="318.5" width="100" height="30"/>
+                                <rect key="frame" x="157" y="353" width="100" height="30"/>
                                 <color key="backgroundColor" red="0.98155669761273212" green="0.33016856781448967" blue="0.44037638774859839" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="4HX-be-Zo0"/>
@@ -57,7 +57,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nbS-bT-Rdq">
-                                <rect key="frame" x="123" y="74" width="129" height="29"/>
+                                <rect key="frame" x="142.66666666666669" y="74" width="129.00000000000006" height="29"/>
                                 <segments>
                                     <segment title="Login"/>
                                     <segment title="Register"/>
@@ -68,16 +68,16 @@
                                 </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzh-9l-jW9">
-                                <rect key="frame" x="16" y="185" width="343" height="30"/>
+                                <rect key="frame" x="20" y="185" width="374" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QlM-Wn-Ca4">
-                                        <rect key="frame" x="0.0" y="0.0" width="58.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="58.333333333333329" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f8X-Xv-WQ0">
-                                        <rect key="frame" x="58.5" y="0.0" width="284.5" height="30"/>
+                                        <rect key="frame" x="58.333333333333343" y="0.0" width="315.66666666666663" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -87,6 +87,10 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9mp-LV-f8b">
+                                <rect key="frame" x="345" y="352.66666666666669" width="51" height="31"/>
+                                <color key="onTintColor" red="0.97856038810000001" green="0.328689754" blue="0.43761157989999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="0.59525197254634366" green="0.58752484969323493" blue="0.66061215185676392" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -95,6 +99,8 @@
                             <constraint firstItem="nbS-bT-Rdq" firstAttribute="centerX" secondItem="JGi-ap-OMa" secondAttribute="centerX" id="GFY-ME-8oS"/>
                             <constraint firstItem="Nzh-9l-jW9" firstAttribute="top" secondItem="AXV-kp-eq6" secondAttribute="bottom" constant="24" id="JR1-sD-9zD"/>
                             <constraint firstItem="kEv-01-tIv" firstAttribute="centerX" secondItem="JGi-ap-OMa" secondAttribute="centerX" id="Mpk-0n-PfP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9mp-LV-f8b" secondAttribute="trailing" id="XGR-68-EwE"/>
+                            <constraint firstItem="9mp-LV-f8b" firstAttribute="centerY" secondItem="kEv-01-tIv" secondAttribute="centerY" id="e86-vL-x0o"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Nzh-9l-jW9" secondAttribute="trailing" id="e9S-a6-bt1"/>
                             <constraint firstItem="nbS-bT-Rdq" firstAttribute="top" secondItem="FB9-HY-hgA" secondAttribute="bottom" constant="54" id="eHp-ms-vEd"/>
                             <constraint firstItem="NmT-Dk-Dok" firstAttribute="top" secondItem="nbS-bT-Rdq" secondAttribute="bottom" constant="29" id="laI-VP-7qV"/>
@@ -107,6 +113,7 @@
                         <outlet property="loginRegisterSegmentedControl" destination="nbS-bT-Rdq" id="nZ5-n3-vtJ"/>
                         <outlet property="nameTextField" destination="AXV-kp-eq6" id="3j7-Wi-gCr"/>
                         <outlet property="passwordTextField" destination="f8X-Xv-WQ0" id="6uG-o8-zuu"/>
+                        <outlet property="rememberMeSwitch" destination="9mp-LV-f8b" id="gjx-2h-i8K"/>
                         <segue destination="iH4-z4-Gok" kind="show" identifier="loginSegue" id="XaZ-wQ-wrm"/>
                     </connections>
                 </viewController>
@@ -119,32 +126,32 @@
             <objects>
                 <tableViewController id="PxI-PM-cs8" customClass="FoodsTableViewController" customModule="FoodsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oic-cx-Ekf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.59525197249999995" green="0.58752484969999996" blue="0.6606121519" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FoodsTableViewCell" id="scT-VC-aeo" customClass="FoodsTableViewCell" customModule="FoodsApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="scT-VC-aeo" id="AmU-ND-eb0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NMS-l3-nT1">
-                                            <rect key="frame" x="8" y="8" width="43.5" height="43.5"/>
+                                            <rect key="frame" x="8" y="8" width="43.666666666666664" height="43.666666666666664"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="NMS-l3-nT1" secondAttribute="height" multiplier="1:1" id="wdW-b8-TOH"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe very long name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjG-vJ-k4C">
-                                            <rect key="frame" x="59" y="13.5" width="146.5" height="17"/>
+                                            <rect key="frame" x="58.999999999999986" y="13.666666666666664" width="146.66666666666663" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe very long duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6N-Uf-cAb">
-                                            <rect key="frame" x="59" y="29.5" width="146.5" height="14.5"/>
+                                            <rect key="frame" x="58.999999999999986" y="29.666666666666671" width="146.66666666666663" height="14.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                             <nil key="highlightedColor"/>
@@ -197,11 +204,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Xuc-L6-zpX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0rK-P5-26h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6bd-lQ-4LF">
-                                <rect key="frame" x="67.5" y="106.5" width="240" height="454"/>
+                                <rect key="frame" x="87" y="141" width="240" height="454"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food.png" translatesAutoresizingMaskIntoConstraints="NO" id="4dq-ft-x9s">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -269,7 +276,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IRL-1t-kho"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gUU-vg-Cik">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipe name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zV6-Xm-d2F">
