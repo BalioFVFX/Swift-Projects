@@ -24,9 +24,15 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
+        let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
         
+        if(isMyRememberSwitchOn == true){
         self.nameTextField.text = nameForTextField
-        
+        self.rememberMeSwitch.isOn = isMyRememberSwitchOn
+        }
+        else{
+            self.nameTextField.text = ""
+        }
         isLoginSelected = true
         isRegisterSelected = false
     }
@@ -73,7 +79,7 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func rememberMeSwitchTapped(_ sender: UISwitch) {
-        rememberMeSwitch.isOn = true
+ 
     }
     
     
@@ -92,9 +98,10 @@ class LoginViewController: UIViewController {
             return
         }
         
-        if(self.rememberMeSwitch.isOn == true){
+        
             UserDefaults.standard.set(self.nameTextField.text, forKey: "savedNameTextField")
-        }
+            UserDefaults.standard.set(rememberMeSwitch.isOn, forKey: "rememberMeSwitchIsOn")
+        
         
         nameTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
