@@ -39,6 +39,9 @@ class FoodDetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func showCommentsButtonTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "commentsSegue", sender: nil)
+    }
 
 
 

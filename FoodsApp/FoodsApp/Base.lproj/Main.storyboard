@@ -253,13 +253,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WuZ-ZV-05Z">
-                                        <rect key="frame" x="91" y="185" width="58" height="18"/>
+                                        <rect key="frame" x="91" y="185" width="58" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Very long text about the recipe" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W8X-Sg-RuS">
-                                        <rect key="frame" x="3" y="213" width="234" height="241"/>
+                                        <rect key="frame" x="3" y="195" width="234" height="241"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="241" id="dIi-bz-NMh"/>
@@ -268,6 +268,19 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeU-ek-5sg">
+                                        <rect key="frame" x="60" y="446" width="120" height="8"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="8" id="8pm-sy-Foc"/>
+                                            <constraint firstAttribute="width" constant="120" id="jtR-Bd-kRo"/>
+                                        </constraints>
+                                        <state key="normal" title="Show comments">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showCommentsButtonTapped:" destination="yhd-zr-Y8M" eventType="touchUpInside" id="7kG-Pq-sEl"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="PTD-Cu-DQT"/>
@@ -286,11 +299,90 @@
                         <outlet property="foodImageView" destination="4dq-ft-x9s" id="WQg-1N-mdc"/>
                         <outlet property="foodNameTextLabel" destination="Xqp-SK-iEP" id="8D7-E4-n1g"/>
                         <outlet property="foodTimeToCookTextLabel" destination="WuZ-ZV-05Z" id="gfE-83-vPg"/>
+                        <segue destination="A7w-KW-c9k" kind="show" identifier="commentsSegue" id="gJd-kV-ehl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oA-oF-Z1y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2464.8000000000002" y="394.45277361319341"/>
+        </scene>
+        <!--Comments Table View Controller-->
+        <scene sceneID="Nhy-Gg-plO">
+            <objects>
+                <tableViewController id="A7w-KW-c9k" customClass="CommentsTableViewController" customModule="FoodsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" id="UCP-mc-kSY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.5965308547" green="0.58349746469999997" blue="0.65895420309999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="separatorColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentsTableViewCell" id="ROC-5W-iW6" customClass="CommentsTableViewCell" customModule="FoodsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ROC-5W-iW6" id="yyN-Vh-mzR">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HCn-Vw-6Rn">
+                                            <rect key="frame" x="8" y="8" width="43.5" height="43.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="HCn-Vw-6Rn" secondAttribute="height" multiplier="1:1" id="mAc-tT-Qxf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very long name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvb-3i-ac5">
+                                            <rect key="frame" x="59" y="11.5" width="119" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYZ-De-XSQ">
+                                            <rect key="frame" x="277" y="12" width="90" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="90" id="7sL-xj-NRr"/>
+                                                <constraint firstAttribute="height" constant="21" id="P6t-9r-vHH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very long commentVery long commentVery long commentVery long commentVery long commentVery long commentVery long comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="gLp-jO-T4g">
+                                            <rect key="frame" x="59" y="34" width="308" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="HCn-Vw-6Rn" secondAttribute="bottom" constant="8" id="466-N5-gXy"/>
+                                        <constraint firstItem="Kvb-3i-ac5" firstAttribute="leading" secondItem="HCn-Vw-6Rn" secondAttribute="trailing" constant="7.5" id="6dG-yq-4Wq"/>
+                                        <constraint firstItem="gLp-jO-T4g" firstAttribute="leading" secondItem="HCn-Vw-6Rn" secondAttribute="trailing" constant="7.5" id="A29-B1-SLA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="iYZ-De-XSQ" secondAttribute="trailing" id="B8M-mR-JaR"/>
+                                        <constraint firstItem="Kvb-3i-ac5" firstAttribute="centerY" secondItem="HCn-Vw-6Rn" secondAttribute="centerY" constant="-8" id="Taq-Dh-5IY"/>
+                                        <constraint firstItem="iYZ-De-XSQ" firstAttribute="top" secondItem="yyN-Vh-mzR" secondAttribute="topMargin" constant="4" id="d9n-vd-xwv"/>
+                                        <constraint firstItem="HCn-Vw-6Rn" firstAttribute="top" secondItem="yyN-Vh-mzR" secondAttribute="top" constant="8" id="gUC-Aj-jYt"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="HCn-Vw-6Rn" secondAttribute="leading" id="h08-99-IOp"/>
+                                        <constraint firstAttribute="trailing" secondItem="gLp-jO-T4g" secondAttribute="trailing" constant="8" id="k1t-fl-dSE"/>
+                                        <constraint firstItem="gLp-jO-T4g" firstAttribute="top" secondItem="Kvb-3i-ac5" secondAttribute="bottom" constant="1.5" id="lb9-3H-akX"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.5965308547" green="0.58349746469999997" blue="0.65895420309999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="commentDateLabel" destination="iYZ-De-XSQ" id="IT4-at-q5I"/>
+                                    <outlet property="commentImageView" destination="HCn-Vw-6Rn" id="cvA-86-dLK"/>
+                                    <outlet property="commentLabel" destination="gLp-jO-T4g" id="ENY-Od-xuF"/>
+                                    <outlet property="commentNameLabel" destination="Kvb-3i-ac5" id="RiT-op-OAV"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="A7w-KW-c9k" id="Quw-L0-sFf"/>
+                            <outlet property="delegate" destination="A7w-KW-c9k" id="PvO-dt-FWP"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IYJ-tZ-JeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3266" y="394"/>
         </scene>
         <!--Add Recipe View Controller-->
         <scene sceneID="2S1-f7-1FU">
