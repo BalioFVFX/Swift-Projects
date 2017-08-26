@@ -23,20 +23,40 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        isLoginSelected = true
+        isRegisterSelected = false
+        
+        
         let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
         let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
         
+
         if(isMyRememberSwitchOn == true){
         self.nameTextField.text = nameForTextField
         self.rememberMeSwitch.isOn = isMyRememberSwitchOn
         }
+        
         else{
-            self.nameTextField.text = ""
+        self.nameTextField.text = ""
         }
-        isLoginSelected = true
-        isRegisterSelected = false
+    
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
+        let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
+        
+        
+        if(isMyRememberSwitchOn == true){
+            LocalDataManager.user.name = nameForTextField!
+            self.performSegue(withIdentifier: "loginSegue", sender: nil)
+        }
 
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
