@@ -17,4 +17,5 @@ class Foods{
     var recipeDetails:String = ""
     var recipeTimeToCook:String = ""
     var recipeImageName:String = ""
+    var comments: [(comment:String, date: String)] = []
 }

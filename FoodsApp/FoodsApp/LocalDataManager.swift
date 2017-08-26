@@ -22,6 +22,7 @@ class LocalDataManager{
         food.recipeDetails = recipe
         food.recipeTimeToCook = duration
         food.recipeImageName = "food.png"
+        food.comments = []
         
         // Add the data to the myFoods static array of foods
         self.allFoods.append(food)
@@ -35,6 +36,7 @@ class LocalDataManager{
         food.recipeDetails = recipe
         food.recipeTimeToCook = duration
         food.recipeImageName = "food.png"
+        food.comments = []
         
         self.myFoods.append(food)
     }
