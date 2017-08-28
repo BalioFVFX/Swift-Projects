@@ -114,6 +114,7 @@ class FoodsTableViewController: UITableViewController {
     @IBAction func LogoutBarButtonTapped(_ sender: UIBarButtonItem) {
         UserDefaults.standard.set(true, forKey: "hasLoggedoutBool")
         LocalDataManager.user = User()
+        LocalDataManager.myFoods.removeAll()
         self.performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
