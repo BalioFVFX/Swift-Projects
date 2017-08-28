@@ -371,6 +371,7 @@
                                     <outlet property="commentImageView" destination="HCn-Vw-6Rn" id="cvA-86-dLK"/>
                                     <outlet property="commentLabel" destination="gLp-jO-T4g" id="ENY-Od-xuF"/>
                                     <outlet property="commentNameLabel" destination="Kvb-3i-ac5" id="RiT-op-OAV"/>
+                                    <segue destination="wJm-mb-25S" kind="show" identifier="commentDetailsSegue" id="KSb-PL-iyp"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -393,6 +394,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYJ-tZ-JeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3266" y="394"/>
+        </scene>
+        <!--Comment Details View Controller-->
+        <scene sceneID="Tjy-77-6bX">
+            <objects>
+                <viewController id="wJm-mb-25S" customClass="CommentDetailsViewController" customModule="FoodsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="k08-AL-Wv8"/>
+                        <viewControllerLayoutGuide type="bottom" id="AMH-AW-WSY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="70O-cW-zf6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g4G-Y3-zMb">
+                                <rect key="frame" x="16" y="128" width="343" height="411"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food.png" translatesAutoresizingMaskIntoConstraints="NO" id="P7o-Ar-1mo">
+                                        <rect key="frame" x="51.5" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="Bnf-Z5-zIw"/>
+                                            <constraint firstAttribute="width" constant="240" id="vDh-xL-qcJ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very long name of user" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eio-23-6Mq">
+                                        <rect key="frame" x="76" y="138" width="191" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="a9J-yj-b5q"/>
+                                            <constraint firstAttribute="width" constant="191" id="y5h-UE-NSz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Very long date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sod-br-ybx">
+                                        <rect key="frame" x="106.5" y="169" width="130" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="GKV-Fl-pnz"/>
+                                            <constraint firstAttribute="width" constant="130" id="wJf-eq-BZp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mXR-wz-0po">
+                                        <rect key="frame" x="51.5" y="200" width="240" height="211"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="211" id="Imz-Ak-LJb"/>
+                                            <constraint firstAttribute="width" constant="240" id="fKD-43-rKL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.5965308547" green="0.58349746469999997" blue="0.65895420309999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="g4G-Y3-zMb" firstAttribute="leading" secondItem="70O-cW-zf6" secondAttribute="leadingMargin" id="4kq-oC-jXm"/>
+                            <constraint firstItem="g4G-Y3-zMb" firstAttribute="centerY" secondItem="70O-cW-zf6" secondAttribute="centerY" id="94t-W0-blv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="g4G-Y3-zMb" secondAttribute="trailing" id="Q2d-7e-cp6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="commentTextView" destination="mXR-wz-0po" id="iqN-zq-UHE"/>
+                        <outlet property="dateLabel" destination="Sod-br-ybx" id="QAT-NT-C0W"/>
+                        <outlet property="nameLabel" destination="Eio-23-6Mq" id="vTU-8f-RVK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6FC-C2-acd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4038" y="412"/>
         </scene>
         <!--Add Comment View Controller-->
         <scene sceneID="94Z-WQ-2IO">
@@ -444,7 +517,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Wi-ao-9aC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4109.6000000000004" y="393.55322338830587"/>
+            <point key="canvasLocation" x="4038" y="-269"/>
         </scene>
         <!--Add Recipe View Controller-->
         <scene sceneID="2S1-f7-1FU">
