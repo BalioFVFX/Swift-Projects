@@ -27,6 +27,7 @@ class AddCommentViewController: UIViewController {
     
 
     @IBAction func addCommentButtonTapped(_ sender: UIButton) {
+        RequestManager.postComment(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey, comment: "a comment")
         LocalDataManager.currentFood.comments.append("a Comment")
     }
     
