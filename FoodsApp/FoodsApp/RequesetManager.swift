@@ -334,7 +334,7 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
-    class func postComment(user:String, key:String, comment:String) {
+    class func postCommentRequest(user:String, key:String, comment:String) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -364,6 +364,61 @@ class RequestManager{
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+
+    class func GetCommentsRequest(user:String, key:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         Get Comments (GET https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user)/\(key)/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "GET"
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                LocalDataManager.currentFood.comments.removeAll()
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+
+                    for item in json.allKeys{
+                        
+                        
+                        // Get the current data
+                        if let myKey = json[item] as? NSDictionary{
+                            
+                            LocalDataManager.currentFood.comments.append(myKey.value(forKey: "Comment") as! String)
+                            
+                        }
+                        
+                    }
+                    completion(true, nil)
+                }
+                 
+                catch{
+                    //completion(false, "ERROR")
+                    //Throws error SVPRogressHUD message when recipe/user/.json is empty
+                }
+                
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false, error?.localizedDescription)
             }
         })
         task.resume()

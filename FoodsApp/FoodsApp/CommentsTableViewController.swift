@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CommentsTableViewController: UITableViewController {
 
@@ -18,8 +19,31 @@ class CommentsTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+     
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        RequestManager.GetCommentsRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey) { (sucess, statusMessage) in
+            
+            DispatchQueue.main.sync{
+            guard sucess == true && statusMessage == nil else{
+                SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay:0.7)
+                return
+            }
+            
+           
+                self.tableView.reloadData()
+                SVProgressHUD.showSuccess(withStatus: "Comments loaded")
+                SVProgressHUD.dismiss(withDelay:0.7)
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,6 +71,11 @@ class CommentsTableViewController: UITableViewController {
         cell.commentDateLabel.text = "Date"
 
         return cell
+    }
+    
+    
+    @IBAction func addCommentBarButtonTapped(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "addCommentSegue", sender: nil)
     }
     
 

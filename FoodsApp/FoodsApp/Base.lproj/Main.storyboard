@@ -382,10 +382,13 @@
                     <navigationItem key="navigationItem" title="Comments" id="uWz-mk-117">
                         <barButtonItem key="rightBarButtonItem" title="Add comment" id="0gz-rZ-FgW">
                             <connections>
-                                <segue destination="T6M-Zh-sZu" kind="show" id="tkG-D1-QhP"/>
+                                <action selector="addCommentBarButtonTapped:" destination="A7w-KW-c9k" id="FRV-Hu-wu3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="T6M-Zh-sZu" kind="show" identifier="addCommentSegue" id="LRp-Ps-XoP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYJ-tZ-JeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -404,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6P-tf-nBt">
-                                <rect key="frame" x="137.5" y="393" width="100" height="30"/>
+                                <rect key="frame" x="137.5" y="437" width="100" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Q3g-yZ-F4T"/>
@@ -417,7 +420,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8K0-m4-nFC">
-                                <rect key="frame" x="67.5" y="118" width="240" height="217"/>
+                                <rect key="frame" x="67.5" y="162" width="240" height="217"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="6Qk-QX-fJ8"/>
