@@ -13,30 +13,37 @@ class LocalDataManager{
     static var user = User()
     static var allFoods = [Foods]()
     static var myFoods = [Foods]()
+    static var currentFood = Foods()
     
-    class func addItems(name:String, duration:String, recipe:String){
+    class func addItems(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
         // Make an food object of Foods class
         let food = Foods()
         
+        food.recipeUser = user
         food.recipeName = name
         food.recipeDetails = recipe
         food.recipeTimeToCook = duration
         food.recipeImageName = "food.png"
         food.comments = []
+        food.datesOfComments = []
+        food.recipeKey = keyOfRecipe
         
         // Add the data to the myFoods static array of foods
         self.allFoods.append(food)
         
     }
     
-    class func addRecipesInMyFoods(name:String, duration:String, recipe:String){
+    class func addRecipesInMyFoods(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
         let food = Foods()
         
+        food.recipeUser = user
         food.recipeName = name
         food.recipeDetails = recipe
         food.recipeTimeToCook = duration
         food.recipeImageName = "food.png"
         food.comments = []
+        food.datesOfComments = []
+        food.recipeKey = keyOfRecipe
         
         self.myFoods.append(food)
     }

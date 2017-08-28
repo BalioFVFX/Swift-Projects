@@ -13,9 +13,12 @@ class User{
 }
 
 class Foods{
+    var recipeUser:String = ""
     var recipeName:String = ""
     var recipeDetails:String = ""
     var recipeTimeToCook:String = ""
     var recipeImageName:String = ""
-    var comments: [(comment:String, date: String)] = []
+    var comments: [String] = []
+    var datesOfComments: [String] = []
+    var recipeKey:String = ""
 }

@@ -20,6 +20,8 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("User: " + currentCellItem.recipeUser)
+        print("Key: " + currentCellItem.recipeKey)
         // Do any additional setup after loading the view.
     }
     
@@ -40,6 +42,7 @@ class FoodDetailsViewController: UIViewController {
     }
     
     @IBAction func showCommentsButtonTapped(_ sender: UIButton) {
+        LocalDataManager.currentFood = currentCellItem
         self.performSegue(withIdentifier: "commentsSegue", sender: nil)
     }
 

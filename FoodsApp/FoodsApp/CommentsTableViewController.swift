@@ -34,7 +34,7 @@ class CommentsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return LocalDataManager.currentFood.comments.count
     }
 
     
@@ -42,7 +42,7 @@ class CommentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
         cell.commentLabel.text = "Text"
-        cell.commentNameLabel.text = "Name"
+        cell.commentNameLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
         cell.commentImageView.image = UIImage(named: "food.png")
         cell.commentDateLabel.text = "Date"
 

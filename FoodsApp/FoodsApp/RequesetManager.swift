@@ -235,15 +235,16 @@ class RequestManager{
                
                 
                     for item in json.allKeys{
-          
+                       
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
-                            
+                           
                             for value in myKey.allKeys{
                                 
                                 if let myValue = myKey[value] as? NSDictionary{
+                                    //print(myValue)
                                     // Add the items
-                                    LocalDataManager.addItems(name: myValue.value(forKey: "RecipeName") as! String, duration: myValue.value(forKey: "RecipeTimeToCook") as! String, recipe: myValue.value(forKey: "RecipeDetails") as! String)
+                                    LocalDataManager.addItems(name: myValue.value(forKey: "RecipeName") as! String, duration: myValue.value(forKey: "RecipeTimeToCook") as! String, recipe: myValue.value(forKey: "RecipeDetails") as! String, keyOfRecipe: value as! String, user: myValue.value(forKey: "Name") as! String)
                                     
                                 }
                                
@@ -306,7 +307,7 @@ class RequestManager{
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
-                            LocalDataManager.addRecipesInMyFoods(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeTimeToCook") as! String, recipe: myKey.value(forKey: "RecipeDetails") as! String)
+                            LocalDataManager.addRecipesInMyFoods(name: myKey.value(forKey: "RecipeName") as! String, duration: myKey.value(forKey: "RecipeTimeToCook") as! String, recipe: myKey.value(forKey: "RecipeDetails") as! String, keyOfRecipe: item as! String, user: myKey.value(forKey: "Name") as! String)
                            
                             
                             
