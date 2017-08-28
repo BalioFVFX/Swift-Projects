@@ -66,8 +66,8 @@ class CommentsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
-        cell.commentLabel.text = LocalDataManager.currentFood.recipeUser
-        cell.commentNameLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
+        cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
+        cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
         cell.commentImageView.image = UIImage(named: "food.png")
         cell.commentDateLabel.text = "Date"
 

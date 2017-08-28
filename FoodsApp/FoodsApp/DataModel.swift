@@ -21,4 +21,5 @@ class Foods{
     var comments: [String] = []
     var datesOfComments: [String] = []
     var recipeKey:String = ""
+    var commentNames: [String] = []
 }
