@@ -334,7 +334,7 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
-    class func postCommentRequest(user:String, key:String, comment:String, commentName:String) {
+    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -351,7 +351,8 @@ class RequestManager{
         
         let bodyObject: [String : Any] = [
             "Comment": comment,
-            "User": commentName
+            "User": commentName,
+            "Date" : currentDate
         ]
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
@@ -394,6 +395,7 @@ class RequestManager{
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
                 LocalDataManager.currentFood.comments.removeAll()
                 LocalDataManager.currentFood.commentNames.removeAll()
+                LocalDataManager.currentFood.datesOfComments.removeAll()
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
 
@@ -404,6 +406,7 @@ class RequestManager{
                         if let myKey = json[item] as? NSDictionary{
                             LocalDataManager.currentFood.commentNames.append(myKey.value(forKey: "User") as! String)
                             LocalDataManager.currentFood.comments.append(myKey.value(forKey: "Comment") as! String)
+                            LocalDataManager.currentFood.datesOfComments.append(myKey.value(forKey: "Date") as! String)
                             
                         }
                         
