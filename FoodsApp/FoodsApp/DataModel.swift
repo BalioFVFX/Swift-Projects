@@ -29,5 +29,6 @@ class myComments{
     var commentName:String = ""
     var dateOfComment:String = ""
     var comment:String = ""
+    var commentKey:String = ""
     //var dateOfComments:String = ""
 }

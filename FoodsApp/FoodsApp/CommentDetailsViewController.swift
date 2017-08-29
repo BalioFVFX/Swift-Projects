@@ -15,13 +15,27 @@ class CommentDetailsViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var editCommentButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Wrong informaiton about the first section of my comments
+        
         self.nameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[currentCell]
         self.dateLabel.text = "Date: " + LocalDataManager.currentFood.datesOfComments[currentCell]
         self.commentTextView.text = LocalDataManager.currentFood.comments[currentCell]
+        print(LocalDataManager.currentFood.recipeKey)
+        
+        if(LocalDataManager.currentFood.commentNames[currentCell] == LocalDataManager.user.name){
+            commentTextView.isEditable = true
+            editCommentButton.isHidden = false
+        }
+        else{
+            commentTextView.isEditable = false
+            editCommentButton.isHidden = true
+        }
         
 
         // Do any additional setup after loading the view.
@@ -30,6 +44,18 @@ class CommentDetailsViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func editCommentButtonTapped(_ sender: UIButton) {
+       print("REC KEY", LocalDataManager.currentFood.recipeKey)
+        //print(LocalDataManager.myCurrentComments[0].commentKey)
+        RequestManager.editCommentRequest(user: LocalDataManager.currentFood.recipeName, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: "Date", commentName: LocalDataManager.user.name, commentKey: LocalDataManager.myCurrentComments[0].commentKey) { (sucess, statusMessage) in
+            guard sucess == true && statusMessage == nil else{
+                return
+            }
+            
+        }
     }
     
 

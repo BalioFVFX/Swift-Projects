@@ -408,7 +408,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="g4G-Y3-zMb">
-                                <rect key="frame" x="16" y="128" width="343" height="411"/>
+                                <rect key="frame" x="16" y="108" width="343" height="451"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="food.png" translatesAutoresizingMaskIntoConstraints="NO" id="P7o-Ar-1mo">
                                         <rect key="frame" x="51.5" y="0.0" width="240" height="128"/>
@@ -447,6 +447,13 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xx-cQ-EvL">
+                                        <rect key="frame" x="124" y="421" width="95" height="30"/>
+                                        <state key="normal" title="Edit comment"/>
+                                        <connections>
+                                            <action selector="editCommentButtonTapped:" destination="wJm-mb-25S" eventType="touchUpInside" id="sTA-CE-PlK"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -460,6 +467,7 @@
                     <connections>
                         <outlet property="commentTextView" destination="mXR-wz-0po" id="iqN-zq-UHE"/>
                         <outlet property="dateLabel" destination="Sod-br-ybx" id="QAT-NT-C0W"/>
+                        <outlet property="editCommentButton" destination="3Xx-cQ-EvL" id="zbb-lV-S8q"/>
                         <outlet property="nameLabel" destination="Eio-23-6Mq" id="vTU-8f-RVK"/>
                     </connections>
                 </viewController>

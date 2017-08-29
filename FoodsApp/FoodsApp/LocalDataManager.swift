@@ -16,12 +16,13 @@ class LocalDataManager{
     static var currentFood = Foods()
     static var myCurrentComments = [myComments]()
     
-    class func addMyCurrentComments(comment:String, commentName:String, dateOfComment:String){
+    class func addMyCurrentComments(comment:String, commentName:String, dateOfComment:String, commentKey:String){
         let currentComment = myComments()
         
         currentComment.commentName = commentName
         currentComment.comment = comment
         currentComment.dateOfComment = dateOfComment
+        currentComment.commentKey = commentKey
         
         self.myCurrentComments.append(currentComment)
     }

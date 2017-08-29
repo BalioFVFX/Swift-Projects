@@ -20,7 +20,7 @@ class CommentsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-     
+        //print(LocalDataManager.myCurrentComments[0].commentKey)
         
     }
     
@@ -138,11 +138,16 @@ class CommentsTableViewController: UITableViewController {
 //            if(indexPath.section == 1){
 //                (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.allFoods[indexPath.row]
 //            }
+            if(indexPath.section == 0){
+                (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
+            }
+            
+            if(indexPath.section == 1){
             
             (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
-            
+            }
             print(indexPath.row)
-            
+            print("TEST: " + LocalDataManager.myCurrentComments[0].commentKey)
         default:
             break
             

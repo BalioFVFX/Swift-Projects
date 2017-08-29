@@ -405,6 +405,7 @@ class RequestManager{
                     for item in json.allKeys{
                         
                         
+                       
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             LocalDataManager.currentFood.commentNames.append(myKey.value(forKey: "User") as! String)
@@ -412,11 +413,12 @@ class RequestManager{
                             LocalDataManager.currentFood.datesOfComments.append(myKey.value(forKey: "Date") as! String)
                             
                             if(myKey.value(forKey: "User") as! String == LocalDataManager.user.name){
-                                LocalDataManager.addMyCurrentComments(comment: myKey.value(forKey: "Comment") as! String, commentName: myKey.value(forKey: "User") as! String, dateOfComment: myKey.value(forKey: "Date") as! String)
+                                LocalDataManager.addMyCurrentComments(comment: myKey.value(forKey: "Comment") as! String, commentName: myKey.value(forKey: "User") as! String, dateOfComment: myKey.value(forKey: "Date") as! String, commentKey: item as! String)
                             }
                         }
                         
                     }
+                    
                     completion(true, nil)
                 }
                  
@@ -436,5 +438,45 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
 
-    
+    class func editCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, commentKey:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         Request (3) (PUT https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user)/\(key)/\(commentKey)/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "PUT"
+        
+        let bodyObject: [String : Any] = [
+            "Comment": comment,
+            "User": commentName,
+            "Date" : "Edited on: " + currentDate
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                completion(true, nil)
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false, error?.localizedDescription)
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+
 }
