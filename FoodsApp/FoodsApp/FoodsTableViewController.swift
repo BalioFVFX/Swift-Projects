@@ -16,6 +16,7 @@ class FoodsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         openScreenForFirstTime = true
+        print("Current user: ", LocalDataManager.user.name)
     }
     
     override func viewWillAppear(_ animated: Bool) {

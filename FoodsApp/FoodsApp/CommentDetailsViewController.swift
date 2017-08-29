@@ -19,7 +19,9 @@ class CommentDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.nameLabel.text = LocalDataManager.currentFood.recipeUser
+        self.nameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[currentCell]
+        self.dateLabel.text = "Date: " + LocalDataManager.currentFood.datesOfComments[currentCell]
+        self.commentTextView.text = LocalDataManager.currentFood.comments[currentCell]
         
 
         // Do any additional setup after loading the view.

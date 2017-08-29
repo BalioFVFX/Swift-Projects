@@ -111,7 +111,7 @@ class CommentsTableViewController: UITableViewController {
 //                (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.allFoods[indexPath.row]
 //            }
             
-            (segue.destination as! CommentDetailsViewController)
+            (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
             
             print(indexPath.row)
             
