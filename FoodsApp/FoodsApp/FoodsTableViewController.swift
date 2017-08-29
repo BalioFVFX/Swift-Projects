@@ -47,6 +47,7 @@ class FoodsTableViewController: UITableViewController {
                         SVProgressHUD.dismiss(withDelay:0.7)
                         self.openScreenForFirstTime = false
                     }
+                    SVProgressHUD.dismiss(withDelay:0.7)
                     self.tableView.reloadData()
                 }
             }

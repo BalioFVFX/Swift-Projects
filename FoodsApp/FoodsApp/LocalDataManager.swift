@@ -14,6 +14,17 @@ class LocalDataManager{
     static var allFoods = [Foods]()
     static var myFoods = [Foods]()
     static var currentFood = Foods()
+    static var myCurrentComments = [myComments]()
+    
+    class func addMyCurrentComments(comment:String, commentName:String, dateOfComment:String){
+        let currentComment = myComments()
+        
+        currentComment.commentName = commentName
+        currentComment.comment = comment
+        currentComment.dateOfComment = dateOfComment
+        
+        self.myCurrentComments.append(currentComment)
+    }
     
     class func addItems(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
         // Make an food object of Foods class

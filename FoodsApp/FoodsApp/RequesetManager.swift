@@ -398,6 +398,7 @@ class RequestManager{
                 LocalDataManager.currentFood.comments.removeAll()
                 LocalDataManager.currentFood.commentNames.removeAll()
                 LocalDataManager.currentFood.datesOfComments.removeAll()
+                LocalDataManager.myCurrentComments.removeAll()
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
 
@@ -410,6 +411,9 @@ class RequestManager{
                             LocalDataManager.currentFood.comments.append(myKey.value(forKey: "Comment") as! String)
                             LocalDataManager.currentFood.datesOfComments.append(myKey.value(forKey: "Date") as! String)
                             
+                            if(myKey.value(forKey: "User") as! String == LocalDataManager.user.name){
+                                LocalDataManager.addMyCurrentComments(comment: myKey.value(forKey: "Comment") as! String, commentName: myKey.value(forKey: "User") as! String, dateOfComment: myKey.value(forKey: "Date") as! String)
+                            }
                         }
                         
                     }

@@ -10,6 +10,7 @@ import Foundation
 
 class User{
     var name:String = ""
+    var myComments: [String] = []
 }
 
 class Foods{
@@ -22,4 +23,11 @@ class Foods{
     var datesOfComments: [String] = []
     var recipeKey:String = ""
     var commentNames: [String] = []
+}
+
+class myComments{
+    var commentName:String = ""
+    var dateOfComment:String = ""
+    var comment:String = ""
+    //var dateOfComments:String = ""
 }

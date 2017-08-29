@@ -54,23 +54,50 @@ class CommentsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return LocalDataManager.currentFood.comments.count
+        switch section{
+        case 0:
+            return LocalDataManager.myCurrentComments.count
+        default:
+             return LocalDataManager.currentFood.comments.count
+        }
+       
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        
+        switch section {
+        case 0:
+            return "My comments"
+        default:
+            return "All comments"
+        }
+    }
+    
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
+        if(indexPath.section == 0){
+            cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
+            cell.commentNameLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
+            cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
+        }
+        
+        if(indexPath.section == 1){
+        
         cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
         cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
         cell.commentImageView.image = UIImage(named: "food.png")
         cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
-
+        
+        }
         return cell
     }
     
@@ -82,6 +109,7 @@ class CommentsTableViewController: UITableViewController {
     
     @IBAction func addCommentBarButtonTapped(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "addCommentSegue", sender: nil)
+      
     }
     
 
