@@ -334,7 +334,7 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
-    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String) {
+    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -362,10 +362,12 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
+                completion(true, nil)
             }
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false, error?.localizedDescription)
             }
         })
         task.resume()

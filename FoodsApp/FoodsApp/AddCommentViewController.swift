@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class AddCommentViewController: UIViewController {
 
@@ -29,7 +30,7 @@ class AddCommentViewController: UIViewController {
     @IBAction func addCommentButtonTapped(_ sender: UIButton) {
         
         //Getting the current date
-        
+        SVProgressHUD.show()
         let date = Date()
         
         let calendar = Calendar.current
@@ -39,11 +40,18 @@ class AddCommentViewController: UIViewController {
         let day = calendar.component(.day, from: date)
         
         let currentDate = String(day) + "." + String(month) + "." + String(year)
+
         
-        print(currentDate)
+        RequestManager.postCommentRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: currentDate, commentName: LocalDataManager.user.name) { (success, statusMessage) in
+            guard success == true && statusMessage == nil else{
+                SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay:0.7)
+                return
+            }
+        }
         
-        
-        RequestManager.postCommentRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: currentDate, commentName: LocalDataManager.user.name)
+        SVProgressHUD.showSuccess(withStatus: "Comment posted")
+        SVProgressHUD.dismiss(withDelay:0.5)
 
     }
     
