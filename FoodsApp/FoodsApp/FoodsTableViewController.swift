@@ -22,6 +22,7 @@ class FoodsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        SVProgressHUD.show()
         
         //Get my recipes
         RequestManager.getMyRecipesRequest(user: LocalDataManager.user) { (sucess, statusMessage) in
@@ -116,6 +117,7 @@ class FoodsTableViewController: UITableViewController {
         UserDefaults.standard.set(true, forKey: "hasLoggedoutBool")
         LocalDataManager.user = User()
         LocalDataManager.myFoods.removeAll()
+        LocalDataManager.allFoods.removeAll()
         self.performSegue(withIdentifier: "logoutSegue", sender: nil)
     }
     
