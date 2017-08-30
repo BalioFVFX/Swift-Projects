@@ -21,6 +21,9 @@
 		B9B17ED61F4D850D0088691C /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED51F4D850D0088691C /* AddRecipeViewController.swift */; };
 		B9B17ED81F4D89550088691C /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED71F4D89550088691C /* DataModel.swift */; };
 		B9B17EDA1F4D89680088691C /* LocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B17ED91F4D89680088691C /* LocalDataManager.swift */; };
+		B9C365FC1F56EB3600C89529 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C365FB1F56EB3600C89529 /* UserProfileViewController.swift */; };
+		B9C365FF1F57019000C89529 /* user2Image.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C365FD1F57019000C89529 /* user2Image.png */; };
+		B9C366001F57019000C89529 /* user1Image.png in Resources */ = {isa = PBXBuildFile; fileRef = B9C365FE1F57019000C89529 /* user1Image.png */; };
 		B9C59CF11F5209C6000307CE /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C59CF01F5209C6000307CE /* AddCommentViewController.swift */; };
 		B9D64F2D1F51C9920033BEBF /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D64F2C1F51C9920033BEBF /* CommentsTableViewController.swift */; };
 		B9D64F2F1F51C99E0033BEBF /* CommentsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D64F2E1F51C99E0033BEBF /* CommentsTableViewCell.swift */; };
@@ -47,6 +50,9 @@
 		B9B17ED51F4D850D0088691C /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		B9B17ED71F4D89550088691C /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		B9B17ED91F4D89680088691C /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; };
+		B9C365FB1F56EB3600C89529 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		B9C365FD1F57019000C89529 /* user2Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user2Image.png; sourceTree = "<group>"; };
+		B9C365FE1F57019000C89529 /* user1Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user1Image.png; sourceTree = "<group>"; };
 		B9C59CF01F5209C6000307CE /* AddCommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		B9D64F2C1F51C9920033BEBF /* CommentsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		B9D64F2E1F51C99E0033BEBF /* CommentsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsTableViewCell.swift; sourceTree = "<group>"; };
@@ -108,9 +114,12 @@
 				B9B17ED91F4D89680088691C /* LocalDataManager.swift */,
 				B901401E1F4CB7F500378567 /* FoodsTableViewController.swift */,
 				B9284FAA1F4ED1B7003B79B8 /* FoodDetailsViewController.swift */,
+				B9C365FD1F57019000C89529 /* user2Image.png */,
+				B9C365FE1F57019000C89529 /* user1Image.png */,
 				B90140201F4CB80400378567 /* FoodsTableViewCell.swift */,
 				B9284FA81F4ED0BE003B79B8 /* food.png */,
 				B901400C1F4CB25E00378567 /* Main.storyboard */,
+				B9C365FB1F56EB3600C89529 /* UserProfileViewController.swift */,
 				B9A177401F544909003BF7EC /* CommentDetailsViewController.swift */,
 				B9C59CF01F5209C6000307CE /* AddCommentViewController.swift */,
 				B9D64F2C1F51C9920033BEBF /* CommentsTableViewController.swift */,
@@ -188,7 +197,9 @@
 			files = (
 				B90140131F4CB25E00378567 /* LaunchScreen.storyboard in Resources */,
 				B90140101F4CB25E00378567 /* Assets.xcassets in Resources */,
+				B9C365FF1F57019000C89529 /* user2Image.png in Resources */,
 				B901400E1F4CB25E00378567 /* Main.storyboard in Resources */,
+				B9C366001F57019000C89529 /* user1Image.png in Resources */,
 				B9284FA91F4ED0BE003B79B8 /* food.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,6 +274,7 @@
 				B9A177411F544909003BF7EC /* CommentDetailsViewController.swift in Sources */,
 				B9D64F2D1F51C9920033BEBF /* CommentsTableViewController.swift in Sources */,
 				B9284FAB1F4ED1B7003B79B8 /* FoodDetailsViewController.swift in Sources */,
+				B9C365FC1F56EB3600C89529 /* UserProfileViewController.swift in Sources */,
 				B901401D1F4CB54100378567 /* RequesetManager.swift in Sources */,
 				B901401F1F4CB7F500378567 /* FoodsTableViewController.swift in Sources */,
 				B90140211F4CB80400378567 /* FoodsTableViewCell.swift in Sources */,

@@ -11,6 +11,12 @@ import Foundation
 class User{
     var name:String = ""
     var myComments: [String] = []
+    var myImage:String = ""
+    var userDetails:String = ""
+}
+
+struct UserImages{
+    var userImages: Set = ["user1Image.png", "user2Image.png", "user3Image.png", "user4Image.png"]
 }
 
 class Foods{
@@ -24,6 +30,8 @@ class Foods{
     var recipeKey:String = ""
     var commentNames: [String] = []
 }
+
+
 
 class myComments{
     var commentName:String = ""

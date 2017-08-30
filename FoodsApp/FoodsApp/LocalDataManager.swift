@@ -15,6 +15,9 @@ class LocalDataManager{
     static var myFoods = [Foods]()
     static var currentFood = Foods()
     static var myCurrentComments = [myComments]()
+    static var myUserImages = UserImages()
+    
+ 
     
     class func addMyCurrentComments(comment:String, commentName:String, dateOfComment:String, commentKey:String){
         let currentComment = myComments()
