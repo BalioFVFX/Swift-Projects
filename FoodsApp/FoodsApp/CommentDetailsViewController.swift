@@ -49,8 +49,23 @@ class CommentDetailsViewController: UIViewController {
     
     @IBAction func editCommentButtonTapped(_ sender: UIButton) {
        print("REC KEY", LocalDataManager.currentFood.recipeKey)
+       print("Username", LocalDataManager.user.name)
+       print("Comment Key", LocalDataManager.myCurrentComments[0].commentKey)
+        print("RecipeName", LocalDataManager.currentFood.recipeName)
         //print(LocalDataManager.myCurrentComments[0].commentKey)
-        RequestManager.editCommentRequest(user: LocalDataManager.currentFood.recipeName, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: "Date", commentName: LocalDataManager.user.name, commentKey: LocalDataManager.myCurrentComments[0].commentKey) { (sucess, statusMessage) in
+        
+        let date = Date()
+        
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        let currentDate = String(day) + "." + String(month) + "." + String(year)
+
+        
+        RequestManager.editCommentRequest(user: LocalDataManager.user.name, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: currentDate, commentName: LocalDataManager.user.name, commentKey: LocalDataManager.myCurrentComments[0].commentKey) { (sucess, statusMessage) in
             guard sucess == true && statusMessage == nil else{
                 return
             }
