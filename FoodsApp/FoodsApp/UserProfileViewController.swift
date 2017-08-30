@@ -12,10 +12,6 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
 
     @IBOutlet weak var imageButton: UIButton!
 
-    
-    
-    
-    
     var currentUserProfileImage:String = ""
     
     override func viewDidLoad() {
@@ -50,15 +46,12 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
                 break
             }
         }
-        
-        
-        //pictureToShow = imageButton.currentImage.
+
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
         print(LocalDataManager.user.myImage)
         LocalDataManager.user.myImage = currentUserProfileImage
-        print(LocalDataManager.user.myImage)
     }
     
     

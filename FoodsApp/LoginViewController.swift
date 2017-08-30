@@ -52,22 +52,7 @@ class LoginViewController: UIViewController {
         }
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //        let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
-        //        let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
-        //
-        //
-        //        if(isMyRememberSwitchOn == true && LocalDataManager.hasLoggedOut == false){
-        //            LocalDataManager.user.name = nameForTextField!
-        //            LocalDataManager.hasLoggedOut = false
-        //            self.performSegue(withIdentifier: "loginSegue", sender: nil)
-        //        }
-        
-    }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
