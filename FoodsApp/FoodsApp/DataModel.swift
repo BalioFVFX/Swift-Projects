@@ -16,7 +16,7 @@ class User{
 }
 
 struct UserImages{
-    var userImages: Set = ["user1Image.png", "user2Image.png", "user3Image.png", "user4Image.png"]
+    var userImages: Set = ["user1Image.png", "user2Image.png"]
 }
 
 class Foods{
@@ -29,6 +29,7 @@ class Foods{
     var datesOfComments: [String] = []
     var recipeKey:String = ""
     var commentNames: [String] = []
+    var commentImages: [String] = []
 }
 
 

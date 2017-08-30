@@ -334,7 +334,7 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
-    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, imageName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -352,7 +352,8 @@ class RequestManager{
         let bodyObject: [String : Any] = [
             "Comment": comment,
             "User": commentName,
-            "Date" : currentDate
+            "Date" : currentDate,
+            "Image" : imageName
         ]
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
@@ -411,7 +412,7 @@ class RequestManager{
                             LocalDataManager.currentFood.commentNames.append(myKey.value(forKey: "User") as! String)
                             LocalDataManager.currentFood.comments.append(myKey.value(forKey: "Comment") as! String)
                             LocalDataManager.currentFood.datesOfComments.append(myKey.value(forKey: "Date") as! String)
-                            
+                            LocalDataManager.currentFood.commentImages.append(myKey.value(forKey: "Image") as! String)
                             if(myKey.value(forKey: "User") as! String == LocalDataManager.user.name){
                                 LocalDataManager.addMyCurrentComments(comment: myKey.value(forKey: "Comment") as! String, commentName: myKey.value(forKey: "User") as! String, dateOfComment: myKey.value(forKey: "Date") as! String, commentKey: item as! String)
                             }

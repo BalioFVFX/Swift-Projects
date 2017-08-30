@@ -43,6 +43,7 @@ class LocalDataManager{
         food.datesOfComments = []
         food.recipeKey = keyOfRecipe
         food.commentNames = []
+    
         
         // Add the data to the myFoods static array of foods
         self.allFoods.append(food)

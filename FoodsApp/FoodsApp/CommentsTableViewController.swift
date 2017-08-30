@@ -94,7 +94,7 @@ class CommentsTableViewController: UITableViewController {
         
         cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
         cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
-        cell.commentImageView.image = UIImage(named: "food.png")
+            cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
         cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
         
         }

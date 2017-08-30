@@ -11,11 +11,17 @@ import UIKit
 class UserProfileViewController: UIViewController, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var imageButton: UIButton!
+
     
     
+    
+    
+    var currentUserProfileImage:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.currentUserProfileImage = LocalDataManager.user.myImage
+        self.imageButton.setImage(UIImage(named: currentUserProfileImage), for: .normal)
 
         // Do any additional setup after loading the view.
     }
@@ -36,12 +42,23 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     
     @IBAction func imageButtonTapped(_ sender: UIButton){
-            imageButton.setImage(UIImage(named: "user1Image.png"), for: .normal)
+       
+        for item in LocalDataManager.myUserImages.userImages{
+            if(item != currentUserProfileImage){
+                imageButton.setImage(UIImage(named: item), for: .normal)
+                currentUserProfileImage = item
+                break
+            }
+        }
+        
+        
+        //pictureToShow = imageButton.currentImage.
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-
- 
+        print(LocalDataManager.user.myImage)
+        LocalDataManager.user.myImage = currentUserProfileImage
+        print(LocalDataManager.user.myImage)
     }
     
     
