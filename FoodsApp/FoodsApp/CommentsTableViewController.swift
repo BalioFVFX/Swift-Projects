@@ -85,8 +85,8 @@ class CommentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
         if(indexPath.section == 0){
+            cell.commentNameLabel.text = "Name: " + LocalDataManager.myCurrentComments[indexPath.row].commentName
             cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
-            cell.commentNameLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
             cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
         }
         
