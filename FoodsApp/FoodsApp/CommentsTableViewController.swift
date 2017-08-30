@@ -42,8 +42,9 @@ class CommentsTableViewController: UITableViewController {
                 SVProgressHUD.dismiss(withDelay:0.7)
             }
         }
-        print(LocalDataManager.currentFood.recipeUser)
+        print(LocalDataManager.currentFood.recipeImageName)
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

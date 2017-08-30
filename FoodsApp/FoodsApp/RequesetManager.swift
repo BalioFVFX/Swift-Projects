@@ -400,6 +400,8 @@ class RequestManager{
                 LocalDataManager.currentFood.commentNames.removeAll()
                 LocalDataManager.currentFood.datesOfComments.removeAll()
                 LocalDataManager.myCurrentComments.removeAll()
+                LocalDataManager.currentFood.commentImages.removeAll()
+                
                 do{
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
 
