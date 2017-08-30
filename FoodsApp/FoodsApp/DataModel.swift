@@ -39,5 +39,4 @@ class myComments{
     var dateOfComment:String = ""
     var comment:String = ""
     var commentKey:String = ""
-    //var dateOfComments:String = ""
 }
