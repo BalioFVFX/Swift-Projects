@@ -13,6 +13,8 @@ class User{
     var myComments: [String] = []
     var myImage:String = ""
     var userDetails:String = ""
+    var allCommentsKeys: [String] = []
+    
 }
 
 struct UserImages{
@@ -39,4 +41,5 @@ class myComments{
     var dateOfComment:String = ""
     var comment:String = ""
     var commentKey:String = ""
+    var recipeKey:String = ""
 }
