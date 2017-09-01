@@ -54,20 +54,16 @@ class LocalDataManager{
         
     }
     
-//    class func addRecipesInMyFoods(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
-//        let food = Foods()
-//        
-//        food.recipeUser = user
-//        food.recipeName = name
-//        food.recipeDetails = recipe
-//        food.recipeTimeToCook = duration
-//        food.recipeImageName = "food.png"
-//        food.comments = []
-//        food.datesOfComments = []
-//        food.recipeKey = keyOfRecipe
-//        food.commentNames = []
-//        
-//        self.myFoods.append(food)
-//    }
+    class func addFoodInMySection(username:String, recipeName:String, recipeDuration:String, recipeDetails:String){
+        let food = Foods()
+        
+        food.username = username
+        food.recipeName = recipeName
+        food.recipeDuration = recipeDuration
+        food.recipeDetails = recipeDetails
+        
+        self.myFoods.append(food)
+        
+    }
     
 }

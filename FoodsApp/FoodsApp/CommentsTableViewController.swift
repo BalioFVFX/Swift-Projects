@@ -57,7 +57,6 @@ class CommentsTableViewController: UITableViewController {
         default:
              return 1
         }
-       
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

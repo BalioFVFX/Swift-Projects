@@ -16,7 +16,7 @@ class FoodsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        
         openScreenForFirstTime = true
        
     }
@@ -24,16 +24,23 @@ class FoodsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 print("PRINT")
+  
         
-        RequestManager.GETRecipesRequest { (success, statusMessage) in
-            DispatchQueue.main.sync{
-            guard success == true, statusMessage == nil else{
-                return
+    
+            
+            RequestManager.GETRecipesRequest { (success, statusMessage) in
+                DispatchQueue.main.async{
+                    guard success == true, statusMessage == nil else{
+                        return
+                    }
+                    self.tableView.reloadData()
+                }
             }
-            self.tableView.reloadData()
-            }
-        }
-        //print(LocalDataManager.users[0].name)
+
+            
+            
+        
+                //print(LocalDataManager.users[0].name)
 
         
         
@@ -110,9 +117,9 @@ class FoodsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodsTableViewCell", for: indexPath) as! FoodsTableViewCell
         
         if(indexPath.section == 0){
-//            cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
-//            cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
-//            cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
+            cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
+            cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeDuration
+            //cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
         }
         
         if(indexPath.section == 1){

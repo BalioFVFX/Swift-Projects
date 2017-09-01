@@ -311,6 +311,8 @@ class RequestManager{
     
     // MARK: - GET RECIPES
     
+    // GET ALL RECIPES
+    
     class func GETRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
@@ -376,20 +378,21 @@ class RequestManager{
         }
         
     }
-
     
-    class func getRecipesRequest(completion:@escaping (_ sucess:Bool, _ statusMessage:String?) ->() ) {
-        
+    // GET MY RECIPES
+    
+    class func GETMyRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
+
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         
         /* Create the Request:
-         Request (3) (GET https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+         GET Recipe from user (GET https://foodsapp-4a21c.firebaseio.com/user/.json)
          */
         
-        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/.json") else {return}
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(LocalDataManager.user.name)/recipes/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "GET"
         
@@ -399,53 +402,47 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
-//                LocalDataManager.allFoods.removeAll()
-//                LocalDataManager.myKeys.recipeKeys.removeAll()
-
+                
+                LocalDataManager.myFoods.removeAll()
+                
                 do{
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
                     
                     // Iterate through all the data by their keys
-               
-                
+                    
+                    
+                    
                     for item in json.allKeys{
-                       
+                        
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
-                           
-                            for value in myKey.allKeys{
-                                
-                                if let myValue = myKey[value] as? NSDictionary{
-
-                                    // Add the items
-//                                    LocalDataManager.addItems(name: myValue.value(forKey: "RecipeName") as! String, duration: myValue.value(forKey: "RecipeTimeToCook") as! String, recipe: myValue.value(forKey: "RecipeDetails") as! String, keyOfRecipe: value as! String, user: myValue.value(forKey: "Name") as! String)
-//                                        LocalDataManager.myKeys.recipeKeys.append(value as! String)
-                                }
-                               
-                            }
+                            
+                            LocalDataManager.addFoodInMySection(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String)
+                            
                             
                         }
                         
                     }
-                    completion(true,nil)
+                    completion(true, nil)
                 }
                     
                 catch{
-                    completion(false, "ERROR")
+                    
                 }
             }
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
-                completion(false, error?.localizedDescription)
             }
         })
         task.resume()
         session.finishTasksAndInvalidate()
     }
-    
+
+
+
     class func getMyRecipesRequest(user: User, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
         let sessionConfig = URLSessionConfiguration.default
         
