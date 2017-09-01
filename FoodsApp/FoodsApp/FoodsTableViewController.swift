@@ -36,6 +36,10 @@ class FoodsTableViewController: UITableViewController {
             // Get all recipes
             RequestManager.getRecipesRequest { (sucess, statusMessage) in
                 
+                if(self.openScreenForFirstTime == true){
+                    //RequestManager.GetCommentsRequest(user: LocalDataManager.user.name, key: <#T##String#>, completion: <#T##(Bool, String?) -> ()#>)
+                }
+                
                 DispatchQueue.main.sync{
                     guard sucess == true && statusMessage == nil else{
                         SVProgressHUD.showError(withStatus: statusMessage)

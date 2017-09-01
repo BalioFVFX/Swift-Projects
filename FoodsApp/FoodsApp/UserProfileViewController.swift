@@ -17,7 +17,7 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.currentUserProfileImage = LocalDataManager.user.myImage
+        print(LocalDataManager.users)
         self.imageButton.setImage(UIImage(named: currentUserProfileImage), for: .normal)
 
         // Do any additional setup after loading the view.
@@ -51,8 +51,9 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        print(LocalDataManager.user.myImage)
-        LocalDataManager.user.myImage = currentUserProfileImage
+
+        print("RECIPE KEYS: ", LocalDataManager.myKeys.recipeKeys)
+        
         
         RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in
 

@@ -80,14 +80,14 @@ class CommentsTableViewController: UITableViewController {
             cell.commentNameLabel.text = "Name: " + LocalDataManager.myCurrentComments[indexPath.row].commentName
             cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
             cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
-            cell.commentImageView.image = UIImage(named: LocalDataManager.user.myImage)
+           
         }
         
         if(indexPath.section == 1){
         
         cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
         cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
-            cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
+        cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
         cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
         
         }

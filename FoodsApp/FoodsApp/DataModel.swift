@@ -10,11 +10,13 @@ import Foundation
 
 class User{
     var name:String = ""
-    var myComments: [String] = []
-    var myImage:String = ""
-    var userDetails:String = ""
-    var allCommentsKeys: [String] = []
-    
+    var image:String = ""
+    var comments: [String] = []
+    var recipes = [[String:String]]()
+}
+
+struct Users{
+    var name:String = ""
 }
 
 struct UserImages{
@@ -34,6 +36,10 @@ class Foods{
     var commentImages: [String] = []
 }
 
+struct allKeys{
+    var recipeKeys: [String] = []
+    var commentKeys: [String] = []
+}
 
 
 class myComments{

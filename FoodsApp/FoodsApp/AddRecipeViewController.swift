@@ -84,25 +84,47 @@ class AddRecipeViewController: UIViewController, UITextViewDelegate {
         
         //Add the data
         
-        RequestManager.addRecipeRequest(user: LocalDataManager.user, recipeName: recipeName, recipeDetails: recipeDetails, recipeTimeToCook: recipeTimeToCook) { (sucess, statusMessage) in
+        
+        RequestManager.POSTRecipeRequest(username: LocalDataManager.user.name, recipeName: recipeName, recipeDetails: recipeDetails, recipeDuration: recipeTimeToCook) { (success, statusMessage) in
             
-            DispatchQueue.main.async{
-            
-            guard sucess == true && statusMessage == nil else{
-                SVProgressHUD.showError(withStatus: statusMessage)
-                SVProgressHUD.dismiss(withDelay:0.7)
-                return
-            }
-           
-                // Clear the textfields & views when recipe is added sucessfuly
-            self.recipeNameTextField.text = ""
-            self.recipeDetailsTextView.text = ""
-            self.recipeTimeToCookTextField.text = ""
-            
-            SVProgressHUD.showSuccess(withStatus: "Recipe added sucessfuly")
-                SVProgressHUD.dismiss(withDelay:0.5)
+            DispatchQueue.main.sync{
+                
+                guard success == true && statusMessage == nil else{
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay: 0.7)
+                    return
+                }
+                
+                self.recipeNameTextField.text = ""
+                self.recipeDetailsTextView.text = ""
+                self.recipeTimeToCookTextField.text = ""
+                
+                SVProgressHUD.showSuccess(withStatus: "Recipe added successfuly")
+                SVProgressHUD.dismiss(withDelay: 0.5)
             }
         }
+        
+        
+//        RequestManager.addRecipeRequest(user: LocalDataManager.user, recipeName: recipeName, recipeDetails: recipeDetails, recipeTimeToCook: recipeTimeToCook) { (sucess, statusMessage) in
+//            
+//            DispatchQueue.main.async{
+//            
+//            guard sucess == true && statusMessage == nil else{
+//                SVProgressHUD.showError(withStatus: statusMessage)
+//                SVProgressHUD.dismiss(withDelay:0.7)
+//                return
+//            }
+//           
+//                // Clear the textfields & views when recipe is added sucessfuly
+//            self.recipeNameTextField.text = ""
+//            self.recipeDetailsTextView.text = ""
+//            self.recipeTimeToCookTextField.text = ""
+//            
+//            SVProgressHUD.showSuccess(withStatus: "Recipe added sucessfuly")
+//                SVProgressHUD.dismiss(withDelay:0.5)
+//            }
+//        }
+        
         
     }
     
