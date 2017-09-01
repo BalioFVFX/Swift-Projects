@@ -15,7 +15,7 @@ class User{
     var recipes = [[String:String]]()
 }
 
-struct Users{
+class Users{
     var name:String = ""
 }
 
@@ -24,16 +24,10 @@ struct UserImages{
 }
 
 class Foods{
-    var recipeUser:String = ""
+    var username:String = ""
     var recipeName:String = ""
+    var recipeDuration:String = ""
     var recipeDetails:String = ""
-    var recipeTimeToCook:String = ""
-    var recipeImageName:String = ""
-    var comments: [String] = []
-    var datesOfComments: [String] = []
-    var recipeKey:String = ""
-    var commentNames: [String] = []
-    var commentImages: [String] = []
 }
 
 struct allKeys{

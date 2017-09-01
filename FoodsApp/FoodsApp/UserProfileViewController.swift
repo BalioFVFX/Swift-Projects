@@ -52,7 +52,8 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
 
-        print("RECIPE KEYS: ", LocalDataManager.myKeys.recipeKeys)
+       // DEBUG AREA
+         
         
         
         RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in

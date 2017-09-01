@@ -21,7 +21,7 @@ class LocalDataManager{
     
  
     class func addRegisteredUsers(username:String){
-        var user = Users()
+        let user = Users()
         
         user.name = username
         
@@ -40,40 +40,34 @@ class LocalDataManager{
         self.myCurrentComments.append(currentComment)
     }
     
-    class func addItems(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
+    class func addItems(username:String, recipeName:String, recipeDuration:String, recipeDetails:String){
         // Make an food object of Foods class
         let food = Foods()
         
-        food.recipeUser = user
-        food.recipeName = name
-        food.recipeDetails = recipe
-        food.recipeTimeToCook = duration
-        food.recipeImageName = "food.png"
-        food.comments = []
-        food.datesOfComments = []
-        food.recipeKey = keyOfRecipe
-        food.commentNames = []
-    
+        food.username = username
+        food.recipeName = recipeName
+        food.recipeDuration = recipeDuration
+        food.recipeDetails = recipeDetails
         
         // Add the data to the myFoods static array of foods
         self.allFoods.append(food)
         
     }
     
-    class func addRecipesInMyFoods(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
-        let food = Foods()
-        
-        food.recipeUser = user
-        food.recipeName = name
-        food.recipeDetails = recipe
-        food.recipeTimeToCook = duration
-        food.recipeImageName = "food.png"
-        food.comments = []
-        food.datesOfComments = []
-        food.recipeKey = keyOfRecipe
-        food.commentNames = []
-        
-        self.myFoods.append(food)
-    }
+//    class func addRecipesInMyFoods(name:String, duration:String, recipe:String, keyOfRecipe:String, user:String){
+//        let food = Foods()
+//        
+//        food.recipeUser = user
+//        food.recipeName = name
+//        food.recipeDetails = recipe
+//        food.recipeTimeToCook = duration
+//        food.recipeImageName = "food.png"
+//        food.comments = []
+//        food.datesOfComments = []
+//        food.recipeKey = keyOfRecipe
+//        food.commentNames = []
+//        
+//        self.myFoods.append(food)
+//    }
     
 }

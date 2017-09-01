@@ -33,12 +33,12 @@ class LoginViewController: UIViewController {
         let hasLoggedout = UserDefaults.standard.bool(forKey: "hasLoggedoutBool")
         LocalDataManager.user.name = nameForTextField!
         
-        print("first")
+        
         
         if(isMyRememberSwitchOn == true){
             self.nameTextField.text = nameForTextField
             self.rememberMeSwitch.isOn = isMyRememberSwitchOn
-            print(hasLoggedout)
+          
             if(hasLoggedout == false){
                 
                 UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")

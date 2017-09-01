@@ -20,18 +20,17 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("User: " + currentCellItem.recipeUser)
-        print("Key: " + currentCellItem.recipeKey)
+
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.foodImageView.image = UIImage(named: currentCellItem.recipeImageName)
-        self.foodNameTextLabel.text = currentCellItem.recipeName
-        self.foodTimeToCookTextLabel.text = currentCellItem.recipeTimeToCook
-        self.foodDetailsTextView.text = currentCellItem.recipeDetails
+//        self.foodImageView.image = UIImage(named: currentCellItem.recipeImageName)
+//        self.foodNameTextLabel.text = currentCellItem.recipeName
+//        self.foodTimeToCookTextLabel.text = currentCellItem.recipeTimeToCook
+//        self.foodDetailsTextView.text = currentCellItem.recipeDetails
 
     }
     

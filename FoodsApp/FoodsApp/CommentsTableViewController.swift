@@ -19,21 +19,21 @@ class CommentsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        RequestManager.GetCommentsRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey) { (sucess, statusMessage) in
-            
-            DispatchQueue.main.sync{
-            guard sucess == true && statusMessage == nil else{
-                SVProgressHUD.showError(withStatus: statusMessage)
-                SVProgressHUD.dismiss(withDelay:0.7)
-                return
-            }
-            
-           
-                self.tableView.reloadData()
-                SVProgressHUD.showSuccess(withStatus: "Comments loaded")
-                SVProgressHUD.dismiss(withDelay:0.7)
-            }
-        }
+//        RequestManager.GetCommentsRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey) { (sucess, statusMessage) in
+//            
+//            DispatchQueue.main.sync{
+//            guard sucess == true && statusMessage == nil else{
+//                SVProgressHUD.showError(withStatus: statusMessage)
+//                SVProgressHUD.dismiss(withDelay:0.7)
+//                return
+//            }
+//            
+//           
+//                self.tableView.reloadData()
+//                SVProgressHUD.showSuccess(withStatus: "Comments loaded")
+//                SVProgressHUD.dismiss(withDelay:0.7)
+//            }
+//        }
     }
     
     
@@ -55,7 +55,7 @@ class CommentsTableViewController: UITableViewController {
         case 0:
             return LocalDataManager.myCurrentComments.count
         default:
-             return LocalDataManager.currentFood.comments.count
+             return 1
         }
        
     }
@@ -85,10 +85,10 @@ class CommentsTableViewController: UITableViewController {
         
         if(indexPath.section == 1){
         
-        cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
-        cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
-        cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
-        cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
+//        cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
+//        cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
+//        cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
+//        cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
         
         }
         return cell

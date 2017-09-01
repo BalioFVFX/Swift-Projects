@@ -15,49 +15,62 @@ class FoodsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
         openScreenForFirstTime = true
-        print("Current user: ", LocalDataManager.user.name)
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+                print("PRINT")
         
-        SVProgressHUD.show()
-        
-        //Get my recipes
-        RequestManager.getMyRecipesRequest(user: LocalDataManager.user) { (sucess, statusMessage) in
-            
-            guard sucess == true && statusMessage == nil else{
-                SVProgressHUD.showError(withStatus: statusMessage)
-                SVProgressHUD.dismiss(withDelay:0.7)
+        RequestManager.GETRecipesRequest { (success, statusMessage) in
+            DispatchQueue.main.sync{
+            guard success == true, statusMessage == nil else{
                 return
             }
-            
-            // Get all recipes
-            RequestManager.getRecipesRequest { (sucess, statusMessage) in
-                
-                if(self.openScreenForFirstTime == true){
-                    //RequestManager.GetCommentsRequest(user: LocalDataManager.user.name, key: <#T##String#>, completion: <#T##(Bool, String?) -> ()#>)
-                }
-                
-                DispatchQueue.main.sync{
-                    guard sucess == true && statusMessage == nil else{
-                        SVProgressHUD.showError(withStatus: statusMessage)
-                        SVProgressHUD.dismiss(withDelay:0.7)
-                        return
-                    }
-                    if(self.openScreenForFirstTime == true){
-                        SVProgressHUD.showSuccess(withStatus: "Data downloaded successfully")
-                        SVProgressHUD.dismiss(withDelay:0.7)
-                        self.openScreenForFirstTime = false
-                    }
-                    SVProgressHUD.dismiss(withDelay:0.7)
-                    self.tableView.reloadData()
-                }
+            self.tableView.reloadData()
             }
-            
-            
         }
+        //print(LocalDataManager.users[0].name)
+
+        
+        
+        //Get my recipes
+//        RequestManager.getMyRecipesRequest(user: LocalDataManager.user) { (sucess, statusMessage) in
+//            
+//            guard sucess == true && statusMessage == nil else{
+//                SVProgressHUD.showError(withStatus: statusMessage)
+//                SVProgressHUD.dismiss(withDelay:0.7)
+//                return
+//            }
+//            
+//            // Get all recipes
+//            RequestManager.getRecipesRequest { (sucess, statusMessage) in
+//                
+//                if(self.openScreenForFirstTime == true){
+//                    //RequestManager.GetCommentsRequest(user: LocalDataManager.user.name, key: <#T##String#>, completion: <#T##(Bool, String?) -> ()#>)
+//                }
+//                
+//                DispatchQueue.main.sync{
+//                    guard sucess == true && statusMessage == nil else{
+//                        SVProgressHUD.showError(withStatus: statusMessage)
+//                        SVProgressHUD.dismiss(withDelay:0.7)
+//                        return
+//                    }
+//                    if(self.openScreenForFirstTime == true){
+//                        SVProgressHUD.showSuccess(withStatus: "Data downloaded successfully")
+//                        SVProgressHUD.dismiss(withDelay:0.7)
+//                        self.openScreenForFirstTime = false
+//                    }
+//                    SVProgressHUD.dismiss(withDelay:0.7)
+//                    self.tableView.reloadData()
+//                }
+//            }
+//            
+//            
+//        }
     }
     
     
@@ -97,15 +110,15 @@ class FoodsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FoodsTableViewCell", for: indexPath) as! FoodsTableViewCell
         
         if(indexPath.section == 0){
-            cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
-            cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
-            cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
+//            cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
+//            cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeTimeToCook
+//            cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
         }
         
         if(indexPath.section == 1){
             cell.foodItemRecipeNameLabel.text = LocalDataManager.allFoods[indexPath.row].recipeName
-            cell.foodItemRecipeDurationLabel.text = LocalDataManager.allFoods[indexPath.row].recipeTimeToCook
-            cell.foodItemImageView.image = UIImage(named: LocalDataManager.allFoods[indexPath.row].recipeImageName)
+            cell.foodItemRecipeDurationLabel.text = LocalDataManager.allFoods[indexPath.row].recipeDuration
+           // cell.foodItemImageView.image = UIImage(named: LocalDataManager.allFoods[indexPath.row].recipeImageName)
             
         }
         return cell
