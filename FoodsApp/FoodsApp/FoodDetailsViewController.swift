@@ -28,9 +28,9 @@ class FoodDetailsViewController: UIViewController {
         super.viewWillAppear(animated)
         
 //        self.foodImageView.image = UIImage(named: currentCellItem.recipeImageName)
-//        self.foodNameTextLabel.text = currentCellItem.recipeName
-//        self.foodTimeToCookTextLabel.text = currentCellItem.recipeTimeToCook
-//        self.foodDetailsTextView.text = currentCellItem.recipeDetails
+        self.foodNameTextLabel.text = currentCellItem.recipeName
+        self.foodTimeToCookTextLabel.text = currentCellItem.recipeDuration
+        self.foodDetailsTextView.text = currentCellItem.recipeDetails
 
     }
     

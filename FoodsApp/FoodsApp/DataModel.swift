@@ -28,6 +28,7 @@ class Foods{
     var recipeName:String = ""
     var recipeDuration:String = ""
     var recipeDetails:String = ""
+    var recipeKey:String = ""
 }
 
 struct allKeys{

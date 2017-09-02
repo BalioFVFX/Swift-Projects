@@ -400,7 +400,7 @@ class RequestManager{
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
-                            LocalDataManager.addItems(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String)
+                            LocalDataManager.addItems(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String, recipeKey: item as! String)
                             
                             
                         }
@@ -466,7 +466,7 @@ class RequestManager{
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
-                            LocalDataManager.addFoodInMySection(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String)
+                            LocalDataManager.addFoodInMySection(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String, recipeKey: item as! String)
                             
                             
                         }

@@ -40,7 +40,7 @@ class LocalDataManager{
         self.myCurrentComments.append(currentComment)
     }
     
-    class func addItems(username:String, recipeName:String, recipeDuration:String, recipeDetails:String){
+    class func addItems(username:String, recipeName:String, recipeDuration:String, recipeDetails:String, recipeKey:String){
         // Make an food object of Foods class
         let food = Foods()
         
@@ -48,19 +48,21 @@ class LocalDataManager{
         food.recipeName = recipeName
         food.recipeDuration = recipeDuration
         food.recipeDetails = recipeDetails
+        food.recipeKey = recipeKey
         
         // Add the data to the myFoods static array of foods
         self.allFoods.append(food)
         
     }
     
-    class func addFoodInMySection(username:String, recipeName:String, recipeDuration:String, recipeDetails:String){
+    class func addFoodInMySection(username:String, recipeName:String, recipeDuration:String, recipeDetails:String, recipeKey:String){
         let food = Foods()
         
         food.username = username
         food.recipeName = recipeName
         food.recipeDuration = recipeDuration
         food.recipeDetails = recipeDetails
+        food.recipeKey = recipeKey
         
         self.myFoods.append(food)
         
