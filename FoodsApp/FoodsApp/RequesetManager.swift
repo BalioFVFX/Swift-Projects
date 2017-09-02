@@ -194,6 +194,7 @@ class RequestManager{
             "RecipeDuration": recipeDuration,
             "RecipeDetails": recipeDetails
         ]
+        
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
         
@@ -359,23 +360,22 @@ class RequestManager{
     
     // MARK: - GET RECIPES
     
+    
     // GET ALL RECIPES
     
-    class func GETRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
-       
+    class func GETAllRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
+
+        
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         
         /* Create the Request:
-         GET Recipe from user (GET https://foodsapp-4a21c.firebaseio.com/user/.json)
+         GET All Recipes (GET https://foodsapp-4a21c.firebaseio.com/recipes/.json)
          */
         
-        LocalDataManager.allFoods.removeAll()
-        for user in LocalDataManager.users{
-        
-        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(user.name)/recipes/.json") else {return}
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipes/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "GET"
         
@@ -385,24 +385,23 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
-                
-                
+                LocalDataManager.allFoods.removeAll()
                 do{
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
                     
                     // Iterate through all the data by their keys
-                   
-                
-            
+                    
+                    
+                    
                     for item in json.allKeys{
                         
                         // Get the current data
                         if let myKey = json[item] as? NSDictionary{
                             
                             LocalDataManager.addItems(username: myKey.value(forKey: "Username") as! String, recipeName: myKey.value(forKey: "RecipeName") as! String, recipeDuration: myKey.value(forKey: "RecipeDuration") as! String, recipeDetails: myKey.value(forKey: "RecipeDetails") as! String)
-                          
+                            
                             
                         }
                         
@@ -411,25 +410,22 @@ class RequestManager{
                 }
                     
                 catch{
-                   
+                    
                 }
-                
             }
-        
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
                 completion(false, error?.localizedDescription)
             }
-            
         })
-        
         task.resume()
         session.finishTasksAndInvalidate()
-        }
-        
     }
+
     
+    
+
     // GET MY RECIPES
     
     class func GETMyRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {

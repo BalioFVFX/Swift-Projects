@@ -30,16 +30,30 @@ class FoodsTableViewController: UITableViewController {
                     return
                 }
         
-    
+       
             
-            RequestManager.GETRecipesRequest { (success, statusMessage) in
-                DispatchQueue.main.async{
+            RequestManager.GETMyRecipesRequest { (success, statusMessage) in
+               
                     guard success == true, statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay: 0.7)
                         return
                     }
-                    self.tableView.reloadData()
-                }
+                    
+                
             }
+                
+                RequestManager.GETAllRecipesRequest(completion: { (success, statusMessage) in
+                     DispatchQueue.main.async{
+                    guard success == true, statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay: 0.7)
+                        return
+                    }
+                    
+                    self.tableView.reloadData()
+                    }
+                })
 
         }
         
