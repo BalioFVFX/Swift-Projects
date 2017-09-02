@@ -15,18 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let group = DispatchGroup()
-        group.enter()
-        // Override point for customization after application launch.
-        RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
-            guard success == true && statusMessage == nil else{
-                return
-            }
-            group.leave()
-            
-        }
-        
-        group.wait()
+//        let group = DispatchGroup()
+//        group.enter()
+//        // Override point for customization after application launch.
+//        RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
+//            guard success == true && statusMessage == nil else{
+//                return
+//            }
+//            group.leave()
+//            
+//        }
+//        
+//        group.wait()
         return true
     }
 

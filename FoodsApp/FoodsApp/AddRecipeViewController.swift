@@ -83,26 +83,35 @@ class AddRecipeViewController: UIViewController, UITextViewDelegate {
         recipeTimeToCookTextField.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         
         //Add the data
-        
-        
         RequestManager.POSTRecipeRequest(username: LocalDataManager.user.name, recipeName: recipeName, recipeDetails: recipeDetails, recipeDuration: recipeTimeToCook) { (success, statusMessage) in
-            
-            DispatchQueue.main.sync{
-                
-                guard success == true && statusMessage == nil else{
-                    SVProgressHUD.showError(withStatus: statusMessage)
-                    SVProgressHUD.dismiss(withDelay: 0.7)
-                    return
-                }
-                
-                self.recipeNameTextField.text = ""
-                self.recipeDetailsTextView.text = ""
-                self.recipeTimeToCookTextField.text = ""
-                
-                SVProgressHUD.showSuccess(withStatus: "Recipe added successfuly")
-                SVProgressHUD.dismiss(withDelay: 0.5)
+            guard success == true && statusMessage == nil else{
+                SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay: 0.7)
+                return
             }
+            
+            RequestManager.POSTUserRecipeRequest(username: LocalDataManager.user.name, recipeName: recipeName, recipeDetails: recipeDetails, recipeDuration: recipeTimeToCook) { (success, statusMessage) in
+                
+                DispatchQueue.main.sync{
+                    
+                    guard success == true && statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay: 0.7)
+                        return
+                    }
+                    
+                    self.recipeNameTextField.text = ""
+                    self.recipeDetailsTextView.text = ""
+                    self.recipeTimeToCookTextField.text = ""
+                    
+                    SVProgressHUD.showSuccess(withStatus: "Recipe added successfuly")
+                    SVProgressHUD.dismiss(withDelay: 0.5)
+                }
+            }
+            
         }
+        
+ 
         
         
 //        RequestManager.addRecipeRequest(user: LocalDataManager.user, recipeName: recipeName, recipeDetails: recipeDetails, recipeTimeToCook: recipeTimeToCook) { (sucess, statusMessage) in

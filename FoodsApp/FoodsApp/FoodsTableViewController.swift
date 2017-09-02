@@ -24,7 +24,11 @@ class FoodsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 print("PRINT")
-  
+           
+            RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
+                guard success == true && statusMessage == nil else{
+                    return
+                }
         
     
             
@@ -37,8 +41,8 @@ class FoodsTableViewController: UITableViewController {
                 }
             }
 
-            
-            
+        }
+        
         
                 //print(LocalDataManager.users[0].name)
 

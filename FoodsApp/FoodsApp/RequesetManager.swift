@@ -127,11 +127,12 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
-                
+                LocalDataManager.users.removeAll()
                 do{
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     
+                
                     
                     // Iterate through all the data by their keys
                  
@@ -170,8 +171,55 @@ class RequestManager{
     
     // MARK: - ADD RECIPE REQUEST
     
+    // ADD RECIPE IN RECIPES
     
     class func POSTRecipeRequest(username:String, recipeName:String, recipeDetails:String, recipeDuration:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         POST Recipe in recipes (POST https://foodsapp-4a21c.firebaseio.com/recipes)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipes/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "POST"
+        
+        let bodyObject: [String : Any] = [
+            "Username": username,
+            "RecipeName": recipeName,
+            "RecipeDuration": recipeDuration,
+            "RecipeDetails": recipeDetails
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+        
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                completion(true , nil)
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false, error?.localizedDescription)
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+
+    
+    
+    // ADD RECIPE IN USER/RECIPES
+    
+    class func POSTUserRecipeRequest(username:String, recipeName:String, recipeDetails:String, recipeDuration:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -314,7 +362,7 @@ class RequestManager{
     // GET ALL RECIPES
     
     class func GETRecipesRequest(completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
-
+       
         let sessionConfig = URLSessionConfiguration.default
         
         /* Create session, and optionally set a URLSessionDelegate. */
@@ -367,12 +415,15 @@ class RequestManager{
                 }
                 
             }
+        
             else {
                 // Failure
                 print("URL Session Task Failed: %@", error!.localizedDescription);
                 completion(false, error?.localizedDescription)
             }
+            
         })
+        
         task.resume()
         session.finishTasksAndInvalidate()
         }
