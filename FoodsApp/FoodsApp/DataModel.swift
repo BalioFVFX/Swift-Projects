@@ -17,6 +17,7 @@ class User{
 
 class Users{
     var name:String = ""
+    var imageName:String = ""
 }
 
 struct UserImages{
@@ -29,6 +30,7 @@ class Foods{
     var recipeDuration:String = ""
     var recipeDetails:String = ""
     var recipeKey:String = ""
+    var comments = [String:Any] ()
 }
 
 struct allKeys{

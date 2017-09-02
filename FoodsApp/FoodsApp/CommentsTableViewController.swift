@@ -18,7 +18,7 @@ class CommentsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print(LocalDataManager.allFoods[0].comments)
 //        RequestManager.GetCommentsRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey) { (sucess, statusMessage) in
 //            
 //            DispatchQueue.main.sync{

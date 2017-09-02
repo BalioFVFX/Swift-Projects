@@ -550,7 +550,10 @@ class RequestManager{
         session.finishTasksAndInvalidate()
     }
     
-    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, imageName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+    // MARK: - COMMENTS
+    
+    
+    class func POSTCommentRequest(recipeKey:String, user:String, comment:String, date:String, imageName:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
         
@@ -558,20 +561,22 @@ class RequestManager{
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
         
         /* Create the Request:
-         Post comment (POST https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+         POST Comment in all recipes (POST https://foodsapp-4a21c.firebaseio.com/recipes/.json)
          */
         
-        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user)/\(key)/.json") else {return}
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipes/\(recipeKey)/.json") else {return}
         var request = URLRequest(url: URL)
         request.httpMethod = "POST"
         
         let bodyObject: [String : Any] = [
+            "RecipeKey": recipeKey,
+            "User": user,
             "Comment": comment,
-            "User": commentName,
-            "Date" : currentDate,
-            "Image" : imageName,
-            "RecipeKey": key
+            "Date" : date,
+            "Image" : imageName
+            
         ]
+        
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
         /* Start a new Task */
@@ -580,7 +585,19 @@ class RequestManager{
                 // Success
                 let statusCode = (response as! HTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
-                completion(true, nil)
+                
+                do{
+                    
+                    
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+                    // GET THE KEY OF THE COMMENT
+                    print(json.allValues)
+
+                }
+
+                catch{
+                    
+                }
             }
             else {
                 // Failure
@@ -591,6 +608,49 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
+    
+    
+//    class func postCommentRequest(user:String, key:String, comment:String, currentDate:String, commentName:String, imageName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
+//
+//        let sessionConfig = URLSessionConfiguration.default
+//        
+//        /* Create session, and optionally set a URLSessionDelegate. */
+//        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+//        
+//        /* Create the Request:
+//         Post comment (POST https://foodsapp-4a21c.firebaseio.com/recipe/.json)
+//         */
+//        
+//        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipe/\(user)/\(key)/.json") else {return}
+//        var request = URLRequest(url: URL)
+//        request.httpMethod = "POST"
+//        
+//        let bodyObject: [String : Any] = [
+//            "Comment": comment,
+//            "User": commentName,
+//            "Date" : currentDate,
+//            "Image" : imageName,
+//            "RecipeKey": key
+//        ]
+//        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+//        
+//        /* Start a new Task */
+//        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+//            if (error == nil) {
+//                // Success
+//                let statusCode = (response as! HTTPURLResponse).statusCode
+//                print("URL Session Task Succeeded: HTTP \(statusCode)")
+//                completion(true, nil)
+//            }
+//            else {
+//                // Failure
+//                print("URL Session Task Failed: %@", error!.localizedDescription);
+//                completion(false, error?.localizedDescription)
+//            }
+//        })
+//        task.resume()
+//        session.finishTasksAndInvalidate()
+//    }
 
     class func GetCommentsRequest(user:String, key:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
 
