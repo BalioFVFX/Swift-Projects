@@ -553,6 +553,50 @@ class RequestManager{
     // MARK: - COMMENTS
     
     
+    // POST THE KEYS OF COMMENTS AND RECIPES IN API/USER/COMMENTS/.JSON
+    
+    class func POSTTheKeysOfCommentsAndRecipesInUserRequest(username:String, commentKey:String, recipeKey:String) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         POST KEYS OF RECIPES AND COMMENTS IN USER (POST https://foodsapp-4a21c.firebaseio.com/user/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/comments/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "POST"
+        
+        let bodyObject: [String : Any] = [
+            "User": username,
+            "CommentKey": commentKey,
+            "RecipeKey" : recipeKey
+        ]
+        
+        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+    
+    // POST THE COMMENT IN API/RECPIES/.JSON
+    
+    
     class func POSTCommentRequest(recipeKey:String, user:String, comment:String, date:String, imageName:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
 
         let sessionConfig = URLSessionConfiguration.default
@@ -591,8 +635,12 @@ class RequestManager{
                     
                     let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
                     // GET THE KEY OF THE COMMENT
-                    print(json.allValues)
-
+                    
+                    for item in json.allValues{
+                        RequestManager.POSTTheKeysOfCommentsAndRecipesInUserRequest(username: LocalDataManager.user.name, commentKey: item as! String, recipeKey: recipeKey)
+                        break
+                    }
+                    
                 }
 
                 catch{
