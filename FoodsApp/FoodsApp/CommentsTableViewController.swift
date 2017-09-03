@@ -18,6 +18,10 @@ class CommentsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
+        
+        
+        
         RequestManager.GETTheCommentsOfTheSelectedRecipeRequest(recipeKey: LocalDataManager.currentFood.recipeKey) { (success, statusMessage) in
             DispatchQueue.main.async {
                 
@@ -52,7 +56,7 @@ class CommentsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section{
         case 0:
-            return 1 //LocalDataManager.myCurrentComments.count
+            return LocalDataManager.user.comments.count
         default:
              return LocalDataManager.currentRecipeComments.count
         }
@@ -75,9 +79,9 @@ class CommentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
         if(indexPath.section == 0){
-//            cell.commentNameLabel.text = "Name: " + LocalDataManager.myCurrentComments[indexPath.row].commentName
-//            cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
-//            cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
+            cell.commentNameLabel.text = "Name: " + LocalDataManager.user.comments[indexPath.row]["User"]!
+            cell.commentLabel.text = LocalDataManager.user.comments[indexPath.row]["Comment"]!
+            cell.commentDateLabel.text = LocalDataManager.user.comments[indexPath.row]["Date"]!
            
         }
         

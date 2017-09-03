@@ -11,7 +11,7 @@ import Foundation
 class User{
     var name:String = ""
     var image:String = ""
-    var comments: [String] = []
+    var comments = [[String:String]]()
     var recipes = [[String:String]]()
 }
 
