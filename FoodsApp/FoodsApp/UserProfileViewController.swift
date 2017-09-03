@@ -58,20 +58,20 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
         print(LocalDataManager.allFoods[0].comments)
         
         
-        RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in
-
-            DispatchQueue.main.sync {
-         
-            guard success == true && statusMessage == nil else{
-                SVProgressHUD.showError(withStatus: statusMessage)
-                SVProgressHUD.dismiss(withDelay: 0.7)
-                return
-            }
-            SVProgressHUD.showSuccess(withStatus: "Profile picture changed")
-            SVProgressHUD.dismiss(withDelay:0.5)
-            }
-        }
-        
+//        RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in
+//
+//            DispatchQueue.main.sync {
+//         
+//            guard success == true && statusMessage == nil else{
+//                SVProgressHUD.showError(withStatus: statusMessage)
+//                SVProgressHUD.dismiss(withDelay: 0.7)
+//                return
+//            }
+//            SVProgressHUD.showSuccess(withStatus: "Profile picture changed")
+//            SVProgressHUD.dismiss(withDelay:0.5)
+//            }
+//        }
+//        
     }
     
    

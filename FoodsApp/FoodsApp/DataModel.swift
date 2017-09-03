@@ -38,11 +38,9 @@ struct allKeys{
     var commentKeys: [String] = []
 }
 
-
-class myComments{
-    var commentName:String = ""
-    var dateOfComment:String = ""
+class RecipeComments{
+    var user:String = ""
     var comment:String = ""
-    var commentKey:String = ""
-    var recipeKey:String = ""
+    var date:String = ""
+    var imageName:String = ""
 }

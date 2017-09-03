@@ -13,27 +13,26 @@ class CommentsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(LocalDataManager.allFoods[0].comments)
-//        RequestManager.GetCommentsRequest(user: LocalDataManager.currentFood.recipeUser, key: LocalDataManager.currentFood.recipeKey) { (sucess, statusMessage) in
-//            
-//            DispatchQueue.main.sync{
-//            guard sucess == true && statusMessage == nil else{
-//                SVProgressHUD.showError(withStatus: statusMessage)
-//                SVProgressHUD.dismiss(withDelay:0.7)
-//                return
-//            }
-//            
-//           
-//                self.tableView.reloadData()
-//                SVProgressHUD.showSuccess(withStatus: "Comments loaded")
-//                SVProgressHUD.dismiss(withDelay:0.7)
-//            }
-//        }
+        
+        RequestManager.GETTheCommentsOfTheSelectedRecipeRequest(recipeKey: LocalDataManager.currentFood.recipeKey) { (success, statusMessage) in
+            DispatchQueue.main.async {
+                
+            guard success == true && statusMessage == nil else{
+                SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay: 0.7)
+                return
+            }
+            
+            SVProgressHUD.showSuccess(withStatus: "Comments loaded")
+            SVProgressHUD.dismiss(withDelay: 0.5)
+            self.tableView.reloadData()
+            }
+        }
+        
     }
     
     
@@ -53,9 +52,9 @@ class CommentsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section{
         case 0:
-            return LocalDataManager.myCurrentComments.count
+            return 1 //LocalDataManager.myCurrentComments.count
         default:
-             return 1
+             return LocalDataManager.currentRecipeComments.count
         }
     }
     
@@ -76,18 +75,18 @@ class CommentsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentsTableViewCell", for: indexPath) as! CommentsTableViewCell
 
         if(indexPath.section == 0){
-            cell.commentNameLabel.text = "Name: " + LocalDataManager.myCurrentComments[indexPath.row].commentName
-            cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
-            cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
+//            cell.commentNameLabel.text = "Name: " + LocalDataManager.myCurrentComments[indexPath.row].commentName
+//            cell.commentLabel.text = LocalDataManager.myCurrentComments[indexPath.row].comment
+//            cell.commentDateLabel.text = LocalDataManager.myCurrentComments[indexPath.row].dateOfComment
            
         }
         
         if(indexPath.section == 1){
         
-//        cell.commentNameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[indexPath.row]
-//        cell.commentLabel.text = LocalDataManager.currentFood.comments[indexPath.row]
-//        cell.commentImageView.image = UIImage(named:LocalDataManager.currentFood.commentImages[indexPath.row])
-//        cell.commentDateLabel.text = LocalDataManager.currentFood.datesOfComments[indexPath.row]
+        cell.commentNameLabel.text = "Name: " + LocalDataManager.currentRecipeComments[indexPath.row].user
+        cell.commentLabel.text = LocalDataManager.currentRecipeComments[indexPath.row].comment
+        cell.commentImageView.image = UIImage(named:LocalDataManager.currentRecipeComments[indexPath.row].imageName)
+        cell.commentDateLabel.text = LocalDataManager.currentRecipeComments[indexPath.row].date
         
         }
         return cell
@@ -139,7 +138,7 @@ class CommentsTableViewController: UITableViewController {
             (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
             }
             print(indexPath.row)
-            print("TEST: " + LocalDataManager.myCurrentComments[0].commentKey)
+          
         default:
             break
             
