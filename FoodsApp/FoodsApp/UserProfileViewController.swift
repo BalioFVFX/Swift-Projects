@@ -55,7 +55,7 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
        // DEBUG AREA
          print(LocalDataManager.allFoods[0].recipeKey)
          print(LocalDataManager.myFoods[0].recipeKey)
-        print(LocalDataManager.allFoods[0].comments)
+
         
         
 //        RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in

@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CommentDetailsViewController: UIViewController {
 
     var currentCell:Int = 0
+    var currentSection:Int = 1
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -20,24 +22,34 @@ class CommentDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        commentTextView.isEditable = false
+        editCommentButton.isHidden = true
         
         //Wrong informaiton about the first section of my comments
-        
-//        self.nameLabel.text = "Name: " + LocalDataManager.currentFood.commentNames[currentCell]
-//        self.dateLabel.text = "Date: " + LocalDataManager.currentFood.datesOfComments[currentCell]
-//        self.commentTextView.text = LocalDataManager.currentFood.comments[currentCell]
-//        print(LocalDataManager.currentFood.recipeKey)
-//        
-//        if(LocalDataManager.currentFood.commentNames[currentCell] == LocalDataManager.user.name){
-//            commentTextView.isEditable = true
-//            editCommentButton.isHidden = false
-//        }
-//        else{
-//            commentTextView.isEditable = false
-//            editCommentButton.isHidden = true
-//        }
-        
+        if(currentSection == 0){
+            self.nameLabel.text = "Name: " + LocalDataManager.user.comments[currentCell]["User"]!
+            self.dateLabel.text = "Date: " + LocalDataManager.user.comments[currentCell]["Date"]!
+            self.commentTextView.text = LocalDataManager.user.comments[currentCell]["Comment"]!
+            commentTextView.isEditable = true
+            editCommentButton.isHidden = false
 
+        }
+        
+        
+        if(currentSection == 1){
+        
+        self.nameLabel.text = "Name: " + LocalDataManager.currentRecipeComments[currentCell].user
+        self.dateLabel.text = "Date: " + LocalDataManager.currentRecipeComments[currentCell].date
+        self.commentTextView.text = LocalDataManager.currentRecipeComments[currentCell].comment
+        
+            if(LocalDataManager.currentRecipeComments[currentCell].user == LocalDataManager.user.name){
+                commentTextView.isEditable = true
+                editCommentButton.isHidden = false
+            }
+
+        
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -48,29 +60,31 @@ class CommentDetailsViewController: UIViewController {
     
     
     @IBAction func editCommentButtonTapped(_ sender: UIButton) {
-//       print("REC KEY", LocalDataManager.currentFood.recipeKey)
-//       print("Username", LocalDataManager.user.name)
-//       print("Comment Key", LocalDataManager.myCurrentComments[0].commentKey)
-//        print("RecipeName", LocalDataManager.currentFood.recipeName)
-//        //print(LocalDataManager.myCurrentComments[0].commentKey)
-//        
-//        let date = Date()
-//        
-//        let calendar = Calendar.current
-//        
-//        let year = calendar.component(.year, from: date)
-//        let month = calendar.component(.month, from: date)
-//        let day = calendar.component(.day, from: date)
-//        
-//        let currentDate = String(day) + "." + String(month) + "." + String(year)
-//
-//        
-//        RequestManager.editCommentRequest(user: LocalDataManager.user.name, key: LocalDataManager.currentFood.recipeKey, comment: commentTextView.text!, currentDate: currentDate, commentName: LocalDataManager.user.name, commentKey: LocalDataManager.myCurrentComments[0].commentKey) { (sucess, statusMessage) in
-//            guard sucess == true && statusMessage == nil else{
-//                return
-//            }
-//            
-//        }
+        
+     
+      
+        let date = Date()
+        
+        let calendar = Calendar.current
+        
+        let year = calendar.component(.year, from: date)
+        let month = calendar.component(.month, from: date)
+        let day = calendar.component(.day, from: date)
+        
+        let currentDate = String(day) + "." + String(month) + "." + String(year)
+        
+        RequestManager.PATCHEditCommentRequest(recipeKey: LocalDataManager.user.comments[currentCell]["RecipeKey"]!, commentKey: LocalDataManager.user.comments[currentCell]["CommentKey"]!, comment: commentTextView.text!, date: currentDate) { (success, statusMessage) in
+            DispatchQueue.main.async{
+                guard success == true && statusMessage == nil else{
+                    SVProgressHUD.showError(withStatus: statusMessage)
+                    SVProgressHUD.dismiss(withDelay: 0.7)
+                    return
+                }
+                SVProgressHUD.showSuccess(withStatus: "Comment edited")
+                SVProgressHUD.dismiss(withDelay: 0.5)
+            }
+        }
+        
     }
     
 

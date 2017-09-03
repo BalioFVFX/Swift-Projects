@@ -81,6 +81,7 @@ class CommentsTableViewController: UITableViewController {
         if(indexPath.section == 0){
             cell.commentNameLabel.text = "Name: " + LocalDataManager.user.comments[indexPath.row]["User"]!
             cell.commentLabel.text = LocalDataManager.user.comments[indexPath.row]["Comment"]!
+            cell.commentImageView.image = UIImage(named: LocalDataManager.user.comments[indexPath.row]["Image"]!)
             cell.commentDateLabel.text = LocalDataManager.user.comments[indexPath.row]["Date"]!
            
         }
@@ -135,6 +136,7 @@ class CommentsTableViewController: UITableViewController {
 //            }
             if(indexPath.section == 0){
                 (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
+                (segue.destination as! CommentDetailsViewController).currentSection = indexPath.section
             }
             
             if(indexPath.section == 1){

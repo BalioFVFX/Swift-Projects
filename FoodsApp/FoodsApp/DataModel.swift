@@ -12,7 +12,7 @@ class User{
     var name:String = ""
     var image:String = ""
     var comments = [[String:String]]()
-    var recipes = [[String:String]]()
+
 }
 
 class Users{
@@ -30,7 +30,7 @@ class Foods{
     var recipeDuration:String = ""
     var recipeDetails:String = ""
     var recipeKey:String = ""
-    var comments = [String:Any] ()
+
 }
 
 struct allKeys{

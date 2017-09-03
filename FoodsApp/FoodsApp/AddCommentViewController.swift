@@ -27,8 +27,7 @@ class AddCommentViewController: UIViewController {
 
     @IBAction func addCommentButtonTapped(_ sender: UIButton) {
         
-        
-        LocalDataManager.allFoods[0].comments = (["User": "123", "Comment": "testComment"])
+  
         
         //Getting the current date
         SVProgressHUD.show()
