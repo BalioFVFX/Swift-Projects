@@ -31,7 +31,9 @@ class LoginViewController: UIViewController {
         let nameForTextField = UserDefaults.standard.string(forKey: "savedNameTextField")
         let isMyRememberSwitchOn = UserDefaults.standard.bool(forKey: "rememberMeSwitchIsOn")
         let hasLoggedout = UserDefaults.standard.bool(forKey: "hasLoggedoutBool")
+        let userImage = UserDefaults.standard.string(forKey: "userSavedImage")
         LocalDataManager.user.name = nameForTextField!
+       
         
         
         
@@ -40,7 +42,7 @@ class LoginViewController: UIViewController {
             self.rememberMeSwitch.isOn = isMyRememberSwitchOn
           
             if(hasLoggedout == false){
-                
+                LocalDataManager.user.image = userImage!
                 UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")
                 self.performSegue(withIdentifier: "loginSegue", sender: nil)
                 
@@ -135,6 +137,7 @@ class LoginViewController: UIViewController {
         
         
         
+        
         // MARK: - LOGIN
         
         if(isLoginSelected == true){
@@ -195,6 +198,8 @@ class LoginViewController: UIViewController {
                         
                     }
                     UserDefaults.standard.set(false, forKey: "hasLoggedoutBool")
+                    UserDefaults.standard.set("user1Image.png", forKey: "userSavedImage")
+                    LocalDataManager.user.image = "user1Image.png"
                 }
                 
                 

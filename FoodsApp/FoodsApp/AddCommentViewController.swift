@@ -41,7 +41,7 @@ class AddCommentViewController: UIViewController {
         
         let currentDate = String(day) + "." + String(month) + "." + String(year)
         
-        RequestManager.POSTCommentRequest(recipeKey: LocalDataManager.currentFood.recipeKey, user: LocalDataManager.user.name, comment: commentTextView.text!, date: currentDate, imageName: "user1Image.png") { (success, statusMessage) in
+        RequestManager.POSTCommentRequest(recipeKey: LocalDataManager.currentFood.recipeKey, user: LocalDataManager.user.name, comment: commentTextView.text!, date: currentDate, imageName: LocalDataManager.user.image) { (success, statusMessage) in
             guard success == true && statusMessage == nil else{
                 SVProgressHUD.showError(withStatus: statusMessage)
                 SVProgressHUD.dismiss(withDelay: 0.7)

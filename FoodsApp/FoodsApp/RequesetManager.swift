@@ -79,7 +79,8 @@ class RequestManager{
         
         let bodyObject: [String : Any] = [
             "username": username.hash,
-            "password": password.hash
+            "password": password.hash,
+            "userImage": "user1Image.png"
         ]
         
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
@@ -333,6 +334,9 @@ class RequestManager{
                     
                     
                     if(json["username"] as! Int == Int(username.hash) && json["password"] as! Int == Int(password.hash)){
+                        LocalDataManager.user.image = json["userImage"] as! String
+                        print(json["userImage"])
+                        print(LocalDataManager.user.image)
                         completion(true,nil)
                     }
                     else{

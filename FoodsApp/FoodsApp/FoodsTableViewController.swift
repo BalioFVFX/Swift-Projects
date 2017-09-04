@@ -24,7 +24,8 @@ class FoodsTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 print("PRINT")
-           
+           print(LocalDataManager.user.name)
+           print(LocalDataManager.user.image)
             RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
                 guard success == true && statusMessage == nil else{
                     return
