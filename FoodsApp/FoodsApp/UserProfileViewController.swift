@@ -17,7 +17,7 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        SVProgressHUD.show()
         RequestManager.GETCommentsAndRecipesKeysRequest(username: LocalDataManager.user.name)
         RequestManager.GETUserImageRequest(username: LocalDataManager.user.name) { (success, statusMessage) in
             DispatchQueue.main.async {
@@ -26,16 +26,12 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
             guard success == true && statusMessage == nil else{
                 return
             }
-            
+        
             self.imageButton.setImage(UIImage(named: LocalDataManager.user.image), for: .normal)
+            SVProgressHUD.showSuccess(withStatus: "Data loaded")
+            SVProgressHUD.dismiss(withDelay: 0.4)
             }
         }
-        print("1")
-       
-  
-    
-  
-    
 
         // Do any additional setup after loading the view.
     }
@@ -73,7 +69,7 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-        
+        SVProgressHUD.show()
         RequestManager.PATCHUserImageRequest(userImage: currentUserProfileImage) { (success, statusMessage) in
             DispatchQueue.main.async {
                 

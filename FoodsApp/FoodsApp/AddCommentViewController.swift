@@ -15,6 +15,7 @@ class AddCommentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        commentTextView.becomeFirstResponder()
 
         // Do any additional setup after loading the view.
     }
@@ -27,10 +28,10 @@ class AddCommentViewController: UIViewController {
 
     @IBAction func addCommentButtonTapped(_ sender: UIButton) {
         
-  
+        SVProgressHUD.show()
         
         //Getting the current date
-        SVProgressHUD.show()
+       
         let date = Date()
         
         let calendar = Calendar.current
@@ -42,13 +43,17 @@ class AddCommentViewController: UIViewController {
         let currentDate = String(day) + "." + String(month) + "." + String(year)
         
         RequestManager.POSTCommentRequest(recipeKey: LocalDataManager.currentFood.recipeKey, user: LocalDataManager.user.name, comment: commentTextView.text!, date: currentDate, imageName: LocalDataManager.user.image) { (success, statusMessage) in
+            DispatchQueue.main.async {
+            
             guard success == true && statusMessage == nil else{
                 SVProgressHUD.showError(withStatus: statusMessage)
                 SVProgressHUD.dismiss(withDelay: 0.7)
                 return
             }
+            self.commentTextView.text = ""
             SVProgressHUD.showSuccess(withStatus: "Comment posted")
             SVProgressHUD.dismiss(withDelay: 0.5)
+            }
         }
 
         

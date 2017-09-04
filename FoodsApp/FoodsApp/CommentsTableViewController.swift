@@ -38,6 +38,11 @@ class CommentsTableViewController: UITableViewController {
         }
         
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        LocalDataManager.currentRecipeComments.removeAll()
+        LocalDataManager.user.comments.removeAll()
+    }
     
     
     override func didReceiveMemoryWarning() {

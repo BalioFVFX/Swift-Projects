@@ -15,7 +15,7 @@ class FoodsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        SVProgressHUD.show()
         
         openScreenForFirstTime = true
        
@@ -23,9 +23,7 @@ class FoodsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                print("PRINT")
-           print(LocalDataManager.user.name)
-           print(LocalDataManager.user.image)
+        
             RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
                 guard success == true && statusMessage == nil else{
                     return
@@ -53,9 +51,18 @@ class FoodsTableViewController: UITableViewController {
                     }
                     
                     self.tableView.reloadData()
+                    if(self.openScreenForFirstTime == true){
+                    SVProgressHUD.showSuccess(withStatus: "Recipes loaded successfully")
+                    SVProgressHUD.dismiss(withDelay: 0.5)
+                    self.openScreenForFirstTime = false
+                    }
+                    else{
+                        SVProgressHUD.showSuccess(withStatus: "Recipes updated")
+                        SVProgressHUD.dismiss(withDelay: 0.4)
+                        }
                     }
                 })
-
+                
         }
         
         
@@ -138,13 +145,13 @@ class FoodsTableViewController: UITableViewController {
         if(indexPath.section == 0){
             cell.foodItemRecipeNameLabel.text = LocalDataManager.myFoods[indexPath.row].recipeName
             cell.foodItemRecipeDurationLabel.text = LocalDataManager.myFoods[indexPath.row].recipeDuration
-            //cell.foodItemImageView.image = UIImage(named: LocalDataManager.myFoods[indexPath.row].recipeImageName)
+            cell.foodItemImageView.image = UIImage(named: "food.png")
         }
         
         if(indexPath.section == 1){
             cell.foodItemRecipeNameLabel.text = LocalDataManager.allFoods[indexPath.row].recipeName
             cell.foodItemRecipeDurationLabel.text = LocalDataManager.allFoods[indexPath.row].recipeDuration
-           // cell.foodItemImageView.image = UIImage(named: LocalDataManager.allFoods[indexPath.row].recipeImageName)
+            cell.foodItemImageView.image = UIImage(named: "food.png")
             
         }
         return cell
