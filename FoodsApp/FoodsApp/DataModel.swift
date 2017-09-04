@@ -12,7 +12,7 @@ class User{
     var name:String = ""
     var image:String = ""
     var comments = [[String:String]]()
-
+    var commentsAndRecipesKeys = [[String:String]]()
 }
 
 class Users{

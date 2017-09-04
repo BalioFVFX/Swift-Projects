@@ -1,4 +1,4 @@
-//
+    //
 //  RequesetManager.swift
 //  FoodsApp
 //
@@ -906,6 +906,208 @@ class RequestManager{
         task.resume()
         session.finishTasksAndInvalidate()
     }
+    
+    // MARK: - PROFILE IMAGES
+    
+    // GET COMMENTS AND RECIPES KEYS 
+    
+    class func GETCommentsAndRecipesKeysRequest(username:String) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         GET CommentsAndRecipeKeys (GET https://foodsapp-4a21c.firebaseio.com/user///comments.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/comments.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "GET"
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                
+                do{
+                    
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+                    
+                    
+                    // Iterate through all the data by their keys
+                    
+                    
+                    
+                    for item in json.allKeys{
+                        
+                        // Get the current data
+                        if let myKey = json[item] as? NSDictionary{
+                            
+                           LocalDataManager.user.commentsAndRecipesKeys.append(["RecipeKey": myKey.value(forKey: "RecipeKey") as! String, "CommentKey": myKey.value(forKey: "CommentKey") as! String])
+                            
+                            
+                        }
+                        
+                    }
+                    
+                }
+                    
+                catch{
+                    
+                }
+
+  
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+    
+    
+    // GET user image
+
+    
+    class func GETUserImageRequest(username:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         GET User Image (GET https://foodsapp-4a21c.firebaseio.com/user/.json)
+         */
+        
+        guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "GET"
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                
+                do{
+                    let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as AnyObject
+                    
+                    LocalDataManager.user.image = json.value(forKey: "userImage") as! String
+                    completion(true,nil)
+                }
+                    
+                catch{
+            
+                }
+
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false,error?.localizedDescription)
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+    }
+    
+    // Change user image
+    
+    class func updateUserImage(username:String, userImage:String){
+       
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         PATCH User Image (PATCH https://foodsapp-4a21c.firebaseio.com/recipes/.json)
+         */
+        
+            guard let URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/user/\(username)/.json") else {return}
+            var request = URLRequest(url: URL)
+            request.httpMethod = "PATCH"
+            
+            let bodyObject: [String : Any] = [
+                "userImage": userImage
+                
+            ]
+            request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+            
+            /* Start a new Task */
+            let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+                if (error == nil) {
+                    // Success
+                    let statusCode = (response as! HTTPURLResponse).statusCode
+                    print("URL Session Task Succeeded: HTTP \(statusCode)")
+                    
+                }
+                else {
+                    // Failure
+                    print("URL Session Task Failed: %@", error!.localizedDescription);
+                    
+                }
+            })
+            task.resume()
+            session.finishTasksAndInvalidate()
+        
+
+
+    }
+    
+    class func PATCHUserImageRequest(userImage:String, completion:@escaping (_ success:Bool, _ statusMessage:String?)->()) {
+
+        let sessionConfig = URLSessionConfiguration.default
+        
+        /* Create session, and optionally set a URLSessionDelegate. */
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        
+        /* Create the Request:
+         PATCH User Image (PATCH https://foodsapp-4a21c.firebaseio.com/recipes/.json)
+         */
+        
+        RequestManager.updateUserImage(username: LocalDataManager.user.name, userImage: userImage)
+        
+        for comments in LocalDataManager.user.commentsAndRecipesKeys {
+            
+        
+        guard var URL = URL(string: "https://foodsapp-4a21c.firebaseio.com/recipes/\(comments["RecipeKey"]!)/comments/\(comments["CommentKey"]!)/.json") else {return}
+        var request = URLRequest(url: URL)
+        request.httpMethod = "PATCH"
+        
+        let bodyObject: [String : Any] = [
+            "Image": userImage
+ 
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+        
+        /* Start a new Task */
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
+            if (error == nil) {
+                // Success
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
+                completion(true,nil)
+            }
+            else {
+                // Failure
+                print("URL Session Task Failed: %@", error!.localizedDescription);
+                completion(false,error?.localizedDescription)
+            }
+        })
+        task.resume()
+        session.finishTasksAndInvalidate()
+        }
+    }
+    
     
 //    class func imageChangeRequest(user:String, imageName:String, completion:@escaping (_ sucess:Bool, _ statusMessage:String?)->()) {
 //

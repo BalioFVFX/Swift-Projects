@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //        
 //        group.wait()
+       
+        
         return true
     }
 

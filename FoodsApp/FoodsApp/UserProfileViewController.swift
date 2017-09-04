@@ -17,12 +17,34 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(LocalDataManager.users)
-        self.imageButton.setImage(UIImage(named: currentUserProfileImage), for: .normal)
+
+        RequestManager.GETCommentsAndRecipesKeysRequest(username: LocalDataManager.user.name)
+        RequestManager.GETUserImageRequest(username: LocalDataManager.user.name) { (success, statusMessage) in
+            DispatchQueue.main.async {
+                
+            
+            guard success == true && statusMessage == nil else{
+                return
+            }
+            
+            self.imageButton.setImage(UIImage(named: LocalDataManager.user.image), for: .normal)
+            }
+        }
+        print("1")
+       
+  
+    
+  
+    
 
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -51,27 +73,24 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
-
-       // DEBUG AREA
-         print(LocalDataManager.allFoods[0].recipeKey)
-         print(LocalDataManager.myFoods[0].recipeKey)
-
         
+        RequestManager.PATCHUserImageRequest(userImage: currentUserProfileImage) { (success, statusMessage) in
+            DispatchQueue.main.async {
+                
+            guard success == true && statusMessage == nil else{
+                SVProgressHUD.showError(withStatus: statusMessage)
+                SVProgressHUD.dismiss(withDelay: 0.7)
+                return
+            }
+            
+            SVProgressHUD.showSuccess(withStatus: "Image updated")
+            SVProgressHUD.dismiss(withDelay: 0.5)
+                
+            }
+        }
+
+       
         
-//        RequestManager.imageChangeRequest(user: LocalDataManager.user.name, imageName: currentUserProfileImage) { (success, statusMessage) in
-//
-//            DispatchQueue.main.sync {
-//         
-//            guard success == true && statusMessage == nil else{
-//                SVProgressHUD.showError(withStatus: statusMessage)
-//                SVProgressHUD.dismiss(withDelay: 0.7)
-//                return
-//            }
-//            SVProgressHUD.showSuccess(withStatus: "Profile picture changed")
-//            SVProgressHUD.dismiss(withDelay:0.5)
-//            }
-//        }
-//        
     }
     
    
