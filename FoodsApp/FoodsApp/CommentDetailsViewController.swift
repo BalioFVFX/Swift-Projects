@@ -12,7 +12,7 @@ import SVProgressHUD
 class CommentDetailsViewController: UIViewController {
 
     var currentCell:Int = 0
-    var currentSection:Int = 1
+    var currentSection:Int = 12
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -22,10 +22,17 @@ class CommentDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+//        
         commentTextView.isEditable = false
         editCommentButton.isHidden = true
-        
-        //Wrong informaiton about the first section of my comments
+        print("Current Cell", currentCell)
+        print("Current Section", currentSection)
+
+//        
+//        
         if(currentSection == 0){
             self.nameLabel.text = "Name: " + LocalDataManager.user.comments[currentCell]["User"]!
             self.dateLabel.text = "Date: " + LocalDataManager.user.comments[currentCell]["Date"]!
@@ -34,23 +41,26 @@ class CommentDetailsViewController: UIViewController {
             editCommentButton.isHidden = false
 
         }
+        else{
         
         
         if(currentSection == 1){
+     
+            if(LocalDataManager.currentRecipeComments[currentCell].user == LocalDataManager.user.name){
+                commentTextView.isEditable = true
+                editCommentButton.isHidden = false
+
+            }
         
+            
+            
         self.nameLabel.text = "Name: " + LocalDataManager.currentRecipeComments[currentCell].user
         self.dateLabel.text = "Date: " + LocalDataManager.currentRecipeComments[currentCell].date
         self.commentTextView.text = LocalDataManager.currentRecipeComments[currentCell].comment
         
-            if(LocalDataManager.currentRecipeComments[currentCell].user == LocalDataManager.user.name){
-                commentTextView.isEditable = true
-                editCommentButton.isHidden = false
-            }
-
-        
         }
-        
-        // Do any additional setup after loading the view.
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,9 +70,7 @@ class CommentDetailsViewController: UIViewController {
     
     
     @IBAction func editCommentButtonTapped(_ sender: UIButton) {
-        
-     
-      
+
         let date = Date()
         
         let calendar = Calendar.current
@@ -72,7 +80,8 @@ class CommentDetailsViewController: UIViewController {
         let day = calendar.component(.day, from: date)
         
         let currentDate = String(day) + "." + String(month) + "." + String(year)
-        
+        //print(LocalDataManager.user.comments[currentCell]["CommentKey"]!)
+        if(currentSection == 0){
         RequestManager.PATCHEditCommentRequest(recipeKey: LocalDataManager.user.comments[currentCell]["RecipeKey"]!, commentKey: LocalDataManager.user.comments[currentCell]["CommentKey"]!, comment: commentTextView.text!, date: currentDate) { (success, statusMessage) in
             DispatchQueue.main.async{
                 guard success == true && statusMessage == nil else{
@@ -83,6 +92,22 @@ class CommentDetailsViewController: UIViewController {
                 SVProgressHUD.showSuccess(withStatus: "Comment edited")
                 SVProgressHUD.dismiss(withDelay: 0.5)
             }
+        }
+        }
+
+        if(currentSection == 1){
+            RequestManager.PATCHEditCommentRequest(recipeKey: LocalDataManager.currentRecipeComments[currentCell].recipeKey, commentKey: LocalDataManager.currentRecipeComments[currentCell].commentKey, comment: commentTextView.text!, date: currentDate) { (success, statusMessage) in
+                DispatchQueue.main.async{
+                    guard success == true && statusMessage == nil else{
+                        SVProgressHUD.showError(withStatus: statusMessage)
+                        SVProgressHUD.dismiss(withDelay: 0.7)
+                        return
+                    }
+                    SVProgressHUD.showSuccess(withStatus: "Comment edited")
+                    SVProgressHUD.dismiss(withDelay: 0.5)
+                }
+            }
+
         }
         
     }

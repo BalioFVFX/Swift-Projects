@@ -19,9 +19,7 @@ class CommentsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         
-        
-        
-        
+        print("Current food recipe key: ", LocalDataManager.currentFood.recipeKey)
         RequestManager.GETTheCommentsOfTheSelectedRecipeRequest(recipeKey: LocalDataManager.currentFood.recipeKey) { (success, statusMessage) in
             DispatchQueue.main.async {
                 
@@ -38,12 +36,7 @@ class CommentsTableViewController: UITableViewController {
         }
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        LocalDataManager.currentRecipeComments.removeAll()
-        LocalDataManager.user.comments.removeAll()
-    }
-    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -138,17 +131,16 @@ class CommentsTableViewController: UITableViewController {
 //            }
 //            if(indexPath.section == 1){
 //                (segue.destination as! FoodDetailsViewController).currentCellItem = LocalDataManager.allFoods[indexPath.row]
+//          }
+//            if(indexPath.section == 0){
+//                (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
+//                (segue.destination as! CommentDetailsViewController).currentSection = indexPath.section
 //            }
-            if(indexPath.section == 0){
-                (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
-                (segue.destination as! CommentDetailsViewController).currentSection = indexPath.section
-            }
-            
-            if(indexPath.section == 1){
-            
+        
+//
+            (segue.destination as! CommentDetailsViewController).currentSection = indexPath.section
             (segue.destination as! CommentDetailsViewController).currentCell = indexPath.row
-            }
-            print(indexPath.row)
+
           
         default:
             break

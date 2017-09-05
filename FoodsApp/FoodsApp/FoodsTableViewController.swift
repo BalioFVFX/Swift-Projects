@@ -23,7 +23,9 @@ class FoodsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+//        LocalDataManager.currentRecipeComments.removeAll()
+//        LocalDataManager.user.comments.removeAll()
+//        
             RequestManager.GETUsersUsernamesRequest { (success, statusMessage) in
                 guard success == true && statusMessage == nil else{
                     return

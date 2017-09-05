@@ -750,7 +750,7 @@ class RequestManager{
                         
                         // GET all the comments
                         if let myKey = json[item] as? NSDictionary{
-                            LocalDataManager.addRecipeCurrentComments(user: myKey.value(forKey: "User") as! String, comment: myKey.value(forKey: "Comment") as! String, date: myKey.value(forKey: "Date") as! String, imageName: myKey.value(forKey: "Image") as! String)
+                            LocalDataManager.addRecipeCurrentComments(user: myKey.value(forKey: "User") as! String, comment: myKey.value(forKey: "Comment") as! String, date: myKey.value(forKey: "Date") as! String, imageName: myKey.value(forKey: "Image") as! String, recipeKey: myKey.value(forKey: "RecipeKey") as! String, commentKey: myKey.value(forKey: "CommentKey") as! String)
                             
                             //GET only my comments
                             

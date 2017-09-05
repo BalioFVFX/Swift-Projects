@@ -29,13 +29,15 @@ class LocalDataManager{
         self.users.append(user)
     }
 
-    class func addRecipeCurrentComments(user:String, comment:String, date:String, imageName:String){
+    class func addRecipeCurrentComments(user:String, comment:String, date:String, imageName:String, recipeKey:String, commentKey:String){
         let currentComment = RecipeComments()
         
         currentComment.user = user
         currentComment.comment = comment
         currentComment.date = date
         currentComment.imageName = imageName
+        currentComment.recipeKey = recipeKey
+        currentComment.commentKey = commentKey
         
         self.currentRecipeComments.append(currentComment)
     }

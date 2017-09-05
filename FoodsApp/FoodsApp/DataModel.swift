@@ -43,4 +43,6 @@ class RecipeComments{
     var comment:String = ""
     var date:String = ""
     var imageName:String = ""
+    var recipeKey:String = ""
+    var commentKey:String = ""
 }
