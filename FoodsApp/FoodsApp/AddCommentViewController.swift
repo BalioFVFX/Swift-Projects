@@ -16,6 +16,7 @@ class AddCommentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         commentTextView.becomeFirstResponder()
+        print(LocalDataManager.user.image)
 
         // Do any additional setup after loading the view.
     }

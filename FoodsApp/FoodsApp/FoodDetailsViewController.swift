@@ -20,7 +20,8 @@ class FoodDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        LocalDataManager.user.comments.removeAll()
+        LocalDataManager.currentRecipeComments.removeAll()
         // Do any additional setup after loading the view.
     }
     

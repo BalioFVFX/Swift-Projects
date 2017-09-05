@@ -17,6 +17,10 @@ class FoodsTableViewController: UITableViewController {
         super.viewDidLoad()
         SVProgressHUD.show()
         
+      RequestManager.GETUserImageRequest(username: LocalDataManager.user.name) { (success, statusMessage) in
+        
+        }
+        
         openScreenForFirstTime = true
        
     }
